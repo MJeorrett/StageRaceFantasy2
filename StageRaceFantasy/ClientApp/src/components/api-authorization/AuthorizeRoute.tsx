@@ -5,6 +5,7 @@ import { ApplicationPaths, QueryParameterNames } from './ApiAuthorizationConstan
 import authService from './AuthorizeService';
 
 type AuthorizeRouteProps = {
+    exact?: boolean,
     path: string,
     component: React.FC<any>,
 }
