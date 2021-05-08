@@ -9,8 +9,10 @@ namespace StageRaceFantasy.Infrastructure.Persistence
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
     {
+        public DbSet<FantasyStageRaceEntity> FantasyStageRaces { get; init; } = null!;
+
         public ApplicationDbContext(
-            DbContextOptions options,
+            DbContextOptions<ApplicationDbContext> options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }

@@ -25,7 +25,7 @@ namespace StageRaceFantasy.Infrastructure
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddScoped<IApplicationDbContext>(provider =>
-                provider.GetService<ApplicationDbContext>());
+                provider.GetRequiredService<ApplicationDbContext>());
         }
     }
 }

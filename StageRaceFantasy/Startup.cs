@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StageRaceFantasy.Application;
 using StageRaceFantasy.Domain.Entities;
 using StageRaceFantasy.Infrastructure;
 using StageRaceFantasy.Infrastructure.Persistence;
@@ -24,6 +25,7 @@ namespace StageRaceFantasy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(Configuration);
+            services.AddApplication();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

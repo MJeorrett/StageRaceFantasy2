@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StageRaceFantasy", "StageRaceFantasy\StageRaceFantasy.csproj", "{512D136C-14E6-4807-A0E6-1E3D1E2AF2A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StageRaceFantasy.Infrastructure", "StageRaceFantasy.Infrastructure\StageRaceFantasy.Infrastructure.csproj", "{EEF03A73-B6BF-429E-95C1-57CF6E9CEE11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StageRaceFantasy.Infrastructure", "StageRaceFantasy.Infrastructure\StageRaceFantasy.Infrastructure.csproj", "{EEF03A73-B6BF-429E-95C1-57CF6E9CEE11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StageRaceFantasy.Domain", "StageRaceFantasy.Domain\StageRaceFantasy.Domain.csproj", "{D9339231-9D04-4160-9247-CF07579F4C41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StageRaceFantasy.Domain", "StageRaceFantasy.Domain\StageRaceFantasy.Domain.csproj", "{D9339231-9D04-4160-9247-CF07579F4C41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StageRaceFantasy.Application", "StageRaceFantasy.Application\StageRaceFantasy.Application.csproj", "{C15C0594-FD70-40D4-B278-833FF0F5137C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StageRaceFantasy.Application", "StageRaceFantasy.Application\StageRaceFantasy.Application.csproj", "{C15C0594-FD70-40D4-B278-833FF0F5137C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StageRaceFantasy.Application.UnitTests", "StageRaceFantasy.Application.UnitTests\StageRaceFantasy.Application.UnitTests.csproj", "{6266BEE2-D27B-4FA3-8A48-1CECCAB867FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C15C0594-FD70-40D4-B278-833FF0F5137C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C15C0594-FD70-40D4-B278-833FF0F5137C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C15C0594-FD70-40D4-B278-833FF0F5137C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6266BEE2-D27B-4FA3-8A48-1CECCAB867FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6266BEE2-D27B-4FA3-8A48-1CECCAB867FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6266BEE2-D27B-4FA3-8A48-1CECCAB867FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6266BEE2-D27B-4FA3-8A48-1CECCAB867FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
