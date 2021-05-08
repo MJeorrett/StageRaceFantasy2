@@ -12,12 +12,12 @@ window.fetch = () => {
     {
       ok: true,
       json: () => Promise.resolve({
-        "authority": "https://localhost:5001",
-        "client_id": "StageRaceFantasy2",
-        "redirect_uri": "https://localhost:5001/authentication/login-callback",
-        "post_logout_redirect_uri": "https://localhost:5001/authentication/logout-callback",
-        "response_type": "id_token token",
-        "scope": "StageRaceFantasy2API openid profile"
+        authority: 'https://localhost:5001',
+        client_id: 'StageRaceFantasy2',
+        redirect_uri: 'https://localhost:5001/authentication/login-callback',
+        post_logout_redirect_uri: 'https://localhost:5001/authentication/logout-callback',
+        response_type: 'id_token token',
+        scope: 'StageRaceFantasy2API openid profile'
      })
     } as any);
 };
