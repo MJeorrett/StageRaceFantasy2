@@ -1,11 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StageRaceFantasy.Pages
 {
@@ -14,7 +10,9 @@ namespace StageRaceFantasy.Pages
     {
         private readonly ILogger<ErrorModel> _logger;
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public ErrorModel(ILogger<ErrorModel> logger)
+#pragma warning restore CS8618
         {
             _logger = logger;
         }
