@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import authService from './api-authorization/AuthorizeService';
 
 type FetchDataState = {
-  forecasts: {}[],
+  fantasyStageRaces: {}[],
   loading: boolean,
 }
 
@@ -11,31 +11,27 @@ export class FetchData extends Component<{}, FetchDataState> {
 
   constructor(props: {}) {
     super(props);
-    this.state = { forecasts: [], loading: true };
+    this.state = { fantasyStageRaces: [], loading: true };
   }
 
   componentDidMount() {
-    this.populateWeatherData();
+    this.populate();
   }
 
-  static renderForecastsTable(forecasts: any[]) {
+  static renderForecastsTable(fantasyStageRaces: any[]) {
     return (
       <table className='table table-striped' aria-labelledby="tableLabel">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Id</th>
+            <th>Name</th>
           </tr>
         </thead>
         <tbody>
-          {forecasts.map(forecast =>
-            <tr key={forecast.date}>
-              <td>{forecast.date}</td>
-              <td>{forecast.temperatureC}</td>
-              <td>{forecast.temperatureF}</td>
-              <td>{forecast.summary}</td>
+          {fantasyStageRaces.map(fantasyStageRace =>
+            <tr key={fantasyStageRace.id}>
+              <td>{fantasyStageRace.id}</td>
+              <td>{fantasyStageRace.name}</td>
             </tr>
           )}
         </tbody>
@@ -46,23 +42,22 @@ export class FetchData extends Component<{}, FetchDataState> {
   render() {
     const contents = this.state.loading
       ? <p><em>Loading...</em></p>
-      : FetchData.renderForecastsTable(this.state.forecasts);
+      : FetchData.renderForecastsTable(this.state.fantasyStageRaces);
 
     return (
       <div>
-        <h1 id="tableLabel" >Weather forecast</h1>
-        <p>This component demonstrates fetching data from the server.</p>
+        <h1 id="tableLabel" >Fantasy Stage Races</h1>
         {contents}
       </div>
     );
   }
 
-  async populateWeatherData() {
+  async populate() {
     const token = await authService.getAccessToken();
-    const response = await fetch('weatherforecast', {
+    const response = await fetch('api/fantasy-stage-races', {
       headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
     });
     const data = await response.json();
-    this.setState({ forecasts: data, loading: false });
+    this.setState({ fantasyStageRaces: data.content, loading: false });
   }
 }
