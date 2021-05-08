@@ -2,6 +2,7 @@ import { UserManager, WebStorageStateStore } from 'oidc-client';
 import { ApplicationPaths, ApplicationName } from './ApiAuthorizationConstants';
 
 export class AuthorizeService {
+    userManager: UserManager;
     _callbacks = [];
     _nextSubscriptionId = 0;
     _user = null;
@@ -122,7 +123,7 @@ export class AuthorizeService {
         try {
             const response = await this.userManager.signoutCallback(url);
             this.updateState(null);
-            return this.success(response && response.data);
+            return this.success(response && (response as any).data);
         } catch (error) {
             console.log(`There was an error trying to log out '${error}'.`);
             return this.error(error);
@@ -158,7 +159,7 @@ export class AuthorizeService {
         }
     }
 
-    createArguments(state) {
+    createArguments(state?: any) {
         return { useReplaceToNavigate: true, data: state };
     }
 

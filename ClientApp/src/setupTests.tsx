@@ -4,7 +4,7 @@ const localStorageMock = {
   removeItem: jest.fn(),
   clear: jest.fn(),
 };
-global.localStorage = localStorageMock;
+global.localStorage = localStorageMock as any;
 
 // Mock the request issued by the react app to get the client configuration parameters.
 window.fetch = () => {
@@ -19,5 +19,7 @@ window.fetch = () => {
         "response_type": "id_token token",
         "scope": "StageRaceFantasy2API openid profile"
      })
-    });
+    } as any);
 };
+
+export {};

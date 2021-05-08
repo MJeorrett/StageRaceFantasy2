@@ -4,8 +4,20 @@ import { Route, Redirect } from 'react-router-dom'
 import { ApplicationPaths, QueryParameterNames } from './ApiAuthorizationConstants'
 import authService from './AuthorizeService'
 
-export default class AuthorizeRoute extends Component {
-    constructor(props) {
+type AuthorizeRouteProps = {
+    path: string,
+    component: typeof Component,
+}
+
+type AuthorizeRouteState = {
+    ready: boolean,
+    authenticated: boolean,
+}
+
+export default class AuthorizeRoute extends Component<AuthorizeRouteProps, AuthorizeRouteState> {
+    private _subscription = -1;
+
+    constructor(props: AuthorizeRouteProps) {
         super(props);
 
         this.state = {

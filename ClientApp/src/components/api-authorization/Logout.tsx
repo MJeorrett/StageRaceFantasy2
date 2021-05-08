@@ -4,10 +4,20 @@ import authService from './AuthorizeService';
 import { AuthenticationResultStatus } from './AuthorizeService';
 import { QueryParameterNames, LogoutActions, ApplicationPaths } from './ApiAuthorizationConstants';
 
+type LogoutProps = {
+    action: string,
+}
+
+type LogoutState = {
+    isReady: boolean,
+    message: string,
+    authenticated: boolean,
+}
+
 // The main responsibility of this component is to handle the user's logout process.
 // This is the starting point for the logout process, which is usually initiated when a
 // user clicks on the logout button on the LoginMenu component.
-export class Logout extends Component {
+export class Logout extends Component<LogoutProps, LogoutState> {
     constructor(props) {
         super(props);
 
@@ -110,7 +120,7 @@ export class Logout extends Component {
         this.setState({ isReady: true, authenticated });
     }
 
-    getReturnUrl(state) {
+    getReturnUrl(state?: any) {
         const params = new URLSearchParams(window.location.search);
         const fromQuery = params.get(QueryParameterNames.ReturnUrl);
         if (fromQuery && !fromQuery.startsWith(`${window.location.origin}/`)) {

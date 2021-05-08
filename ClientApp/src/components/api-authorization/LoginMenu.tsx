@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
 
-export class LoginMenu extends Component {
+type LoginMenuState = {
+    isAuthenticated: boolean,
+    userName: string,
+}
+
+export class LoginMenu extends Component<{}, LoginMenuState> {
+    private _subscription: number;
+
     constructor(props) {
         super(props);
 

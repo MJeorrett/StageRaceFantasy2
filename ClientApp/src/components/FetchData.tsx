@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import authService from './api-authorization/AuthorizeService'
 
-export class FetchData extends Component {
+type FetchDataState = {
+  forecasts: {}[],
+  loading: boolean,
+}
+
+export class FetchData extends Component<{}, FetchDataState> {
   static displayName = FetchData.name;
 
   constructor(props) {
