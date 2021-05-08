@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { NavMenu } from './components/NavMenu';
 import Routes from './Routes';
 
 export default class App extends Component {
-  static displayName = App.name;
+    static displayName = App.name;
 
-  render () {
-    return (
-      <>
-        <NavMenu />
-        <Routes />
-      </>
-    );
-  }
+    render() {
+        return (
+            <>
+                <ToastContainer />
+                <NavMenu />
+                <Routes />
+            </>
+        );
+    }
 }

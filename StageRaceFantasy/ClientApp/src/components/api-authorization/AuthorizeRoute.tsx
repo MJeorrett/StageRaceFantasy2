@@ -6,7 +6,7 @@ import authService from './AuthorizeService';
 
 type AuthorizeRouteProps = {
     path: string,
-    component: typeof Component,
+    component: React.FC<any>,
 }
 
 type AuthorizeRouteState = {
