@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using StageRaceFantasy.Data;
-using StageRaceFantasy.Models;
+using StageRaceFantasy.Domain.Entities;
+using StageRaceFantasy.Infrastructure;
+using StageRaceFantasy.Infrastructure.Persistence;
 
 namespace StageRaceFantasy
 {
@@ -23,11 +23,7 @@ namespace StageRaceFantasy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddInfrastructure(Configuration);
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

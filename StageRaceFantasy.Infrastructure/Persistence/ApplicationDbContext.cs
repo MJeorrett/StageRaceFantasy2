@@ -2,15 +2,12 @@
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using StageRaceFantasy.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using StageRaceFantasy.Application.Common.Interfaces;
+using StageRaceFantasy.Domain.Entities;
 
-namespace StageRaceFantasy.Data
+namespace StageRaceFantasy.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
     {
         public ApplicationDbContext(
             DbContextOptions options,
