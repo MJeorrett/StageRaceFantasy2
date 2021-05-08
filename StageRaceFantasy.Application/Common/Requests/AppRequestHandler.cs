@@ -42,10 +42,10 @@ namespace StageRaceFantasy.Application.Common.Requests
         }
 
         protected IApplicationDbContext DbContext =>
-            _dbContext ??= _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IApplicationDbContext>();
+            _dbContext ??= _httpContextAccessor.HttpContext!.RequestServices.GetRequiredService<IApplicationDbContext>();
 
         protected IMapper Mapper =>
-            _mapper ??= _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IMapper>();
+            _mapper ??= _httpContextAccessor.HttpContext!.RequestServices.GetRequiredService<IMapper>();
 
         public abstract Task<AppResponse<TResponse>> Handle(TRequest request, CancellationToken cancellationToken);
 
