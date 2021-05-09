@@ -1,4 +1,4 @@
 export interface ApiPaginationQueryParams {
-    pageIndex: number,
+    pageNumber: number,
     pageSize: number,
 }

@@ -9,21 +9,15 @@ export interface ApiPagination {
     hasNextPage: boolean,
 }
 
-export interface ApiPaginatedResponse<T> {
-    content: {
-        pageNumber: number,
-        pageSize: number,
-        totalPages: number,
-        totalCount: number,
-        hasPreviousPage: boolean,
-        hasNextPage: boolean,
+export interface ApiPaginatedListResponse<T> {
+    content: ApiPagination & {
         items: T[],
     }
 }
 
-export function unpackApiPaginatedResponse<TResponse, TMapped>(
-    response: HttpClientResponse<ApiPaginatedResponse<TResponse>>,
-    mapper: (responseModel: TResponse) => TMapped): HttpClientResponse<ApiPaginatedResponse<TMapped>> {
+export function unpackApiPaginatedListResponse<TResponse, TMapped>(
+    response: HttpClientResponse<ApiPaginatedListResponse<TResponse>>,
+    mapper: (responseModel: TResponse) => TMapped): HttpClientResponse<ApiPaginatedListResponse<TMapped>> {
     if (response.isError) return response;
 
     try {

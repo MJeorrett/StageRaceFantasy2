@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { makeStyles } from '@material-ui/core';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import AppNavBar from './components/AppNavBar';
 import Routes from './Routes';
 import './App.css';
-import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {

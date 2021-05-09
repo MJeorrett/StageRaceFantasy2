@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using MbhApi.Application.Common.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using StageRaceFantasy.Application.Common.Requests;
 using StageRaceFantasy.Application.FantasyStageRaces.Commands;
@@ -41,9 +42,9 @@ namespace StageRaceFantasy.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<AppResponse<List<FantasyStageRaceSummaryDto>>>> GetAll()
+        public async Task<ActionResult<AppResponse<PaginatedList<FantasyStageRaceSummaryDto>>>> GetPaginatedList(
+            [FromQuery] GetPaginatedFantasyStageRacesQuery query)
         {
-            var query = new GetAllFantasyStageRacesQuery();
             var response = await _mediator.Send(query);
 
             return ActionResultBuilder.Build(response);

@@ -1,5 +1,5 @@
-import { buildApiUrl, doErrorToastIfRequired, httpClient } from './common';
-import { ApiListResponse, ApiSingleObjectResponse, unpackApiListResponse, unpackApiSingleObjectResponse } from './models/common';
+import { buildApiUrl, buildApiUrlWithQueryParams, doErrorToastIfRequired, httpClient } from './common';
+import { ApiPaginatedListResponse, ApiPaginationQueryParams, ApiSingleObjectResponse, unpackApiPaginatedListResponse, unpackApiSingleObjectResponse } from './models/common';
 import { ApiFantasyStageRace } from './models';
 import { FantasyStageRace } from '../models';
 import { HttpClientResponse } from './common/httpClient';
@@ -22,13 +22,13 @@ export const updateFantasyStageRace = async (id: number, updateBookingDto: ApiFa
     return unpackApiSingleObjectResponse(response, m => m);
 };
 
-export const getAllFantasyStageRaces = async (): Promise<HttpClientResponse<ApiListResponse<FantasyStageRace.Summary>>> => {
-    const url = buildApiUrl('api/fantasy-stage-races');
-    const response = await httpClient.getRequest<ApiListResponse<ApiFantasyStageRace.Summary>>(url);
+export const getPaginatedFantasyStageRaces = async (paginationQueryParams: ApiPaginationQueryParams): Promise<HttpClientResponse<ApiPaginatedListResponse<FantasyStageRace.Summary>>> => {
+    const url = buildApiUrlWithQueryParams('api/fantasy-stage-races', paginationQueryParams);
+    const response = await httpClient.getRequest<ApiPaginatedListResponse<ApiFantasyStageRace.Summary>>(url);
 
     doErrorToastIfRequired(response);
 
-    return unpackApiListResponse(response, m => m);
+    return unpackApiPaginatedListResponse(response, m => m);
 };
 
 export const getFantasyStageRaceById = async (id: number): Promise<HttpClientResponse<FantasyStageRace.Details>> => {
