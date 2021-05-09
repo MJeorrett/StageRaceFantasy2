@@ -12,7 +12,7 @@ const FantasyStageRacesTable: React.FC<FantasyStageRacesTableProps> = ({
     actionButtons = [],
 }) => {
     const fetchRacesState = useHttpRequest(getAllFantasyStageRaces);
-    const columnHeaders = ['id', 'Name'];
+    const columnHeaders = ['ID', 'Name'];
 
     return (
         <>
@@ -23,7 +23,7 @@ const FantasyStageRacesTable: React.FC<FantasyStageRacesTableProps> = ({
                         entities={fetchRacesResponse.content || []}
                         renderRowCells={fantasyStageRace => (
                             <>
-                                <TableCell>{fantasyStageRace.id}</TableCell>
+                                <TableCell width={48}>{fantasyStageRace.id}</TableCell>
                                 <TableCell>{fantasyStageRace.name}</TableCell>
                             </>
                         )}

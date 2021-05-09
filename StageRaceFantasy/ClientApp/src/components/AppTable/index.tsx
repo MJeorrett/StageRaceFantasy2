@@ -85,7 +85,7 @@ const AppTable = <TRow extends { id: number },>({
                             <TableRow key={entity.id}>
                                 {renderRowCells(entity)}
                                 {actionButtons.length > 0 && (
-                                    <TableCell>
+                                    <TableCell width={48 * actionButtons.length}>
                                         {actionButtons.map(({ onClick, icon }, index) => (
                                             <IconButton
                                                 key={index}
