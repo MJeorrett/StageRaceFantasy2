@@ -30,6 +30,16 @@ namespace StageRaceFantasy.Controllers
             return ActionResultBuilder.Build(response);
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<AppResponse>> Update(
+            [FromRoute] int id,
+            [FromBody] UpdateFantasyStageRaceCommand command)
+        {
+            var response = await _mediator.Send(command with { Id = id });
+
+            return ActionResultBuilder.Build(response);
+        }
+
         [HttpGet]
         public async Task<ActionResult<AppResponse<List<FantasyStageRaceSummaryDto>>>> GetAll()
         {

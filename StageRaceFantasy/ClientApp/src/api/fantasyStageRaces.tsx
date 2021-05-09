@@ -13,6 +13,15 @@ export const createFantasyStageRace = async (createBookingDto: ApiFantasyStageRa
     return mapHttpClientResponse(response, m => m);
 };
 
+export const updateFantasyStageRace = async (id: number, updateBookingDto: ApiFantasyStageRace.CreateUpdateDto): Promise<HttpClientResponse<void>> => {
+    const url = buildApiUrl(`api/fantasy-stage-races/${id}`);
+    const response = await httpClient.putRequest<ApiStandardResponse<void>>(url, updateBookingDto);
+
+    doErrorToastIfRequired(response);
+
+    return mapHttpClientResponse(response, m => m);
+};
+
 export const getAllFantasyStageRaces = async (): Promise<HttpClientResponse<ApiListResponse<FantasyStageRace.Summary>>> => {
     const url = buildApiUrl('api/fantasy-stage-races');
     const response = await httpClient.getRequest<ApiListResponse<ApiFantasyStageRace.Summary>>(url);

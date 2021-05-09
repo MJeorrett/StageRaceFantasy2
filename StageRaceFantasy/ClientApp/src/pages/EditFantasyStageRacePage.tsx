@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';
-import { createFantasyStageRace, getFantasyStageRaceById, useHttpRequest } from '../api';
+import { getFantasyStageRaceById, updateFantasyStageRace, useHttpRequest } from '../api';
+import AppForm, { AppFormikSubmitButton } from '../components/AppForm';
 import AppPageTitle from '../components/PageTitle';
 import FantasyStageRaceForm from '../fantasyStageRaces/form';
 import { appPaths, useFantasyStageRaceId } from '../Routes';
@@ -16,16 +17,21 @@ const EditFantasyStageRacePage: React.FC = () => {
         <>
             <AppPageTitle>Edit Race</AppPageTitle>
             {!isLoading && (
-                <FantasyStageRaceForm
+                <FantasyStageRaceForm.Container
                     initialValues={fantasyStageRace}
                     onSubmit={async values => {
-                        const response = await createFantasyStageRace(values);
+                        const response = await updateFantasyStageRace(raceId, values);
 
                         if (!response.isError) {
                             history.push(appPaths.fantasyStageRaces);
                         }
                     }}
-                />
+                >
+                    <AppForm>
+                        <FantasyStageRaceForm.Fields />
+                        <AppFormikSubmitButton>Save Changes</AppFormikSubmitButton>
+                    </AppForm>
+                </FantasyStageRaceForm.Container>
             )}
         </>
     );

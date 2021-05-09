@@ -11,6 +11,21 @@ namespace StageRaceFantasy.Application.Common.Requests
     public abstract class AppRequestHandler<TRequest> : IRequestHandler<TRequest, AppResponse>
         where TRequest : IRequest<AppResponse>
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private IApplicationDbContext? _dbContext;
+        private IMapper? _mapper;
+
+        protected AppRequestHandler(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        protected IApplicationDbContext DbContext =>
+            _dbContext ??= _httpContextAccessor.HttpContext!.RequestServices.GetRequiredService<IApplicationDbContext>();
+
+        protected IMapper Mapper =>
+            _mapper ??= _httpContextAccessor.HttpContext!.RequestServices.GetRequiredService<IMapper>();
+
         public abstract Task<AppResponse> Handle(TRequest request, CancellationToken cancellationToken);
 
         protected AppResponse Success()
