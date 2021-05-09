@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography, Paper, makeStyles } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography, Paper, makeStyles, IconButton } from '@material-ui/core';
 import React from 'react';
 import { ChangeEvent } from 'react';
 import { Pagination } from '../../models/pagination';
@@ -9,33 +9,40 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center'
     },
     table: {
-        
+
     },
     tableContainer: {
         boxShadow: 'none'
     }
 }));
 
+export interface TableActionButtonDefinition {
+    icon: JSX.Element,
+    onClick: (id: number) => void,
+}
+
 export type AppTableProps<TRow> = {
     headers: string[],
     entities: TRow[],
-    renderRow: (entity: TRow) => JSX.Element,
+    renderRowCells: (entity: TRow) => JSX.Element,
     pagination?: Pagination,
     pageSizeOptions?: number[],
     onChangePageNumber?: (pageNumber: number) => void,
     onChangePageSize?: (pageSize: number) => void,
     noEntitiesMessage: string,
+    actionButtons?: TableActionButtonDefinition[],
 }
 
-const AppTable = <TRow,>({
+const AppTable = <TRow extends { id: number },>({
     headers,
     entities,
-    renderRow,
+    renderRowCells,
     pagination,
     pageSizeOptions = [10, 25, 100],
     onChangePageNumber,
     onChangePageSize,
     noEntitiesMessage,
+    actionButtons = [],
 }: AppTableProps<TRow>): JSX.Element => {
     const classes = useStyles();
 
@@ -60,19 +67,36 @@ const AppTable = <TRow,>({
         );
     }
 
+    const _headers = actionButtons.length > 0 ? [...headers, ''] : headers;
+
     return (
         <>
             <TableContainer className={classes.tableContainer} component={Paper}>
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
-                            {headers.map((header, index) => (
+                            {_headers.map((header, index) => (
                                 <TableCell key={index}>{header}</TableCell>
                             ))}
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {entities.map(renderRow)}
+                        {entities.map(entity => (
+                            <TableRow key={entity.id}>
+                                {renderRowCells(entity)}
+                                {actionButtons.length > 0 && (
+                                    <TableCell>
+                                        {actionButtons.map(({ onClick, icon }, index) => (
+                                            <IconButton
+                                                key={index}
+                                                onClick={() => onClick(entity.id)}>
+                                                {icon}
+                                            </IconButton>
+                                        ))}
+                                    </TableCell>
+                                )}
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>
