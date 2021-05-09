@@ -40,7 +40,7 @@ export const useHttpRequest = <T,>(makeRequest: () => Promise<HttpClientResponse
                 setHttpError(apiResponse);
             }
             else {
-                setResult(apiResponse.content);
+                setResult(apiResponse.body);
             }
             setIsLoading(false);
         };

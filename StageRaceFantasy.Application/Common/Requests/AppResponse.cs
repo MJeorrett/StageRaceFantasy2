@@ -1,10 +1,22 @@
-﻿namespace StageRaceFantasy.Application.Common.Requests
+﻿using System.Text.Json.Serialization;
+
+namespace StageRaceFantasy.Application.Common.Requests
 {
-    public record AppResponse(
-        int StatusCode,
-        string Message = "")
+    public record AppResponse
     {
+        [JsonIgnore]
+        public int StatusCode { get; set; }
+        
+        public string Message { get; set; }
+
+        [JsonIgnore]
         public bool IsOk => StatusCode >= 200 && StatusCode <= 299;
+
+        public AppResponse(int statusCode, string message = "")
+        {
+            StatusCode = statusCode;
+            Message = message;
+        }
 
         public static AppResponse Success(string message = "") =>
             new(200, message);
@@ -25,10 +37,23 @@
             new(404, default, message);
     }
 
-    public record AppResponse<T>(
-        int StatusCode,
-        T? Content,
-        string Message = "")
+    public record AppResponse<T>
     {
+        [JsonIgnore]
+        public int StatusCode { get; set; }
+
+        public T? Content { get; set; }
+
+        public string Message { get; set; }
+
+        [JsonIgnore]
+        public bool IsOk => StatusCode >= 200 && StatusCode <= 299;
+
+        public AppResponse(int statusCode, T? content, string message = "")
+        {
+            StatusCode = statusCode;
+            Content = content;
+            Message = message;
+        }
     }
 }

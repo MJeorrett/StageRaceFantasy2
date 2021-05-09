@@ -1,3 +1,5 @@
+import { HttpClientResponse } from '../../common/httpClient';
+
 export interface ApiPagination {
     pageNumber: number,
     pageSize: number,
@@ -16,5 +18,27 @@ export interface ApiPaginatedResponse<T> {
         hasPreviousPage: boolean,
         hasNextPage: boolean,
         items: T[],
+    }
+}
+
+export function unpackApiPaginatedResponse<TResponse, TMapped>(
+    response: HttpClientResponse<ApiPaginatedResponse<TResponse>>,
+    mapper: (responseModel: TResponse) => TMapped): HttpClientResponse<ApiPaginatedResponse<TMapped>> {
+    if (response.isError) return response;
+
+    try {
+        return {
+            ...response,
+            body: {
+                content: {
+                    ...response.body.content,
+                    items: response.body.content.items.map(mapper),
+                }
+            },
+        };
+    }
+    catch (error) {
+        console.error('error parsing api response:', error);
+        throw error;
     }
 }

@@ -4,7 +4,7 @@ import authService from '../../components/api-authorization/AuthorizeService';
 export interface HttpClientSuccessResponse<T> {
     isError: false,
     statusCode: number,
-    content: T,
+    body: T,
 }
 
 export interface HttpClientFailureResponse {
@@ -76,7 +76,7 @@ export async function getRequest<TResponse>(url: string, allowedNon200Statuses: 
         return {
             isError: false,
             statusCode: response.status,
-            content: responseData,
+            body: responseData,
         };
     }
     catch (error) {
@@ -96,7 +96,7 @@ export async function thirdPartyGetRequest<TResponse>(url: string, allowedNon200
         return {
             isError: false,
             statusCode: response.status,
-            content: responseData,
+            body: responseData,
         };
     }
     catch (error) {
@@ -118,7 +118,7 @@ export async function postRequest<TResponse>(url: string, payload?: unknown): Pr
         return {
             isError: false,
             statusCode: response.status,
-            content: responseData,
+            body: responseData,
         };
     }
     catch (error) {
@@ -140,7 +140,7 @@ export async function putRequest<TResponse>(url: string, payload?: unknown): Pro
         return {
             isError: false,
             statusCode: response.status,
-            content: responseData,
+            body: responseData,
         };
     }
     catch (error) {
@@ -162,7 +162,7 @@ export async function patchRequest<TResponse>(url: string, payload?: unknown): P
         return {
             isError: false,
             statusCode: response.status,
-            content: responseData,
+            body: responseData,
         };
     }
     catch (error) {
@@ -184,7 +184,7 @@ export async function deleteRequest<TResponse>(url: string): Promise<HttpClientR
         return {
             isError: false,
             statusCode: response.status,
-            content: responseData,
+            body: responseData,
         };
     }
     catch (error) {
