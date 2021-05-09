@@ -38,5 +38,15 @@ namespace StageRaceFantasy.Controllers
 
             return ActionResultBuilder.Build(response);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AppResponse<FantasyStageRaceDetailsDto>>> GetById(
+            [FromRoute] int id)
+        {
+            var query = new GetFantasyStageRaceByIdQuery(id);
+            var response = await _mediator.Send(query);
+
+            return ActionResultBuilder.Build(response);
+        }
     }
 }

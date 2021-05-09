@@ -12,7 +12,7 @@ export const NavMenu: React.FC = () => {
                         <NavLink className="text-dark" to={appPaths.home}>Home</NavLink>
                     </li>
                     <li>
-                        <NavLink className="text-dark" to={appPaths.fantasyStageRaces}>Events</NavLink>
+                        <NavLink className="text-dark" to={appPaths.fantasyStageRaces}>Races</NavLink>
                     </li>
                     <LoginMenu />
                 </ul>

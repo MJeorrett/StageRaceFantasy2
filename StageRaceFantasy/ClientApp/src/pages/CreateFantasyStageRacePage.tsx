@@ -1,22 +1,26 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { createFantasyStageRace } from '../api';
-import CreateFantasyStageRaceForm from '../fantasyStageRaces/form/CreateFantasyStageRaceForm';
+import AppPageTitle from '../components/PageTitle';
+import FantasyStageRaceForm from '../fantasyStageRaces/form/FantasyStageRaceFormContainer';
 import { appPaths } from '../Routes';
 
 const CreateFantasyStageRacePage: React.FC = () => {
     const history = useHistory();
 
     return (
-        <CreateFantasyStageRaceForm
-            onSubmit={async values => {
-                const response = await createFantasyStageRace(values);
+        <>
+            <AppPageTitle>Create New Race</AppPageTitle>
+            <FantasyStageRaceForm
+                onSubmit={async values => {
+                    const response = await createFantasyStageRace(values);
 
-                if (!response.isError) {
-                    history.push(appPaths.fantasyStageRaces);
-                }
-            }}
-        />
+                    if (!response.isError) {
+                        history.push(appPaths.fantasyStageRaces);
+                    }
+                }}
+            />
+        </>
     );
 };
 
