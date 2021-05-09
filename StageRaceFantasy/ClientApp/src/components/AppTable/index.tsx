@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography, Paper, makeStyles, IconButton } from '@material-ui/core';
 import React from 'react';
 import { ChangeEvent } from 'react';
-import { Pagination } from '../../models/pagination';
+import { ApiPagination } from '../../api/models/common';
 
 const useStyles = makeStyles((theme) => ({
     pagination: {
@@ -25,10 +25,11 @@ export type AppTableProps<TRow> = {
     headers: string[],
     entities: TRow[],
     renderRowCells: (entity: TRow) => JSX.Element,
-    pagination?: Pagination,
+    pagination?: ApiPagination & {
+        setPageNumber: (pageNumber: number) => void
+        setPageSize: (pageSize: number) => void
+    },
     pageSizeOptions?: number[],
-    onChangePageNumber?: (pageNumber: number) => void,
-    onChangePageSize?: (pageSize: number) => void,
     noEntitiesMessage: string,
     actionButtons?: TableActionButtonDefinition[],
 }
@@ -39,26 +40,18 @@ const AppTable = <TRow extends { id: number },>({
     renderRowCells,
     pagination,
     pageSizeOptions = [10, 25, 100],
-    onChangePageNumber,
-    onChangePageSize,
     noEntitiesMessage,
     actionButtons = [],
 }: AppTableProps<TRow>): JSX.Element => {
     const classes = useStyles();
 
-    if (pagination) {
-        if (!onChangePageNumber || !onChangePageSize) {
-            console.warn('AppTable: For pagination to work you must provide page number and size change handlers.');
-        }
-    }
-
     const handleChangePageNumber = (_: unknown, pageNumber: number) => {
-        onChangePageNumber && onChangePageNumber(pageNumber + 1);
+        pagination?.setPageNumber(pageNumber + 1);
     };
 
     const handleChangePageSize = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const pageSize = parseInt(event.target.value);
-        onChangePageSize && onChangePageSize(pageSize);
+        pagination?.setPageSize(pageSize);
     };
 
     if (entities.length === 0) {

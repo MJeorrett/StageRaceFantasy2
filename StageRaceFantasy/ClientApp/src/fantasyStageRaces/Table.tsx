@@ -3,6 +3,7 @@ import { TableCell } from '@material-ui/core';
 import { useHttpRequest, getPaginatedFantasyStageRaces } from '../api';
 import AppTable, { TableActionButtonDefinition } from '../components/AppTable';
 import HttpRequestWrapper from '../components/HttpRequestWrapper';
+import { usePaginatedHttpRequest } from '../api/utils/usePaginatedHttpRequest';
 
 export interface FantasyStageRacesTableProps {
     actionButtons?: TableActionButtonDefinition[],
@@ -11,14 +12,12 @@ export interface FantasyStageRacesTableProps {
 const FantasyStageRacesTable: React.FC<FantasyStageRacesTableProps> = ({
     actionButtons = [],
 }) => {
-    const [pageNumber, setPageNumber] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    const {
+        setPageNumber,
+        setPageSize,
+        ...fetchRacesState
+    } = usePaginatedHttpRequest(getPaginatedFantasyStageRaces);
 
-    const doGetPaginatedRaces = useCallback(
-        () => getPaginatedFantasyStageRaces({ pageNumber, pageSize }),
-        [pageNumber, pageSize]);
-
-    const fetchRacesState = useHttpRequest(doGetPaginatedRaces);
     const columnHeaders = ['ID', 'Name'];
 
     return (
@@ -28,9 +27,11 @@ const FantasyStageRacesTable: React.FC<FantasyStageRacesTableProps> = ({
                     <AppTable
                         headers={columnHeaders}
                         entities={fetchRacesResponse.content.items || []}
-                        pagination={fetchRacesResponse.content}
-                        onChangePageNumber={setPageNumber}
-                        onChangePageSize={setPageSize}
+                        pagination={{
+                            ...fetchRacesResponse.content,
+                            setPageNumber,
+                            setPageSize,
+                        }}
                         renderRowCells={fantasyStageRace => (
                             <>
                                 <TableCell width={48}>{fantasyStageRace.id}</TableCell>
