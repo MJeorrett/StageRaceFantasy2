@@ -2,10 +2,16 @@ import React from 'react';
 
 import * as Fields from './Fields';
 
-const FantasyStageRaceFormFields: React.FC = () => {
+export interface FantasyStageRaceFormFieldsProps {
+    autoFocus?: boolean,
+}
+
+const FantasyStageRaceFormFields: React.FC<FantasyStageRaceFormFieldsProps> = ({
+    autoFocus,
+}) => {
     return (
         <>
-            <Fields.Name />
+            <Fields.Name autoFocus={autoFocus} />
             <Fields.FantasyTeamSize />
         </>
     );

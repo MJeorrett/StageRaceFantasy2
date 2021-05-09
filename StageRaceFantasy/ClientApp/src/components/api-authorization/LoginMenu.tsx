@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { Component } from 'react';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
+import AppNavBarButton from '../AppNavBar/AppNavBarButton';
 
 type LoginMenuState = {
     isAuthenticated: boolean,
@@ -53,12 +53,8 @@ export class LoginMenu extends Component<{}, LoginMenuState> {
     authenticatedView(userName: string | null, profilePath: string, logoutPath: any) {
         return (
             <>
-                <li>
-                    <NavLink className="text-dark" to={profilePath}>Hello {userName}</NavLink>
-                </li>
-                <li>
-                    <NavLink className="text-dark" to={logoutPath}>Logout</NavLink>
-                </li>
+                <AppNavBarButton linkPath={profilePath}>Hello {userName}</AppNavBarButton>
+                <AppNavBarButton linkPath={logoutPath}>Logout</AppNavBarButton>
             </>
         );
     }
@@ -66,12 +62,8 @@ export class LoginMenu extends Component<{}, LoginMenuState> {
     anonymousView(registerPath: string, loginPath: string) {
         return (
             <>
-                <li>
-                    <NavLink className="text-dark" to={registerPath}>Register</NavLink>
-                </li>
-                <li>
-                    <NavLink className="text-dark" to={loginPath}>Login</NavLink>
-                </li>
+                <AppNavBarButton linkPath={registerPath}>Register</AppNavBarButton>
+                <AppNavBarButton linkPath={loginPath}>Login</AppNavBarButton>
             </>
         );
     }

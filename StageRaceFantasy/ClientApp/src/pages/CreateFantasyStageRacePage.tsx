@@ -12,6 +12,7 @@ const CreateFantasyStageRacePage: React.FC = () => {
     return (
         <>
             <AppPageTitle>Create New Race</AppPageTitle>
+            
             <FantasyStageRaceForm.Container
                 onSubmit={async values => {
                     const response = await createFantasyStageRace(values);
@@ -22,7 +23,7 @@ const CreateFantasyStageRacePage: React.FC = () => {
                 }}
             >
                 <AppForm>
-                    <FantasyStageRaceForm.Fields />
+                    <FantasyStageRaceForm.Fields autoFocus />
                     <AppFormikSubmitButton>Create</AppFormikSubmitButton>
                 </AppForm>
             </FantasyStageRaceForm.Container>

@@ -1,18 +1,34 @@
 import { useEffect, useState } from 'react';
 import { HttpClientFailureResponse, HttpClientResponse } from '../common/httpClient';
 
-export interface UseHttpRequest<T> {
-    isLoading: boolean,
-    httpError?: HttpClientFailureResponse,
-    isError: boolean,
-    result?: T,
+export interface UseHttpRequestLoadingState {
+    isLoading: true,
     forceRefresh: () => void,
 }
 
-export const useHttpRequest = <T, >(makeRequest: () => Promise<HttpClientResponse<T>>, defaultValue?: T): UseHttpRequest<T> => {
+export interface UseHttpRequestFailureState {
+    isLoading: false,
+    httpError: HttpClientFailureResponse,
+    isError: true,
+    forceRefresh: () => void,
+}
+
+export interface UseHttpRequestSuccessState<T> {
+    isLoading: false,
+    isError: false,
+    result: T,
+    forceRefresh: () => void,
+}
+
+export type UseHttpRequestState<T> =
+    UseHttpRequestLoadingState |
+    UseHttpRequestFailureState |
+    UseHttpRequestSuccessState<T>;
+
+export const useHttpRequest = <T,>(makeRequest: () => Promise<HttpClientResponse<T>>, defaultValue?: T): UseHttpRequestState<T> => {
     const [isLoading, setIsLoading] = useState(true);
-    const [httpError, setHttpError] = useState<HttpClientFailureResponse|undefined>(undefined);
-    const [result, setResult] = useState<T|undefined>(defaultValue);
+    const [httpError, setHttpError] = useState<HttpClientFailureResponse | undefined>(undefined);
+    const [result, setResult] = useState<T | undefined>(defaultValue);
     const [forceRefresh, setForceRefresh] = useState(false);
 
     useEffect(() => {
@@ -31,11 +47,24 @@ export const useHttpRequest = <T, >(makeRequest: () => Promise<HttpClientRespons
         doRequest();
     }, [makeRequest, forceRefresh]);
 
-    return {
-        isLoading,
+    const doForceRefresh = () => setForceRefresh(!forceRefresh);
+
+    if (isLoading) return {
+        isLoading: true,
+        forceRefresh: doForceRefresh,
+    };
+
+    if (httpError) return {
+        isLoading: false,
         httpError,
-        isError: !!httpError,
-        result,
-        forceRefresh: () => setForceRefresh(!forceRefresh),
+        isError: true,
+        forceRefresh: doForceRefresh,
+    };
+
+    return {
+        isLoading: false,
+        isError: false,
+        result: result as T,
+        forceRefresh: doForceRefresh,
     };
 };
