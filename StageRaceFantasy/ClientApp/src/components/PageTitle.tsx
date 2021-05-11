@@ -10,6 +10,7 @@ const AppPageTitle: React.FC = ({
             component="h1"
             align="center"
             gutterBottom
+            color="primary"
         >
             {children}
         </Typography>

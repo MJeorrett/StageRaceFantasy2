@@ -8,12 +8,13 @@ import AppButton from '../components/AppButton';
 import FantasyRacesTable from '../fantasyRaces/Table';
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     buttons: {
         display: 'flex',
         justifyContent: 'flex-end',
+        marginBottom: theme.spacing(1),
     },
-});
+}));
 
 const ViewFantasyRacesPage: React.FC = () => {
     const classNames = useStyles();

@@ -8,6 +8,7 @@ import Routes from './Routes';
 import './App.css';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import AppTheme from './AppTheme';
 
 const useStyles = makeStyles({
     root: {
@@ -20,11 +21,13 @@ const App = () => {
 
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <ToastContainer />
-            <AppNavBar />
-            <div className={classNames.root}>
-                <Routes />
-            </div>
+            <AppTheme>
+                <ToastContainer />
+                <AppNavBar />
+                <div className={classNames.root}>
+                    <Routes />
+                </div>
+            </AppTheme>
         </MuiPickersUtilsProvider>
     );
 };

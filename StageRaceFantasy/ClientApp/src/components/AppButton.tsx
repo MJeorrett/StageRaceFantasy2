@@ -27,7 +27,7 @@ const AppButton: React.FC<AppButtonProps> = ({
     showSpinner,
     variant = 'contained',
     linkPath,
-    color = 'primary',
+    color = 'secondary',
     ...restOfProps
 }) => {
     const classes = useStyles();

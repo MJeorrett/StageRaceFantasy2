@@ -3,6 +3,8 @@ import React from 'react';
 
 const useStyles = makeStyles(theme => ({
     root: {
+        backgroundColor: 'white',
+        padding: theme.spacing(2),
         maxWidth: '500px',
         marginRight: 'auto',
         marginLeft: 'auto',
