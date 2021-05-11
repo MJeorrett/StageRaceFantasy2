@@ -25,7 +25,7 @@ const ViewFantasyRacesPage: React.FC = () => {
 
     return (
         <>
-            <AppPageTitle>Fantasy Stage Races</AppPageTitle>
+            <AppPageTitle>Fantasy Races</AppPageTitle>
 
             <div className={classNames.buttons}>
                 <AppButton linkPath={appPaths.createFantasyRace}>Create New</AppButton>

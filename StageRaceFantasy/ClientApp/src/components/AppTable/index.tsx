@@ -56,7 +56,7 @@ const AppTable = <TRow extends { id: number },>({
 
     if (entities.length === 0) {
         return (
-            <Typography>{noEntitiesMessage}</Typography>
+            <Typography align="center">{noEntitiesMessage}</Typography>
         );
     }
 

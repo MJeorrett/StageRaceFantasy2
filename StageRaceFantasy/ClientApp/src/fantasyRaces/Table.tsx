@@ -41,7 +41,7 @@ const FantasyRacesTable: React.FC<FantasyRacesTableProps> = ({
                             </>
                         )}
                         actionButtons={actionButtons}
-                        noEntitiesMessage="You don't have any fantasy stage races yet."
+                        noEntitiesMessage="You don't have any fantasy races yet."
                     />
                 )}
             </HttpRequestWrapper>
