@@ -4,7 +4,7 @@ using System;
 
 namespace StageRaceFantasy.Application.FantasyRaces
 {
-    public static class ValidationExtensions
+    public static class FantasyRaceValidationExtensions
     {
         public static IRuleBuilder<T, DateTime> FantasyRaceStartTimeRules<T>(this IRuleBuilder<T, DateTime> ruleBuilder)
         {
