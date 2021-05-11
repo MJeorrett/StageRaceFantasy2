@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import AppNavBar from './components/AppNavBar';
 import Routes from './Routes';
 import './App.css';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 const useStyles = makeStyles({
     root: {
@@ -17,13 +19,13 @@ const App = () => {
     const classNames = useStyles();
 
     return (
-        <>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <ToastContainer />
             <AppNavBar />
             <div className={classNames.root}>
                 <Routes />
             </div>
-        </>
+        </MuiPickersUtilsProvider>
     );
 };
 

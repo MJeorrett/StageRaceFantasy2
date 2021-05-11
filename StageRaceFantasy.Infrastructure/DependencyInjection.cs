@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using StageRaceFantasy.Application.Common.Interfaces;
+using StageRaceFantasy.Application.Common.ExternalInterfaces;
 using StageRaceFantasy.Infrastructure.Persistence;
 
 namespace StageRaceFantasy.Infrastructure

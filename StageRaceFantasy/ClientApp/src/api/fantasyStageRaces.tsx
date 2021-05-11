@@ -3,6 +3,7 @@ import { ApiPaginatedListResponse, ApiPaginationQueryParams, ApiSingleObjectResp
 import { ApiFantasyStageRace } from './models';
 import { FantasyStageRace } from '../models';
 import { HttpClientResponse } from './common/httpClient';
+import { mapFromApiFantasyStageRaceDetails, mapFromApiFantasyStageRaceSummary } from '../modelMappers/fantasyStageRace';
 
 export const createFantasyStageRace = async (createBookingDto: ApiFantasyStageRace.CreateUpdateDto): Promise<HttpClientResponse<FantasyStageRace.Summary>> => {
     const url = buildApiUrl('api/fantasy-stage-races');
@@ -10,7 +11,7 @@ export const createFantasyStageRace = async (createBookingDto: ApiFantasyStageRa
 
     doErrorToastIfRequired(response);
 
-    return unpackApiSingleObjectResponse(response, m => m);
+    return unpackApiSingleObjectResponse(response, mapFromApiFantasyStageRaceSummary);
 };
 
 export const updateFantasyStageRace = async (id: number, updateBookingDto: ApiFantasyStageRace.CreateUpdateDto): Promise<HttpClientResponse<void>> => {
@@ -28,7 +29,7 @@ export const getPaginatedFantasyStageRaces = async (paginationQueryParams: ApiPa
 
     doErrorToastIfRequired(response);
 
-    return unpackApiPaginatedListResponse(response, m => m);
+    return unpackApiPaginatedListResponse(response, mapFromApiFantasyStageRaceSummary);
 };
 
 export const getFantasyStageRaceById = async (id: number): Promise<HttpClientResponse<FantasyStageRace.Details>> => {
@@ -37,5 +38,5 @@ export const getFantasyStageRaceById = async (id: number): Promise<HttpClientRes
 
     doErrorToastIfRequired(response);
 
-    return unpackApiSingleObjectResponse(response, m => m);
+    return unpackApiSingleObjectResponse(response, mapFromApiFantasyStageRaceDetails);
 };

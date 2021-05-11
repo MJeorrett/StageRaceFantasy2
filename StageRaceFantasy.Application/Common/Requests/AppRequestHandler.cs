@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using StageRaceFantasy.Application.Common.Interfaces;
+using StageRaceFantasy.Application.Common.ExternalInterfaces;
 using System.Threading;
 using System.Threading.Tasks;
 

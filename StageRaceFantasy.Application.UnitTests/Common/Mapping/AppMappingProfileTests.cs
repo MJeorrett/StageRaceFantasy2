@@ -33,6 +33,7 @@ namespace StageRaceFantasy.Application.UnitTests.Common.Mapping
         [Test]
         [TestCase(typeof(CreateFantasyStageRaceCommand), typeof(FantasyStageRaceEntity))]
         [TestCase(typeof(FantasyStageRaceEntity), typeof(FantasyStageRaceSummaryDto))]
+        [TestCase(typeof(FantasyStageRaceEntity), typeof(FantasyStageRaceDetailsDto))]
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
         {
             var instance = GetInstanceOf(source);

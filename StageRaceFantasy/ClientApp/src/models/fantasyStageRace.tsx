@@ -1,5 +1,7 @@
 interface Core {
     name: string,
+    startDate: Date,
+    endDate: Date,
 }
 
 export interface Summary extends Core {

@@ -11,6 +11,12 @@ namespace StageRaceFantasy.Application.FantasyStageRaces.Commands
 
             RuleFor(_ => _.FantasyTeamSize)
                 .GreaterThan(0);
+
+            RuleFor(_ => _.StartDate)
+                .FantasyStageRaceStartTimeRules();
+
+            RuleFor(_ => _.EndDate)
+                .FantasyStageRaceEndTimeRules();
         }
     }
 }

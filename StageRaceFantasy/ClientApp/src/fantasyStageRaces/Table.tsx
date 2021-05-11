@@ -18,7 +18,7 @@ const FantasyStageRacesTable: React.FC<FantasyStageRacesTableProps> = ({
         ...fetchRacesState
     } = usePaginatedHttpRequest(getPaginatedFantasyStageRaces);
 
-    const columnHeaders = ['ID', 'Name'];
+    const columnHeaders = ['ID', 'Name', 'Start', 'End'];
 
     return (
         <>
@@ -36,6 +36,8 @@ const FantasyStageRacesTable: React.FC<FantasyStageRacesTableProps> = ({
                             <>
                                 <TableCell width={48}>{fantasyStageRace.id}</TableCell>
                                 <TableCell>{fantasyStageRace.name}</TableCell>
+                                <TableCell>{fantasyStageRace.startDate.toDateString()}</TableCell>
+                                <TableCell>{fantasyStageRace.endDate.toDateString()}</TableCell>
                             </>
                         )}
                         actionButtons={actionButtons}
