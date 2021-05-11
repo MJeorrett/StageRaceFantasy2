@@ -9,4 +9,4 @@ export type {
 } from './models/common/apiPaginatedResponse';
 
 export * from './utils/useHttpRequest';
-export * from './fantasyStageRaces';
+export * from './fantasyRaces';

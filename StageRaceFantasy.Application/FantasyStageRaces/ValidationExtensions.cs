@@ -1,16 +1,12 @@
 ﻿using FluentValidation;
 using StageRaceFantasy.Application.Common.InternalInterfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace StageRaceFantasy.Application.FantasyStageRaces
+namespace StageRaceFantasy.Application.FantasyRaces
 {
     public static class ValidationExtensions
     {
-        public static IRuleBuilder<T, DateTime> FantasyStageRaceStartTimeRules<T>(this IRuleBuilder<T, DateTime> ruleBuilder)
+        public static IRuleBuilder<T, DateTime> FantasyRaceStartTimeRules<T>(this IRuleBuilder<T, DateTime> ruleBuilder)
         {
             ruleBuilder
                 .NotEqual(default(DateTime))
@@ -19,7 +15,7 @@ namespace StageRaceFantasy.Application.FantasyStageRaces
             return ruleBuilder;
         }
 
-        public static IRuleBuilder<T, DateTime> FantasyStageRaceEndTimeRules<T>(this IRuleBuilder<T, DateTime> ruleBuilder)
+        public static IRuleBuilder<T, DateTime> FantasyRaceEndTimeRules<T>(this IRuleBuilder<T, DateTime> ruleBuilder)
             where T : IHasStartAndEndDate
         {
             ruleBuilder

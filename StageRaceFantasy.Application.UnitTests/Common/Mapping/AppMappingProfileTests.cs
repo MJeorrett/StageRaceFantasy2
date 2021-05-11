@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using NUnit.Framework;
 using StageRaceFantasy.Application.Common.Mapping;
-using StageRaceFantasy.Application.FantasyStageRaces.Commands;
-using StageRaceFantasy.Application.FantasyStageRaces.Dtos;
+using StageRaceFantasy.Application.FantasyRaces.Commands;
+using StageRaceFantasy.Application.FantasyRaces.Dtos;
 using StageRaceFantasy.Domain.Entities;
 using System;
 using System.Runtime.Serialization;
@@ -31,9 +31,9 @@ namespace StageRaceFantasy.Application.UnitTests.Common.Mapping
         }
 
         [Test]
-        [TestCase(typeof(CreateFantasyStageRaceCommand), typeof(FantasyStageRaceEntity))]
-        [TestCase(typeof(FantasyStageRaceEntity), typeof(FantasyStageRaceSummaryDto))]
-        [TestCase(typeof(FantasyStageRaceEntity), typeof(FantasyStageRaceDetailsDto))]
+        [TestCase(typeof(CreateFantasyRaceCommand), typeof(FantasyRaceEntity))]
+        [TestCase(typeof(FantasyRaceEntity), typeof(FantasyRaceSummaryDto))]
+        [TestCase(typeof(FantasyRaceEntity), typeof(FantasyRaceDetailsDto))]
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
         {
             var instance = GetInstanceOf(source);

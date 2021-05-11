@@ -1,22 +1,22 @@
-import React, { useCallback, useState } from 'react';
+import React, {  } from 'react';
 import { TableCell } from '@material-ui/core';
-import { useHttpRequest, getPaginatedFantasyStageRaces } from '../api';
+import { getPaginatedFantasyRaces } from '../api';
 import AppTable, { TableActionButtonDefinition } from '../components/AppTable';
 import HttpRequestWrapper from '../components/HttpRequestWrapper';
 import { usePaginatedHttpRequest } from '../api/utils/usePaginatedHttpRequest';
 
-export interface FantasyStageRacesTableProps {
+export interface FantasyRacesTableProps {
     actionButtons?: TableActionButtonDefinition[],
 }
 
-const FantasyStageRacesTable: React.FC<FantasyStageRacesTableProps> = ({
+const FantasyRacesTable: React.FC<FantasyRacesTableProps> = ({
     actionButtons = [],
 }) => {
     const {
         setPageNumber,
         setPageSize,
         ...fetchRacesState
-    } = usePaginatedHttpRequest(getPaginatedFantasyStageRaces);
+    } = usePaginatedHttpRequest(getPaginatedFantasyRaces);
 
     const columnHeaders = ['ID', 'Name', 'Start', 'End'];
 
@@ -32,12 +32,12 @@ const FantasyStageRacesTable: React.FC<FantasyStageRacesTableProps> = ({
                             setPageNumber,
                             setPageSize,
                         }}
-                        renderRowCells={fantasyStageRace => (
+                        renderRowCells={fantasyRace => (
                             <>
-                                <TableCell width={48}>{fantasyStageRace.id}</TableCell>
-                                <TableCell>{fantasyStageRace.name}</TableCell>
-                                <TableCell>{fantasyStageRace.startDate.toDateString()}</TableCell>
-                                <TableCell>{fantasyStageRace.endDate.toDateString()}</TableCell>
+                                <TableCell width={48}>{fantasyRace.id}</TableCell>
+                                <TableCell>{fantasyRace.name}</TableCell>
+                                <TableCell>{fantasyRace.startDate.toDateString()}</TableCell>
+                                <TableCell>{fantasyRace.endDate.toDateString()}</TableCell>
                             </>
                         )}
                         actionButtons={actionButtons}
@@ -49,4 +49,4 @@ const FantasyStageRacesTable: React.FC<FantasyStageRacesTableProps> = ({
     );
 };
 
-export default FantasyStageRacesTable;
+export default FantasyRacesTable;

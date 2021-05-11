@@ -1,16 +1,15 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
 
-import { ApiFantasyStageRace } from '../../api/models';
+import { ApiFantasyRace } from '../../api/models';
 import { defaultValues, validationSchema } from './values';
-import FantasyStageRaceFormFields from './FantasyStageRaceFormFields';
 
-export type FantasyStageRaceFormContainerProps = {
-    initialValues?: ApiFantasyStageRace.CreateUpdateDto,
-    onSubmit: (values: ApiFantasyStageRace.CreateUpdateDto) => Promise<void>
+export type FantasyRaceFormContainerProps = {
+    initialValues?: ApiFantasyRace.CreateUpdateDto,
+    onSubmit: (values: ApiFantasyRace.CreateUpdateDto) => Promise<void>
 }
 
-const FantasyStageRaceFormContainer: React.FC<FantasyStageRaceFormContainerProps> = ({
+const FantasyRaceFormContainer: React.FC<FantasyRaceFormContainerProps> = ({
     initialValues,
     onSubmit,
     children,
@@ -28,4 +27,4 @@ const FantasyStageRaceFormContainer: React.FC<FantasyStageRaceFormContainerProps
     );
 };
 
-export default FantasyStageRaceFormContainer;
+export default FantasyRaceFormContainer;

@@ -1,1 +1,1 @@
-export * as ApiFantasyStageRace from './fantasyStageRace';
+export * as ApiFantasyRace from './fantasyRace';

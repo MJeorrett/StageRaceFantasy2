@@ -4,11 +4,11 @@ import React from 'react';
 import AppFormikDatePicker from '../../components/AppForm/AppFormikDatePicker';
 import AppFormikTextField from '../../components/AppForm/AppFormikTextField';
 
-export interface FantasyStageRaceFormFieldsProps {
+export interface FantasyRaceFormFieldsProps {
     autoFocus?: boolean,
 }
 
-const FantasyStageRaceFormFields: React.FC<FantasyStageRaceFormFieldsProps> = ({
+const FantasyRaceFormFields: React.FC<FantasyRaceFormFieldsProps> = ({
     autoFocus,
 }) => {
     const [{ value: startDate }, , { setValue: setStartDate }] = useField<ParsableDate>('startDate');
@@ -40,4 +40,4 @@ const FantasyStageRaceFormFields: React.FC<FantasyStageRaceFormFieldsProps> = ({
     );
 };
 
-export default FantasyStageRaceFormFields;
+export default FantasyRaceFormFields;

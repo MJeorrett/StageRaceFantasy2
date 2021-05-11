@@ -2,29 +2,28 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using StageRaceFantasy.Application.Common.Requests;
-using StageRaceFantasy.Application.FantasyStageRaces.Commands;
-using StageRaceFantasy.Application.FantasyStageRaces.Dtos;
-using StageRaceFantasy.Application.FantasyStageRaces.Queries;
+using StageRaceFantasy.Application.FantasyRaces.Commands;
+using StageRaceFantasy.Application.FantasyRaces.Dtos;
+using StageRaceFantasy.Application.FantasyRaces.Queries;
 using StageRaceFantasy.Controllers.Common;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StageRaceFantasy.Controllers
 {
     [ApiController]
-    [Route("api/fantasy-stage-races")]
-    public class FantasyStageRacesController : ControllerBase
+    [Route("api/fantasy-races")]
+    public class FantasyRacesController : ControllerBase
     {
         private readonly ISender _mediator;
 
-        public FantasyStageRacesController(ISender mediator)
+        public FantasyRacesController(ISender mediator)
         {
             _mediator = mediator;
         }
 
         [HttpPost]
-        public async Task<ActionResult<AppResponse<FantasyStageRaceSummaryDto>>> Create(
-            [FromBody] CreateFantasyStageRaceCommand command)
+        public async Task<ActionResult<AppResponse<FantasyRaceSummaryDto>>> Create(
+            [FromBody] CreateFantasyRaceCommand command)
         {
             var response = await _mediator.Send(command);
 
@@ -34,7 +33,7 @@ namespace StageRaceFantasy.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<AppResponse>> Update(
             [FromRoute] int id,
-            [FromBody] UpdateFantasyStageRaceCommand command)
+            [FromBody] UpdateFantasyRaceCommand command)
         {
             var response = await _mediator.Send(command with { Id = id });
 
@@ -42,8 +41,8 @@ namespace StageRaceFantasy.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<AppResponse<PaginatedList<FantasyStageRaceSummaryDto>>>> GetPaginatedList(
-            [FromQuery] GetPaginatedFantasyStageRacesQuery query)
+        public async Task<ActionResult<AppResponse<PaginatedList<FantasyRaceSummaryDto>>>> GetPaginatedList(
+            [FromQuery] GetPaginatedFantasyRacesQuery query)
         {
             var response = await _mediator.Send(query);
 
@@ -51,10 +50,10 @@ namespace StageRaceFantasy.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppResponse<FantasyStageRaceDetailsDto>>> GetById(
+        public async Task<ActionResult<AppResponse<FantasyRaceDetailsDto>>> GetById(
             [FromRoute] int id)
         {
-            var query = new GetFantasyStageRaceByIdQuery(id);
+            var query = new GetFantasyRaceByIdQuery(id);
             var response = await _mediator.Send(query);
 
             return ActionResultBuilder.Build(response);

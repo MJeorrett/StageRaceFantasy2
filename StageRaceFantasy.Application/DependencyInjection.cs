@@ -1,7 +1,7 @@
 ﻿using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using StageRaceFantasy.Application.FantasyStageRaces.Commands;
+using StageRaceFantasy.Application.FantasyRaces.Commands;
 using System.Reflection;
 
 namespace StageRaceFantasy.Application
@@ -20,7 +20,7 @@ namespace StageRaceFantasy.Application
         {
             mvcBuilder.AddFluentValidation(fv =>
             {
-                fv.RegisterValidatorsFromAssemblyContaining<CreateFantasyStageRaceCommandValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<CreateFantasyRaceCommandValidator>();
                 fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                 fv.ImplicitlyValidateChildProperties = true;
             });

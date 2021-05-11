@@ -31,7 +31,7 @@ const AppNavBar = () => {
                     Stage Race Fantasy
                 </Typography>
                 <div className={classNames.links}>
-                    <AppNavBarButton linkPath={appPaths.fantasyStageRaces}>Races</AppNavBarButton>
+                    <AppNavBarButton linkPath={appPaths.fantasyRaces}>Races</AppNavBarButton>
                 </div>
                 <div className={classNames.buttons}>
                     <LoginMenu />

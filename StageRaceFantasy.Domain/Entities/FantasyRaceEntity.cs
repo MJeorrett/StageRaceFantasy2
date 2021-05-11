@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StageRaceFantasy.Domain.Entities
 {
-    [Table("FantasyStageRace")]
-    public record FantasyStageRaceEntity
+    [Table("FantasyRace")]
+    public record FantasyRaceEntity
     {
-        [Column("FantasyStageRaceId")]
+        [Column("FantasyRaceId")]
         public int Id { get; init; }
 
         public string Name { get; init; } = "";

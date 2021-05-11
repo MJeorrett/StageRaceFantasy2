@@ -9,11 +9,11 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace StageRaceFantasy.Application.FantasyStageRaces.Commands
+namespace StageRaceFantasy.Application.FantasyRaces.Commands
 {
-    public record UpdateFantasyStageRaceCommand :
+    public record UpdateFantasyRaceCommand :
         IAppRequest,
-        IMapTo<FantasyStageRaceEntity>,
+        IMapTo<FantasyRaceEntity>,
         IHasStartAndEndDate
     {
         [JsonIgnore]
@@ -28,20 +28,20 @@ namespace StageRaceFantasy.Application.FantasyStageRaces.Commands
         public int FantasyTeamSize { get; init; }
     }
 
-    public class UpdateFantasyStageRaceCommandHandler : AppRequestHandler<UpdateFantasyStageRaceCommand>
+    public class UpdateFantasyRaceCommandHandler : AppRequestHandler<UpdateFantasyRaceCommand>
     {
-        public UpdateFantasyStageRaceCommandHandler(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+        public UpdateFantasyRaceCommandHandler(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
         }
 
-        public override async Task<AppResponse> Handle(UpdateFantasyStageRaceCommand command, CancellationToken cancellationToken)
+        public override async Task<AppResponse> Handle(UpdateFantasyRaceCommand command, CancellationToken cancellationToken)
         {
-            var raceEntity = await DbContext.FantasyStageRaces
+            var fantasyRaceEntity = await DbContext.FantasyRaces
                 .FirstOrDefaultAsync(_ => _.Id == command.Id, cancellationToken);
 
-            if (raceEntity == default) return NotFound();
+            if (fantasyRaceEntity == default) return NotFound();
 
-            Mapper.Map(command, raceEntity);
+            Mapper.Map(command, fantasyRaceEntity);
 
             await DbContext.SaveChangesAsync(cancellationToken);
 

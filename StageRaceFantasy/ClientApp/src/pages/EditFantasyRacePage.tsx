@@ -1,17 +1,17 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';
-import { getFantasyStageRaceById, updateFantasyStageRace, useHttpRequest } from '../api';
+import { getFantasyRaceById, updateFantasyRace, useHttpRequest } from '../api';
 import AppForm, { AppFormikSubmitButton } from '../components/AppForm';
 import HttpRequestWrapper from '../components/HttpRequestWrapper';
 import AppPageTitle from '../components/PageTitle';
-import FantasyStageRaceForm from '../fantasyStageRaces/form';
-import { appPaths, useFantasyStageRaceId } from '../Routes';
+import FantasyRaceForm from '../fantasyRaces/form';
+import { appPaths, useFantasyRaceId } from '../Routes';
 
-const EditFantasyStageRacePage: React.FC = () => {
+const EditFantasyRacePage: React.FC = () => {
     const history = useHistory();
-    const raceId = useFantasyStageRaceId();
+    const raceId = useFantasyRaceId();
 
-    const fetchRace = useCallback(() => getFantasyStageRaceById(raceId), [raceId]);
+    const fetchRace = useCallback(() => getFantasyRaceById(raceId), [raceId]);
     const fetchRaceState = useHttpRequest(fetchRace);
 
     return (
@@ -19,25 +19,25 @@ const EditFantasyStageRacePage: React.FC = () => {
             <AppPageTitle>Edit Race</AppPageTitle>
             <HttpRequestWrapper httpState={fetchRaceState}>
                 {fetchRaceResponse => (
-                    <FantasyStageRaceForm.Container
+                    <FantasyRaceForm.Container
                         initialValues={fetchRaceResponse}
                         onSubmit={async values => {
-                            const response = await updateFantasyStageRace(raceId, values);
+                            const response = await updateFantasyRace(raceId, values);
 
                             if (!response.isError) {
-                                history.push(appPaths.fantasyStageRaces);
+                                history.push(appPaths.fantasyRaces);
                             }
                         }}
                     >
                         <AppForm>
-                            <FantasyStageRaceForm.Fields />
+                            <FantasyRaceForm.Fields />
                             <AppFormikSubmitButton>Save Changes</AppFormikSubmitButton>
                         </AppForm>
-                    </FantasyStageRaceForm.Container>
+                    </FantasyRaceForm.Container>
                 )}
             </HttpRequestWrapper>
         </>
     );
 };
 
-export default EditFantasyStageRacePage;
+export default EditFantasyRacePage;

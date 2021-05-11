@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
 
-import { ApiFantasyStageRace } from '../../api/models';
+import { ApiFantasyRace } from '../../api/models';
 
-export const defaultValues: ApiFantasyStageRace.CreateUpdateDto = {
+export const defaultValues: ApiFantasyRace.CreateUpdateDto = {
     name: '',
     fantasyTeamSize: 6,
     startDate: new Date(),

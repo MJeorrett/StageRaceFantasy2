@@ -5,7 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { appPaths } from '../Routes';
 import AppPageTitle from '../components/PageTitle';
 import AppButton from '../components/AppButton';
-import FantasyStageRacesTable from '../fantasyStageRaces/Table';
+import FantasyRacesTable from '../fantasyRaces/Table';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -15,12 +15,12 @@ const useStyles = makeStyles({
     },
 });
 
-const ViewFantasyStageRacesPage: React.FC = () => {
+const ViewFantasyRacesPage: React.FC = () => {
     const classNames = useStyles();
     const history = useHistory();
 
     const handleEditClick = (id: number) => {
-        history.push(appPaths.editFantasyStageRace(id));
+        history.push(appPaths.editFantasyRace(id));
     };
 
     return (
@@ -28,10 +28,10 @@ const ViewFantasyStageRacesPage: React.FC = () => {
             <AppPageTitle>Fantasy Stage Races</AppPageTitle>
 
             <div className={classNames.buttons}>
-                <AppButton linkPath={appPaths.createFantasyStageRace}>Create New</AppButton>
+                <AppButton linkPath={appPaths.createFantasyRace}>Create New</AppButton>
             </div>
             
-            <FantasyStageRacesTable
+            <FantasyRacesTable
                 actionButtons={[
                     { icon: <EditIcon />, onClick: handleEditClick }
                 ]}
@@ -40,4 +40,4 @@ const ViewFantasyStageRacesPage: React.FC = () => {
     );
 };
 
-export default ViewFantasyStageRacesPage;
+export default ViewFantasyRacesPage;

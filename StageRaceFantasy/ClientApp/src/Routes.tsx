@@ -3,34 +3,34 @@ import { Redirect, Route, Switch, useParams } from 'react-router-dom';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
-import ViewFantasyStageRacesPage from './pages/ViewFantasyStageRacesPage';
-import CreateFantasyStageRacePage from './pages/CreateFantasyStageRacePage';
-import EditFantasyStageRacePage from './pages/EditFantasyStageRacePage';
+import ViewFantasyRacesPage from './pages/ViewFantasyRacesPage';
+import CreateFantasyRacePage from './pages/CreateFantasyRacePage';
+import EditFantasyRacePage from './pages/EditFantasyRacePage';
 import HomePage from './pages/HomePage';
 
 export const appPaths = {
     home: '/',
-    fantasyStageRaces: '/fantasy-stage-races',
-    createFantasyStageRace: '/fantasy-stage-races/create',
-    editFantasyStageRace: (id: number|string) => `/fantasy-stage-races/${id}/edit`,
+    fantasyRaces: '/fantasy-races',
+    createFantasyRace: '/fantasy-races/create',
+    editFantasyRace: (id: number|string) => `/fantasy-races/${id}/edit`,
 };
 
 const Routes: React.FC = () => {
     return (
         <Switch>
             <Route exact path={appPaths.home} component={HomePage} />
-            <AuthorizeRoute exact path={appPaths.fantasyStageRaces} component={ViewFantasyStageRacesPage} />
-            <AuthorizeRoute path={appPaths.createFantasyStageRace} component={CreateFantasyStageRacePage} />
-            <AuthorizeRoute path={appPaths.editFantasyStageRace(':fantasyStageRaceId')} component={EditFantasyStageRacePage} />
+            <AuthorizeRoute exact path={appPaths.fantasyRaces} component={ViewFantasyRacesPage} />
+            <AuthorizeRoute path={appPaths.createFantasyRace} component={CreateFantasyRacePage} />
+            <AuthorizeRoute path={appPaths.editFantasyRace(':fantasyRaceId')} component={EditFantasyRacePage} />
             <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
             <Redirect to={appPaths.home} />
         </Switch>
     );
 };
 
-export const useFantasyStageRaceId = () => {
-    const { fantasyStageRaceId } = useParams<{ fantasyStageRaceId: string }>();
-    return parseInt(fantasyStageRaceId);
+export const useFantasyRaceId = () => {
+    const { fantasyRaceId } = useParams<{ fantasyRaceId: string }>();
+    return parseInt(fantasyRaceId);
 };
 
 export default Routes;
