@@ -16,7 +16,8 @@ export interface AppFormikDatePickerProps extends
     'InputProps' |
     'style'> {
     name: string,
-    readonly?: boolean
+    readonly?: boolean,
+    onChangeCallback?: (date: ParsableDate) => void,
 }
 
 const AppFormikDatePicker: React.FC<AppFormikDatePickerProps> = ({
@@ -25,6 +26,7 @@ const AppFormikDatePicker: React.FC<AppFormikDatePickerProps> = ({
     disabled,
     readonly,
     keyboardIcon,
+    onChangeCallback,
     ...restOfProps
 }) => {
     const theme = useTheme();
@@ -37,8 +39,9 @@ const AppFormikDatePicker: React.FC<AppFormikDatePickerProps> = ({
         !fieldProps.value ? '-' : 'do MMMM yyyy hh:mmaaa' :
         'dd/MM/yyyy';
 
-    const handleChange = (date: MaterialUiPickersDate) => {
-        setValue(date);
+    const handleChange = (newDate: MaterialUiPickersDate) => {
+        onChangeCallback && onChangeCallback(newDate);
+        setValue(newDate);
     };
 
     return (
