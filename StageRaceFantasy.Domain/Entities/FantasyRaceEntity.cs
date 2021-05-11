@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StageRaceFantasy.Domain.Entities
@@ -16,5 +17,7 @@ namespace StageRaceFantasy.Domain.Entities
         public DateTime EndDate { get; init; }
 
         public int FantasyTeamSize { get; init; }
+
+        public List<FantasyRaceTeamEntity> FantasyTeams { get; set; } = new();
     }
 }

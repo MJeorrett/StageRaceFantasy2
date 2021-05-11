@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using StageRaceFantasy.Application.Common.ExternalInterfaces;
 using StageRaceFantasy.Domain.Entities;
 using System;
+using System.Reflection;
 
 namespace StageRaceFantasy.Infrastructure.Persistence
 {
@@ -21,6 +22,8 @@ namespace StageRaceFantasy.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
             SpecifyDatesKindAsUtcWhenRetrieving(builder);
 
             base.OnModelCreating(builder);
