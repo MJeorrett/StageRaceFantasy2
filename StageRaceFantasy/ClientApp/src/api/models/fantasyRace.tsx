@@ -8,14 +8,15 @@ export interface CreateUpdateDto extends Core {
   endDate: Date,
 }
 
-export interface Summary extends Core {
+export interface Name extends Core {
   id: number,
+}
+
+export interface Summary extends Name {
   startDate: string,
   endDate: string,
 }
 
 export interface Details extends Summary {
   fantasyTeamSize: number,
-  startDate: string,
-  endDate: string,
 }

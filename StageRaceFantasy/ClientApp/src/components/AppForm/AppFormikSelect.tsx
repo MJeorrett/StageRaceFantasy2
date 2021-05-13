@@ -1,40 +1,33 @@
 import React from 'react';
-import { MenuItem } from '@material-ui/core';
-import AppFormikTextField, { AppFormikTextFieldProps } from './AppFormikTextField';
+import { useField } from 'formik';
+
+import { FormikInputPropsKeys } from './common';
+import AppSelect, { AppSelectProps } from './AppSelect';
 
 export type AppSelectOption = {
     value: number,
     label: string,
 }
 
-export interface AppSelectProps extends AppFormikTextFieldProps {
-    options: AppSelectOption[],
-    showPleaseSelect?: boolean,
-    pleaseSelectText?: string,
+export interface AppFormikSelectProps extends Omit<AppSelectProps, FormikInputPropsKeys> {
+    name: string,
 }
 
-const AppFormikSelect: React.FC<AppSelectProps> = ({
-    options,
-    showPleaseSelect,
-    pleaseSelectText = '-- Please Select --',
+const AppFormikSelect: React.FC<AppFormikSelectProps> = ({
+    name,
     ...restOfProps
 }) => {
+    const [inputProps, fieldMeta] = useField(name);
+    const isError = fieldMeta.touched && !!fieldMeta.error;
+    const helperText = fieldMeta.touched ? fieldMeta.error : undefined;
+
     return (
-        <AppFormikTextField
+        <AppSelect
             {...restOfProps}
-            select
-        >
-            {showPleaseSelect && (
-                <MenuItem value={-1}>
-                    {pleaseSelectText}
-                </MenuItem>
-            )}
-            {options.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                </MenuItem>
-            ))}
-        </AppFormikTextField>
+            {...inputProps}
+            helperText={helperText}
+            error={isError}
+        />
     );
 };
 

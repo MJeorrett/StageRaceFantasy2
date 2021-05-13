@@ -14,9 +14,9 @@ namespace StageRaceFantasy.Application.FantasyRaces.Queries
     {
     }
 
-    public class GetAllFantasyRacesQueryHandler : AppRequestHandler<GetPaginatedFantasyRacesQuery, PaginatedList<FantasyRaceSummaryDto>>
+    public class GetPaginatedFantasyRacesQueryHandler : AppRequestHandler<GetPaginatedFantasyRacesQuery, PaginatedList<FantasyRaceSummaryDto>>
     {
-        public GetAllFantasyRacesQueryHandler(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+        public GetPaginatedFantasyRacesQueryHandler(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
         }
 
@@ -29,7 +29,7 @@ namespace StageRaceFantasy.Application.FantasyRaces.Queries
                 .ProjectTo<FantasyRaceSummaryDto>(Mapper.ConfigurationProvider)
                 .ToPaginatedListAsync(query, cancellationToken);
 
-            return Success(result);
+            return Ok(result);
         }
     }
 }

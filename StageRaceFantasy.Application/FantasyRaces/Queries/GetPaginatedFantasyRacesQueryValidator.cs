@@ -4,5 +4,8 @@ namespace StageRaceFantasy.Application.FantasyRaces.Queries
 {
     public class GetPaginatedFantasyRacesQueryValidator : GetPaginatedListQueryValidator<GetPaginatedFantasyRacesQuery>
     {
+        public GetPaginatedFantasyRacesQueryValidator()
+        {
+        }
     }
 }

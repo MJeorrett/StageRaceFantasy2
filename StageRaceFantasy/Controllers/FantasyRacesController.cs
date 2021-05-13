@@ -6,6 +6,7 @@ using StageRaceFantasy.Application.FantasyRaces.Commands;
 using StageRaceFantasy.Application.FantasyRaces.Dtos;
 using StageRaceFantasy.Application.FantasyRaces.Queries;
 using StageRaceFantasy.Controllers.Common;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StageRaceFantasy.Controllers
@@ -22,7 +23,7 @@ namespace StageRaceFantasy.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<AppResponse<FantasyRaceSummaryDto>>> Create(
+        public async Task<ActionResult<AppResponse<int>>> Create(
             [FromBody] CreateFantasyRaceCommand command)
         {
             var response = await _mediator.Send(command);
@@ -40,8 +41,17 @@ namespace StageRaceFantasy.Controllers
             return ActionResultBuilder.Build(response);
         }
 
+        [HttpGet("/api/fantasy-race-names")]
+        public async Task<ActionResult<AppResponse<List<FantasyRaceNameDto>>>> GetAllNames(
+            [FromQuery] GetAllFantasyRaceNamesQuery query)
+        {
+            var response = await _mediator.Send(query);
+
+            return ActionResultBuilder.Build(response);
+        }
+
         [HttpGet]
-        public async Task<ActionResult<AppResponse<PaginatedList<FantasyRaceSummaryDto>>>> GetPaginatedList(
+        public async Task<ActionResult<AppResponse<PaginatedList<FantasyRaceSummaryDto>>>> GetPaginated(
             [FromQuery] GetPaginatedFantasyRacesQuery query)
         {
             var response = await _mediator.Send(query);

@@ -3,6 +3,8 @@ using NUnit.Framework;
 using StageRaceFantasy.Application.Common.Mapping;
 using StageRaceFantasy.Application.FantasyRaces.Commands;
 using StageRaceFantasy.Application.FantasyRaces.Dtos;
+using StageRaceFantasy.Application.FantasyRaceTeam.Commands;
+using StageRaceFantasy.Application.FantasyRaceTeam.Dtos;
 using StageRaceFantasy.Domain.Entities;
 using System;
 using System.Runtime.Serialization;
@@ -32,8 +34,11 @@ namespace StageRaceFantasy.Application.UnitTests.Common.Mapping
 
         [Test]
         [TestCase(typeof(CreateFantasyRaceCommand), typeof(FantasyRaceEntity))]
+        [TestCase(typeof(FantasyRaceEntity), typeof(FantasyRaceNameDto))]
         [TestCase(typeof(FantasyRaceEntity), typeof(FantasyRaceSummaryDto))]
         [TestCase(typeof(FantasyRaceEntity), typeof(FantasyRaceDetailsDto))]
+        [TestCase(typeof(CreateFantasyRaceTeamCommand), typeof(FantasyRaceTeamEntity))]
+        [TestCase(typeof(FantasyRaceTeamEntity), typeof(FantasyRaceTeamSummaryDto))]
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
         {
             var instance = GetInstanceOf(source);

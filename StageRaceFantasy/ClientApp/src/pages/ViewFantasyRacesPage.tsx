@@ -30,6 +30,7 @@ const ViewFantasyRacesPage: React.FC = () => {
 
             <div className={classNames.buttons}>
                 <AppButton linkPath={appPaths.createFantasyRace}>Create New</AppButton>
+                <AppButton linkPath={appPaths.createFantasyRaceTeam}>Create New Team</AppButton>
             </div>
             
             <FantasyRacesTable

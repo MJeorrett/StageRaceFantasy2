@@ -33,7 +33,7 @@ namespace StageRaceFantasy.Application.FantasyRaces.Queries
 
             var raceDto = Mapper.Map<FantasyRaceDetailsDto>(raceEntity);
 
-            return Success(raceDto);
+            return Ok(raceDto);
         }
     }
 }

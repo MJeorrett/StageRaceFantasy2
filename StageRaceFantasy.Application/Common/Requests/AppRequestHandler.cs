@@ -28,9 +28,13 @@ namespace StageRaceFantasy.Application.Common.Requests
 
         public abstract Task<AppResponse> Handle(TRequest request, CancellationToken cancellationToken);
 
-        protected AppResponse Success()
+        protected AppResponse Ok()
         {
-            return AppResponse.Success();
+            return AppResponse.Ok();
+        }
+        protected AppResponse Created()
+        {
+            return AppResponse.Created();
         }
 
         protected AppResponse BadRequest(string message)
@@ -64,9 +68,13 @@ namespace StageRaceFantasy.Application.Common.Requests
 
         public abstract Task<AppResponse<TResponse>> Handle(TRequest request, CancellationToken cancellationToken);
 
-        protected AppResponse<TResponse> Success(TResponse response)
+        protected AppResponse<TResponse> Ok(TResponse response)
         {
-            return AppResponse.Success(response);
+            return AppResponse.Ok(response);
+        }
+        protected AppResponse<TResponse> Created(TResponse response)
+        {
+            return AppResponse.Created(response);
         }
 
         protected AppResponse<TResponse> BadRequest(string message)

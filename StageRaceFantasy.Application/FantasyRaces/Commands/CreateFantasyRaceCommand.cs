@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using StageRaceFantasy.Application.Common.InternalInterfaces;
 using StageRaceFantasy.Application.Common.Mapping;
 using StageRaceFantasy.Application.Common.Requests;
-using StageRaceFantasy.Application.FantasyRaces.Dtos;
 using StageRaceFantasy.Domain.Entities;
 using System;
 using System.Threading;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 namespace StageRaceFantasy.Application.FantasyRaces.Commands
 {
     public record CreateFantasyRaceCommand :
-        IAppRequest<FantasyRaceSummaryDto>,
+        IAppRequest<int>,
         IMapTo<FantasyRaceEntity>,
         IHasStartAndEndDate
     {
@@ -31,13 +30,13 @@ namespace StageRaceFantasy.Application.FantasyRaces.Commands
         }
     }
 
-    public class CreateFantasyRaceCommandHandler : AppRequestHandler<CreateFantasyRaceCommand, FantasyRaceSummaryDto>
+    public class CreateFantasyRaceCommandHandler : AppRequestHandler<CreateFantasyRaceCommand, int>
     {
         public CreateFantasyRaceCommandHandler(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
         }
 
-        public override async Task<AppResponse<FantasyRaceSummaryDto>> Handle(
+        public override async Task<AppResponse<int>> Handle(
             CreateFantasyRaceCommand command,
             CancellationToken cancellationToken)
         {
@@ -46,9 +45,7 @@ namespace StageRaceFantasy.Application.FantasyRaces.Commands
             DbContext.FantasyRaces.Add(fantasyRaceEntity);
             await DbContext.SaveChangesAsync(cancellationToken);
 
-            var fantasyRaceSummaryDto = Mapper.Map<FantasyRaceSummaryDto>(fantasyRaceEntity);
-
-            return Success(fantasyRaceSummaryDto);
+            return Created(fantasyRaceEntity.Id);
         }
     }
 }

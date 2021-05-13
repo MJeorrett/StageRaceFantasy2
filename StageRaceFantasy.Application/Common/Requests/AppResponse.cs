@@ -18,8 +18,11 @@ namespace StageRaceFantasy.Application.Common.Requests
             Message = message;
         }
 
-        public static AppResponse Success(string message = "") =>
+        public static AppResponse Ok(string message = "") =>
             new(200, message);
+
+        public static AppResponse Created(string message = "") =>
+            new(201, message);
 
         public static AppResponse BadRequest(string message) =>
             new(400, message);
@@ -27,8 +30,11 @@ namespace StageRaceFantasy.Application.Common.Requests
         public static AppResponse NotFound(string message = "") =>
             new(404, message);
 
-        public static AppResponse<T> Success<T>(T content, string message = "") =>
+        public static AppResponse<T> Ok<T>(T content, string message = "") =>
             new(200, content, message);
+
+        public static AppResponse<T> Created<T>(T content, string message = "") =>
+            new(201, content, message);
 
         public static AppResponse<T> BadRequest<T>(string message) =>
             new(400, default, message);

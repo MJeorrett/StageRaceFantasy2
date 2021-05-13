@@ -1,7 +1,7 @@
 import Container from './FantasyRaceFormContainer';
-import Form from './FantasyRaceFormFields';
+import Fields from './FantasyRaceFormFields';
 
 export default {
     Container,
-    Fields: Form,
+    Fields,
 };

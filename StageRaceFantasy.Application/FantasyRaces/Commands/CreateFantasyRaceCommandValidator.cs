@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using System;
 
 namespace StageRaceFantasy.Application.FantasyRaces.Commands
 {
@@ -7,17 +6,10 @@ namespace StageRaceFantasy.Application.FantasyRaces.Commands
     {
         public CreateFantasyRaceCommandValidator()
         {
-            RuleFor(_ => _.Name)
-                .NotNull();
-
-            RuleFor(_ => _.FantasyTeamSize)
-                .GreaterThan(0);
-
-            RuleFor(_ => _.StartDate)
-                .FantasyRaceStartTimeRules();
-
-            RuleFor(_ => _.EndDate)
-                .FantasyRaceEndTimeRules();
+            RuleFor(_ => _.Name).FantasyRaceNameRules();
+            RuleFor(_ => _.FantasyTeamSize).FantasyRaceTeamSizeRules();
+            RuleFor(_ => _.StartDate).FantasyRaceStartTimeRules();
+            RuleFor(_ => _.EndDate).FantasyRaceEndTimeRules();
         }
     }
 }

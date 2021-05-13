@@ -7,12 +7,14 @@ import ViewFantasyRacesPage from './pages/ViewFantasyRacesPage';
 import CreateFantasyRacePage from './pages/CreateFantasyRacePage';
 import EditFantasyRacePage from './pages/EditFantasyRacePage';
 import HomePage from './pages/HomePage';
+import CreateFantasyRaceTeamPage from './pages/CreateFantasyRaceTeamPage';
 
 export const appPaths = {
     home: '/',
     fantasyRaces: '/fantasy-races',
     createFantasyRace: '/fantasy-races/create',
     editFantasyRace: (id: number|string) => `/fantasy-races/${id}/edit`,
+    createFantasyRaceTeam: '/fantasy-race-teams/create',
 };
 
 const Routes: React.FC = () => {
@@ -22,6 +24,7 @@ const Routes: React.FC = () => {
             <AuthorizeRoute exact path={appPaths.fantasyRaces} component={ViewFantasyRacesPage} />
             <AuthorizeRoute path={appPaths.createFantasyRace} component={CreateFantasyRacePage} />
             <AuthorizeRoute path={appPaths.editFantasyRace(':fantasyRaceId')} component={EditFantasyRacePage} />
+            <AuthorizeRoute path={appPaths.createFantasyRaceTeam} component={CreateFantasyRaceTeamPage} />
             <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
             <Redirect to={appPaths.home} />
         </Switch>

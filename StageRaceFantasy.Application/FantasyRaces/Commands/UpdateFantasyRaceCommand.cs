@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using StageRaceFantasy.Application.Common.InternalInterfaces;
 using StageRaceFantasy.Application.Common.Mapping;
@@ -26,6 +27,12 @@ namespace StageRaceFantasy.Application.FantasyRaces.Commands
         public DateTime EndDate { get; init; }
 
         public int FantasyTeamSize { get; init; }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<UpdateFantasyRaceCommand, FantasyRaceEntity>()
+                .ValidateMemberList(MemberList.Source);
+        }
     }
 
     public class UpdateFantasyRaceCommandHandler : AppRequestHandler<UpdateFantasyRaceCommand>
@@ -45,7 +52,7 @@ namespace StageRaceFantasy.Application.FantasyRaces.Commands
 
             await DbContext.SaveChangesAsync(cancellationToken);
 
-            return Success();
+            return Ok();
         }
     }
 }

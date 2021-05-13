@@ -1,11 +1,14 @@
 interface Core {
     name: string,
-    startDate: Date,
-    endDate: Date,
 }
 
-export interface Summary extends Core {
+export interface Name extends Core {
     id: number,
+}
+
+export interface Summary extends Name {
+    startDate: Date,
+    endDate: Date,
 }
 
 export interface Details extends Summary {
