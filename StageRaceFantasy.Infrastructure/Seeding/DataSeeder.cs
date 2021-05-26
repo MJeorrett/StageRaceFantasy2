@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using StageRaceFantasy.Domain.Entities;
 using StageRaceFantasy.Infrastructure.Persistence;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
@@ -23,8 +24,17 @@ namespace StageRaceFantasy.Infrastructure.Seeding
                 return;
             }
 
-            logger.LogInformation("No Fantasy Races exist so creating seed races...");
+            logger.LogInformation("No Fantasy Races exist so creating seed data...");
 
+            SeedRiders(dbContext);
+            var races = SeedRaces(dbContext);
+            SeedFantasyTeams(dbContext, races.First());
+
+            logger.LogInformation("...finished creating seed data.");
+        }
+
+        private static List<FantasyRaceEntity> SeedRaces(ApplicationDbContext dbContext)
+        {
             FantasyRaceEntity tourDeFrance = new()
             {
                 Name = "Tour de France 2021",
@@ -46,7 +56,56 @@ namespace StageRaceFantasy.Infrastructure.Seeding
 
             dbContext.SaveChanges();
 
-            logger.LogInformation("...finished creating seed races.");
+            return new()
+            {
+                tourDeFrance,
+                giroDItalia,
+            };
+        }
+
+        private static void SeedFantasyTeams(ApplicationDbContext dbContext, FantasyRaceEntity race)
+        {
+            var teamOuteos = new FantasyRaceTeamEntity()
+            {
+                Name = "Team Outeos",
+                FantasyRaceId = race.Id,
+            };
+
+            var catrionasWheelers = new FantasyRaceTeamEntity()
+            {
+                Name = "Catriona's Wheelers",
+                FantasyRaceId = race.Id,
+            };
+
+            dbContext.FantasyRaceTeams.Add(teamOuteos);
+            dbContext.FantasyRaceTeams.Add(catrionasWheelers);
+            dbContext.SaveChanges();
+        }
+
+        private static void SeedRiders(ApplicationDbContext dbContext)
+        {
+            var eganBernal = new RiderEntity()
+            {
+                FirstName = "Egan",
+                LastName = "Bernal",
+            };
+
+            var simonYates = new RiderEntity()
+            {
+                FirstName = "Simon",
+                LastName = "Yates",
+            };
+
+            var adamYates = new RiderEntity()
+            {
+                FirstName = "Adam",
+                LastName = "Yates",
+            };
+
+            dbContext.Riders.Add(eganBernal);
+            dbContext.Riders.Add(simonYates);
+            dbContext.Riders.Add(adamYates);
+            dbContext.SaveChanges();
         }
     }
 }
