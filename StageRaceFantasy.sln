@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StageRaceFantasy.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StageRaceFantasy.Application", "StageRaceFantasy.Application\StageRaceFantasy.Application.csproj", "{C15C0594-FD70-40D4-B278-833FF0F5137C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StageRaceFantasy.Application.UnitTests", "StageRaceFantasy.Application.UnitTests\StageRaceFantasy.Application.UnitTests.csproj", "{6266BEE2-D27B-4FA3-8A48-1CECCAB867FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StageRaceFantasy.Application.UnitTests", "StageRaceFantasy.Application.UnitTests\StageRaceFantasy.Application.UnitTests.csproj", "{6266BEE2-D27B-4FA3-8A48-1CECCAB867FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4B0B716-CAF7-49E1-B6AF-FCB39075A092}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
