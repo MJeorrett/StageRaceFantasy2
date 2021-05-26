@@ -5,6 +5,8 @@ using StageRaceFantasy.Application.FantasyRaces.Commands;
 using StageRaceFantasy.Application.FantasyRaces.Dtos;
 using StageRaceFantasy.Application.FantasyRaceTeam.Commands;
 using StageRaceFantasy.Application.FantasyRaceTeam.Dtos;
+using StageRaceFantasy.Application.Riders.Commands;
+using StageRaceFantasy.Application.Riders.Dtos;
 using StageRaceFantasy.Domain.Entities;
 using System;
 using System.Runtime.Serialization;
@@ -33,10 +35,18 @@ namespace StageRaceFantasy.Application.UnitTests.Common.Mapping
         }
 
         [Test]
+        // Rider
+        [TestCase(typeof(CreateRiderCommand), typeof(RiderEntity))]
+        [TestCase(typeof(RiderEntity), typeof(RiderSummaryDto))]
+        [TestCase(typeof(RiderEntity), typeof(RiderDetailsDto))]
+
+        // Fantasy Race
         [TestCase(typeof(CreateFantasyRaceCommand), typeof(FantasyRaceEntity))]
         [TestCase(typeof(FantasyRaceEntity), typeof(FantasyRaceNameDto))]
         [TestCase(typeof(FantasyRaceEntity), typeof(FantasyRaceSummaryDto))]
         [TestCase(typeof(FantasyRaceEntity), typeof(FantasyRaceDetailsDto))]
+
+        // Fantasy Race Team
         [TestCase(typeof(CreateFantasyRaceTeamCommand), typeof(FantasyRaceTeamEntity))]
         [TestCase(typeof(FantasyRaceTeamEntity), typeof(FantasyRaceTeamSummaryDto))]
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)

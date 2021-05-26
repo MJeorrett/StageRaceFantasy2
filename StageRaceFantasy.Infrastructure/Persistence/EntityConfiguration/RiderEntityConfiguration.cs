@@ -4,11 +4,14 @@ using StageRaceFantasy.Domain.Entities;
 
 namespace StageRaceFantasy.Infrastructure.Persistence.EntityConfiguration
 {
-    public class FantasyRaceTeamEntityConfiguration : IEntityTypeConfiguration<FantasyRaceTeamEntity>
+    public class RiderEntityConfiguration : IEntityTypeConfiguration<RiderEntity>
     {
-        public void Configure(EntityTypeBuilder<FantasyRaceTeamEntity> builder)
+        public void Configure(EntityTypeBuilder<RiderEntity> builder)
         {
-            builder.Property(_ => _.Name)
+            builder.Property(_ => _.FirstName)
+                .HasColumnType("varchar(256)");
+
+            builder.Property(_ => _.LastName)
                 .HasColumnType("varchar(256)");
         }
     }

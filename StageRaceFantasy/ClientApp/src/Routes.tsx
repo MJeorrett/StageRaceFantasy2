@@ -9,9 +9,15 @@ import EditFantasyRacePage from './pages/EditFantasyRacePage';
 import HomePage from './pages/HomePage';
 import CreateFantasyRaceTeamPage from './pages/CreateFantasyRaceTeamPage';
 import ViewFantasyRacePage from './pages/ViewFantasyRacePage';
+import ViewRidersPage from './pages/ViewRidersPage';
+import CreateRiderPage from './pages/CreateRiderPage';
+import ViewRiderPage from './pages/ViewRiderPage';
 
 export const appPaths = {
     home: '/',
+    riders: '/riders',
+    createRider: '/riders/create',
+    viewRider: (id: number|string) => `/riders/${id}`,
     fantasyRaces: '/fantasy-races',
     createFantasyRace: '/fantasy-races/create',
     viewFantasyRace: (id: number|string) => `/fantasy-races/${id}`,
@@ -23,6 +29,9 @@ const Routes: React.FC = () => {
     return (
         <Switch>
             <Route exact path={appPaths.home} component={HomePage} />
+            <AuthorizeRoute exact path={appPaths.createRider} component={CreateRiderPage} />
+            <AuthorizeRoute exact path={appPaths.riders} component={ViewRidersPage} />
+            <AuthorizeRoute exact path={appPaths.viewRider(':riderId')} component={ViewRiderPage} />
             <AuthorizeRoute exact path={appPaths.fantasyRaces} component={ViewFantasyRacesPage} />
             <AuthorizeRoute path={appPaths.createFantasyRace} component={CreateFantasyRacePage} />
             <AuthorizeRoute exact path={appPaths.viewFantasyRace(':fantasyRaceId')} component={ViewFantasyRacePage} />
@@ -32,6 +41,11 @@ const Routes: React.FC = () => {
             <Redirect to={appPaths.home} />
         </Switch>
     );
+};
+
+export const useRiderId = () => {
+    const { riderId } = useParams<{ riderId: string }>();
+    return parseInt(riderId);
 };
 
 export const useFantasyRaceId = () => {

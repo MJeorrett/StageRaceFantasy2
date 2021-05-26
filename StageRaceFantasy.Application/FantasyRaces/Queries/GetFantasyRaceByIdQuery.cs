@@ -26,7 +26,7 @@ namespace StageRaceFantasy.Application.FantasyRaces.Queries
             var raceEntity = await DbContext.FantasyRaces
                 .FirstOrDefaultAsync(_ => _.Id == query.Id, cancellationToken);
 
-            if (raceEntity == default)
+            if (raceEntity == null)
             {
                 return NotFound();
             }
