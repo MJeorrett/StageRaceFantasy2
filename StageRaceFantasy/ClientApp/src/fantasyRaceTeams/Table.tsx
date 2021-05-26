@@ -36,6 +36,7 @@ const FantasyRaceTeamsTable: React.FC<FantasyRacesTeamsTableProps> = ({
                             setPageNumber,
                             setPageSize,
                         }}
+                        pageSizeOptions={[10]}
                         renderRowCells={fantasyTeam => (
                             <>
                                 <TableCell width={48}>{fantasyTeam.id}</TableCell>
