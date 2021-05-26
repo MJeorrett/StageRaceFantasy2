@@ -10,3 +10,4 @@ export type {
 
 export * from './utils/useHttpRequest';
 export * from './fantasyRaces';
+export * from './fantasyRaceTeams';

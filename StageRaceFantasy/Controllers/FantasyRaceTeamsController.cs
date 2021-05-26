@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace StageRaceFantasy.Controllers
 {
     [ApiController]
-    [Route("api/fantasy-race-teams")]
+    [Route("api/fantasy-races/{fantasyRaceId}/fantasy-teams")]
     public class FantasyRaceTeamsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -23,8 +23,10 @@ namespace StageRaceFantasy.Controllers
 
         [HttpPost]
         public async Task<ActionResult<AppResponse<int>>> Create(
+            [FromRoute] int fantasyRaceId,
             [FromBody] CreateFantasyRaceTeamCommand command)
         {
+            command.FantasyRaceId = fantasyRaceId;
             var response = await _mediator.Send(command);
 
             return ActionResultBuilder.Build(response);
@@ -32,8 +34,10 @@ namespace StageRaceFantasy.Controllers
 
         [HttpGet]
         public async Task<ActionResult<AppResponse<PaginatedList<FantasyRaceTeamSummaryDto>>>> GetPaginated(
+            [FromRoute] int fantasyRaceId,
             [FromQuery] GetPaginatedFantasyRaceTeamsQuery query)
         {
+            query.FantasyRaceId = fantasyRaceId;
             var response = await _mediator.Send(query);
 
             return ActionResultBuilder.Build(response);

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using StageRaceFantasy.Application.Common.Mapping;
 using StageRaceFantasy.Application.Common.Requests;
 using StageRaceFantasy.Domain.Entities;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +16,8 @@ namespace StageRaceFantasy.Application.FantasyRaceTeam.Commands
     {
         public string Name { get; init; } = "";
 
-        public int FantasyRaceId { get; init; }
+        [JsonIgnore]
+        public int FantasyRaceId { get; set; }
 
         public void Mapping(Profile profile)
         {

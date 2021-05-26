@@ -1,13 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import { createFantasyRaceTeam } from '../api/fantasyRaceTeams';
+import { createFantasyRaceTeam } from '../api';
 import AppForm, { AppFormikSubmitButton } from '../components/AppForm';
 import AppPageTitle from '../components/PageTitle';
 import FantasyRaceTeamForm from '../fantasyRaceTeams/form';
-import { appPaths } from '../Routes';
+import { appPaths, useFantasyRaceId } from '../Routes';
 
 const CreateFantasyRaceTeamPage: React.FC = () => {
     const history = useHistory();
+    const fantasyRaceId = useFantasyRaceId();
 
     return (
         <>
@@ -15,10 +16,10 @@ const CreateFantasyRaceTeamPage: React.FC = () => {
             
             <FantasyRaceTeamForm.Container
                 onSubmit={async values => {
-                    const response = await createFantasyRaceTeam(values);
+                    const response = await createFantasyRaceTeam(fantasyRaceId, values);
 
                     if (!response.isError) {
-                        history.push(appPaths.fantasyRaces);
+                        history.push(appPaths.viewFantasyRace(fantasyRaceId));
                     }
                 }}
             >

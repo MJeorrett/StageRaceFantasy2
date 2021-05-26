@@ -8,6 +8,7 @@ namespace StageRaceFantasy.Application.Common.ExternalInterfaces
     public interface IApplicationDbContext
     {
         public DbSet<FantasyRaceEntity> FantasyRaces { get; }
+        public DbSet<FantasyRaceTeamEntity> FantasyRaceTeams { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

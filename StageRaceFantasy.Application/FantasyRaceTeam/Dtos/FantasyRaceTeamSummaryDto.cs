@@ -8,7 +8,5 @@ namespace StageRaceFantasy.Application.FantasyRaceTeam.Dtos
         public int Id { get; init; }
 
         public string Name { get; init; } = "";
-
-        public string FantasyRaceName { get; init; } = "";
     }
 }

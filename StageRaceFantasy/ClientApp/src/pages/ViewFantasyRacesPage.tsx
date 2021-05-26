@@ -1,27 +1,23 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
+import ViewIcon from '@material-ui/icons/Visibility';
 
 import { appPaths } from '../Routes';
 import AppPageTitle from '../components/PageTitle';
 import AppButton from '../components/AppButton';
 import FantasyRacesTable from '../fantasyRaces/Table';
 import { makeStyles } from '@material-ui/core';
+import AppTableActionButtons from '../components/AppTableActionButtons';
 
-const useStyles = makeStyles(theme => ({
-    buttons: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        marginBottom: theme.spacing(1),
-        '& > *:not(:last-child)': {
-            marginRight: theme.spacing(1),
-        },
-    },
-}));
+
 
 const ViewFantasyRacesPage: React.FC = () => {
-    const classNames = useStyles();
     const history = useHistory();
+
+    const handleViewClick = (id: number) => {
+        history.push(appPaths.viewFantasyRace(id));
+    };
 
     const handleEditClick = (id: number) => {
         history.push(appPaths.editFantasyRace(id));
@@ -31,14 +27,14 @@ const ViewFantasyRacesPage: React.FC = () => {
         <>
             <AppPageTitle>Fantasy Races</AppPageTitle>
 
-            <div className={classNames.buttons}>
+            <AppTableActionButtons>
                 <AppButton linkPath={appPaths.createFantasyRace}>Create New</AppButton>
-                <AppButton linkPath={appPaths.createFantasyRaceTeam}>Create New Team</AppButton>
-            </div>
+            </AppTableActionButtons>
             
             <FantasyRacesTable
                 actionButtons={[
-                    { icon: <EditIcon />, onClick: handleEditClick }
+                    { icon: <ViewIcon />, onClick: handleViewClick },
+                    { icon: <EditIcon />, onClick: handleEditClick },
                 ]}
             />
         </>
