@@ -14,14 +14,11 @@ export const createFantasyRace = async (createDto: ApiFantasyRace.CreateUpdateDt
     return unpackApiSingleObjectResponse(response, m => m);
 };
 
-export const updateFantasyRace = async (id: number, updateDto: ApiFantasyRace.CreateUpdateDto): Promise<HttpClientResponse<void>> => {
-    const url = buildApiUrl(`api/fantasy-races/${id}`);
-    const response = await httpClient.putRequest<ApiSingleObjectResponse<void>>(url, updateDto);
-
-    doErrorToastIfRequired(response);
-
-    return unpackApiSingleObjectResponse(response, m => m);
-};
+export const updateFantasyRace = async (id: number, updateDto: ApiFantasyRace.CreateUpdateDto): Promise<HttpClientResponse<void>> => (
+    apiClient.put(
+        `api/fantasy-races/${id}`,
+        updateDto)
+);
 
 export const getPaginatedFantasyRaces = apiClient
     .makeGetPaginated<ApiFantasyRace.Summary, FantasyRace.Summary>(

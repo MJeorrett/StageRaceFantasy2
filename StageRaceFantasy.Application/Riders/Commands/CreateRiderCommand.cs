@@ -36,7 +36,7 @@ namespace StageRaceFantasy.Application.Riders.Commands
             DbContext.Riders.Add(riderEntity);
             await DbContext.SaveChangesAsync(cancellationToken);
 
-            return Ok(riderEntity.Id);
+            return Created(riderEntity.Id);
         }
     }
 }

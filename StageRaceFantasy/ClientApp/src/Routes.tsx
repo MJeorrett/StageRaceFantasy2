@@ -12,11 +12,13 @@ import ViewFantasyRacePage from './pages/ViewFantasyRacePage';
 import ViewRidersPage from './pages/ViewRidersPage';
 import CreateRiderPage from './pages/CreateRiderPage';
 import ViewRiderPage from './pages/ViewRiderPage';
+import EditRiderPage from './pages/EditRiderPage';
 
 export const appPaths = {
     home: '/',
     riders: '/riders',
     createRider: '/riders/create',
+    editRider: (id: number|string) => `/riders/${id}/edit`,
     viewRider: (id: number|string) => `/riders/${id}`,
     fantasyRaces: '/fantasy-races',
     createFantasyRace: '/fantasy-races/create',
@@ -30,6 +32,7 @@ const Routes: React.FC = () => {
         <Switch>
             <Route exact path={appPaths.home} component={HomePage} />
             <AuthorizeRoute exact path={appPaths.createRider} component={CreateRiderPage} />
+            <AuthorizeRoute exact path={appPaths.editRider(':riderId')} component={EditRiderPage} />
             <AuthorizeRoute exact path={appPaths.riders} component={ViewRidersPage} />
             <AuthorizeRoute exact path={appPaths.viewRider(':riderId')} component={ViewRiderPage} />
             <AuthorizeRoute exact path={appPaths.fantasyRaces} component={ViewFantasyRacesPage} />

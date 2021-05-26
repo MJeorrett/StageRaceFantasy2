@@ -19,3 +19,12 @@ export const getSingleObject = async <TApiResponse, TResponse>(path: string, map
 
     return unpackApiSingleObjectResponse(response, mapper);
 };
+
+export const put = async <TDto,>(path: string, dto: TDto): Promise<HttpClientResponse<void>> => {
+    const url = buildApiUrl(path);
+    const response = await httpClient.putRequest<ApiSingleObjectResponse<void>>(url, dto);
+
+    doErrorToastIfRequired(response);
+
+    return unpackApiSingleObjectResponse(response, m => m);
+};

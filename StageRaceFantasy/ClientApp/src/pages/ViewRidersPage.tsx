@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import EditIcon from '@material-ui/icons/Edit';
 import ViewIcon from '@material-ui/icons/Visibility';
 
 import { appPaths } from '../Routes';
@@ -16,7 +17,7 @@ const ViewRidersPage: React.FC = () => {
     };
 
     const handleEditClick = (id: number) => {
-        history.push(appPaths.editFantasyRace(id));
+        history.push(appPaths.editRider(id));
     };
 
     return (
@@ -30,7 +31,7 @@ const ViewRidersPage: React.FC = () => {
             <RidersTable
                 actionButtons={[
                     { icon: <ViewIcon />, onClick: handleViewClick },
-                    // { icon: <EditIcon />, onClick: handleEditClick },
+                    { icon: <EditIcon />, onClick: handleEditClick },
                 ]}
             />
         </>

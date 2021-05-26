@@ -30,6 +30,17 @@ namespace StageRaceFantasy.Controllers
             return ActionResultBuilder.Build(result);
         }
 
+        [HttpPut("{riderId}")]
+        public async Task<ActionResult<AppResponse>> Update(
+            [FromRoute] int riderId,
+           [FromBody] UpdateRiderCommand command)
+        {
+            command.Id = riderId;
+            var result = await _mediator.Send(command);
+
+            return ActionResultBuilder.Build(result);
+        }
+
         [HttpGet]
         public async Task<ActionResult<AppResponse<PaginatedList<RiderSummaryDto>>>> GetPaginated(
             [FromQuery] GetPaginatedRidersQuery query)

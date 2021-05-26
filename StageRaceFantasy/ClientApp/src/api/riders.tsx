@@ -13,6 +13,10 @@ export const createRider = async (createDto: ApiRider.CreateUpdateDto): Promise<
     return unpackApiSingleObjectResponse(response, m => m);
 };
 
+export const updateRider = async (id: number, updateDto: ApiRider.CreateUpdateDto) => (
+    apiClient.put(`api/riders/${id}`, updateDto)
+);
+
 export const getPaginatedRiders = apiClient
     .makeGetPaginated<ApiRider.Summary, Rider.Summary>(
         'api/riders',
