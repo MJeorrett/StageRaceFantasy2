@@ -1,9 +1,7 @@
-import React, {  } from 'react';
+import React, { } from 'react';
 import { TableCell } from '@material-ui/core';
+import { PaginatedApiTable, TableActionButtonDefinition } from '../components/AppTable';
 import { getPaginatedFantasyRaces } from '../api';
-import AppTable, { TableActionButtonDefinition } from '../components/AppTable';
-import HttpRequestWrapper from '../components/HttpRequestWrapper';
-import { usePaginatedApiRequest } from '../api/utils/usePaginatedApiRequest';
 
 export interface FantasyRacesTableProps {
     actionButtons?: TableActionButtonDefinition[],
@@ -12,40 +10,23 @@ export interface FantasyRacesTableProps {
 const FantasyRacesTable: React.FC<FantasyRacesTableProps> = ({
     actionButtons = [],
 }) => {
-    const {
-        setPageNumber,
-        setPageSize,
-        ...fetchRacesState
-    } = usePaginatedApiRequest(getPaginatedFantasyRaces);
-
     const columnHeaders = ['ID', 'Name', 'Start', 'End'];
 
     return (
-        <>
-            <HttpRequestWrapper httpState={fetchRacesState}>
-                {fetchRacesResponse => (
-                    <AppTable
-                        headers={columnHeaders}
-                        entities={fetchRacesResponse.items || []}
-                        pagination={{
-                            ...fetchRacesResponse,
-                            setPageNumber,
-                            setPageSize,
-                        }}
-                        renderRowCells={fantasyRace => (
-                            <>
-                                <TableCell width={48}>{fantasyRace.id}</TableCell>
-                                <TableCell>{fantasyRace.name}</TableCell>
-                                <TableCell>{fantasyRace.startDate.toDateString()}</TableCell>
-                                <TableCell>{fantasyRace.endDate.toDateString()}</TableCell>
-                            </>
-                        )}
-                        actionButtons={actionButtons}
-                        noEntitiesMessage="You don't have any fantasy races yet."
-                    />
-                )}
-            </HttpRequestWrapper>
-        </>
+        <PaginatedApiTable
+            makeRequest={getPaginatedFantasyRaces}
+            headers={columnHeaders}
+            renderRowCells={fantasyRace => (
+                <>
+                    <TableCell width={48}>{fantasyRace.id}</TableCell>
+                    <TableCell>{fantasyRace.name}</TableCell>
+                    <TableCell>{fantasyRace.startDate.toDateString()}</TableCell>
+                    <TableCell>{fantasyRace.endDate.toDateString()}</TableCell>
+                </>
+            )}
+            actionButtons={actionButtons}
+            noEntitiesMessage="You don't have any fantasy races yet."
+        />
     );
 };
 

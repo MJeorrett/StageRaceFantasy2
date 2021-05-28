@@ -17,7 +17,7 @@ const EditFantasyRacePage: React.FC = () => {
     return (
         <>
             <AppPageTitle>Edit Race</AppPageTitle>
-            <HttpRequestWrapper httpState={fetchRaceState}>
+            <HttpRequestWrapper apiRequestState={fetchRaceState}>
                 {fetchRaceResponse => (
                     <FantasyRaceForm.Container
                         initialValues={fetchRaceResponse}

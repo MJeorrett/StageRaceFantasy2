@@ -16,7 +16,7 @@ const EditRiderPage: React.FC = () => {
     const fetchRiderState = useApiRequest(fetchRider);
 
     return (
-        <HttpRequestWrapper httpState={fetchRiderState}>
+        <HttpRequestWrapper apiRequestState={fetchRiderState}>
             {rider => (
                 <>
                     <AppPageTitle>Create New Rider</AppPageTitle>

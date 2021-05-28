@@ -19,7 +19,7 @@ const ViewFantasyRacePage = () => {
 
     return (
         <HttpRequestWrapper
-            httpState={getFantasyRaceRequest}
+            apiRequestState={getFantasyRaceRequest}
         >
             {
                 fantasyRace => (

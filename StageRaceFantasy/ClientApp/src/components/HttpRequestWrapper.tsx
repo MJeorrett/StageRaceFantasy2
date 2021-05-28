@@ -5,19 +5,19 @@ import AppLoader from './AppLoader';
 import { UseApiRequestState } from '../api';
 
 interface HttpRequestWrapperProps<T> {
-    httpState: UseApiRequestState<T>,
+    apiRequestState: UseApiRequestState<T>,
     children: (result: T) => JSX.Element,
 }
 
 const HttpRequestWrapper = <T, >({
-    httpState,
+    apiRequestState,
     children,
 }: HttpRequestWrapperProps<T>) => {
-    if (httpState.isLoading) {
+    if (apiRequestState.isLoading) {
         return <AppLoader />;
     }
 
-    if (httpState.isError) {
+    if (apiRequestState.isError) {
         return (
             <>
                 <Typography align="center" color="error">error, please try again</Typography>
@@ -27,7 +27,7 @@ const HttpRequestWrapper = <T, >({
 
     return (
         <>
-            {children(httpState.result)}
+            {children(apiRequestState.result)}
         </>
     );
 };

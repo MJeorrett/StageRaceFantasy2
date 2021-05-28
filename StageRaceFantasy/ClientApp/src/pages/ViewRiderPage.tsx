@@ -12,7 +12,7 @@ const ViewRiderPage = () => {
 
     return (
         <HttpRequestWrapper
-            httpState={getRiderRequest}
+            apiRequestState={getRiderRequest}
         >
             {
                 rider => (
