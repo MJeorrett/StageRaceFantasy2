@@ -1,8 +1,8 @@
 import React, {  } from 'react';
-import AppTable, { AppTableProps, TableActionButtonDefinition } from './AppTable';
-import { ApiPaginationQueryParams, usePaginatedApiRequest } from '../../api';
+import AppTable, { AppTableProps } from './AppTable';
+import { ApiPaginationQueryParams } from '../../api';
 import { ApiClientPaginatedListResponse } from '../../api/common/apiClientResponseModels';
-import HttpRequestWrapper from '../HttpRequestWrapper';
+import ApiPaginatedRequestWrapper from '../ApiPaginatedRequestWrapper';
 
 type OverriddenProps = 'entities' | 'pagination';
 
@@ -14,27 +14,18 @@ export const PaginatedApiTable = <T extends { id: number }, >({
     makeRequest,
     ...restOfProps
 }: PaginatedApiTableProps<T>): JSX.Element => {
-    const {
-        setPageNumber,
-        setPageSize,
-        ...apiRequestState
-    } = usePaginatedApiRequest(makeRequest);
 
     return (
         <>
-            <HttpRequestWrapper apiRequestState={apiRequestState}>
-                {fetchRacesResponse => (
+            <ApiPaginatedRequestWrapper makeRequest={makeRequest}>
+                {response => (
                     <AppTable
-                        entities={fetchRacesResponse.items || []}
-                        pagination={{
-                            ...fetchRacesResponse,
-                            setPageNumber,
-                            setPageSize,
-                        }}
+                        entities={response.items || []}
+                        pagination={response}
                         {...restOfProps}
                     />
                 )}
-            </HttpRequestWrapper>
+            </ApiPaginatedRequestWrapper>
         </>
     );
 };

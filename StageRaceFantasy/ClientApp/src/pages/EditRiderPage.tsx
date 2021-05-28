@@ -1,9 +1,8 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';
 
-import { createRider, getRiderById, updateRider, useApiRequest } from '../api';
-import AppForm, { AppFormikSubmitButton } from '../components/AppForm';
-import HttpRequestWrapper from '../components/HttpRequestWrapper';
+import { getRiderById, updateRider } from '../api';
+import ApiRequestWrapper from '../components/ApiRequestWrapper';
 import AppPageTitle from '../components/PageTitle';
 import RiderForm from '../riders/Form';
 import { appPaths, useRiderId } from '../Routes';
@@ -12,15 +11,14 @@ const EditRiderPage: React.FC = () => {
     const history = useHistory();
     const riderId = useRiderId();
 
-    const fetchRider = useCallback(() => getRiderById(riderId), [riderId]);
-    const fetchRiderState = useApiRequest(fetchRider);
+    const getRider = useCallback(() => getRiderById(riderId), [riderId]);
 
     return (
-        <HttpRequestWrapper apiRequestState={fetchRiderState}>
+        <ApiRequestWrapper makeRequest={getRider}>
             {rider => (
                 <>
                     <AppPageTitle>Create New Rider</AppPageTitle>
-                    
+
                     <RiderForm
                         initialValues={rider}
                         onSubmit={async values => {
@@ -34,7 +32,7 @@ const EditRiderPage: React.FC = () => {
                     />
                 </>
             )}
-        </HttpRequestWrapper>
+        </ApiRequestWrapper>
     );
 };
 

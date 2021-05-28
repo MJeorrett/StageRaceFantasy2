@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';
-import { getFantasyRaceById, updateFantasyRace, useApiRequest } from '../api';
-import HttpRequestWrapper from '../components/HttpRequestWrapper';
+import { getFantasyRaceById, updateFantasyRace } from '../api';
+import ApiRequestWrapper from '../components/ApiRequestWrapper';
 import AppPageTitle from '../components/PageTitle';
 import FantasyRaceForm from '../fantasyRaces/Form';
 import { appPaths, useFantasyRaceId } from '../Routes';
@@ -10,16 +10,15 @@ const EditFantasyRacePage: React.FC = () => {
     const history = useHistory();
     const raceId = useFantasyRaceId();
 
-    const fetchRace = useCallback(() => getFantasyRaceById(raceId), [raceId]);
-    const fetchRaceState = useApiRequest(fetchRace);
+    const getFantasyRace = useCallback(() => getFantasyRaceById(raceId), [raceId]);
 
     return (
         <>
             <AppPageTitle>Edit Race</AppPageTitle>
-            <HttpRequestWrapper apiRequestState={fetchRaceState}>
-                {fetchRaceResponse => (
+            <ApiRequestWrapper makeRequest={getFantasyRace}>
+                {fantasyRaceDetails => (
                     <FantasyRaceForm
-                        initialValues={fetchRaceResponse}
+                        initialValues={fantasyRaceDetails}
                         onSubmit={async values => {
                             const response = await updateFantasyRace(raceId, values);
 
@@ -30,7 +29,7 @@ const EditFantasyRacePage: React.FC = () => {
                         submitButtonText="Save Changes"
                     />
                 )}
-            </HttpRequestWrapper>
+            </ApiRequestWrapper>
         </>
     );
 };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ApiClientResponse } from '../common/apiClientResponseModels';
+import { ApiClientFailureResponse, ApiClientResponse } from '../common/apiClientResponseModels';
 import { HttpClientFailureResponse } from '../common/httpClient';
 
 export interface UseApiRequestLoadingState {
@@ -9,7 +9,7 @@ export interface UseApiRequestLoadingState {
 
 export interface UseApiRequestFailureState {
     isLoading: false,
-    httpError: HttpClientFailureResponse,
+    httpError: ApiClientFailureResponse,
     isError: true,
     forceRefresh: () => void,
 }
@@ -28,17 +28,17 @@ export type UseApiRequestState<T> =
 
 export const useApiRequest = <T,>(makeRequest: () => Promise<ApiClientResponse<T>>, defaultValue?: T): UseApiRequestState<T> => {
     const [isLoading, setIsLoading] = useState(true);
-    const [httpError, setHttpError] = useState<HttpClientFailureResponse | undefined>(undefined);
+    const [apiError, setApiError] = useState<ApiClientFailureResponse | undefined>(undefined);
     const [result, setResult] = useState<T | undefined>(defaultValue);
     const [forceRefresh, setForceRefresh] = useState(false);
 
     useEffect(() => {
         const doRequest = async () => {
             setIsLoading(true);
-            setHttpError(undefined);
+            setApiError(undefined);
             const apiResponse = await makeRequest();
             if (apiResponse.isError) {
-                setHttpError(apiResponse);
+                setApiError(apiResponse);
             }
             else {
                 setResult(apiResponse.content);
@@ -55,9 +55,9 @@ export const useApiRequest = <T,>(makeRequest: () => Promise<ApiClientResponse<T
         forceRefresh: doForceRefresh,
     };
 
-    if (httpError) return {
+    if (apiError) return {
         isLoading: false,
-        httpError,
+        httpError: apiError,
         isError: true,
         forceRefresh: doForceRefresh,
     };

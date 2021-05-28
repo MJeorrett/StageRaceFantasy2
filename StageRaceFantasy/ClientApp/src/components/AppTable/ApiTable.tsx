@@ -1,8 +1,7 @@
 import React, {  } from 'react';
 import AppTable, { AppTableProps } from './AppTable';
-import { useApiRequest } from '../../api';
 import { ApiClientListResponse } from '../../api/common/apiClientResponseModels';
-import HttpRequestWrapper from '../HttpRequestWrapper';
+import ApiRequestWrapper from '../ApiRequestWrapper';
 
 type OverriddenProps = 'entities';
 
@@ -14,18 +13,17 @@ export const ApiTable = <T extends { id: number }, >({
     makeRequest,
     ...restOfProps
 }: PaginatedApiTableProps<T>): JSX.Element => {
-    const apiRequestState = useApiRequest(makeRequest);
 
     return (
         <>
-            <HttpRequestWrapper apiRequestState={apiRequestState}>
-                {fetchRacesResponse => (
+            <ApiRequestWrapper makeRequest={makeRequest}>
+                {response => (
                     <AppTable
-                        entities={fetchRacesResponse || []}
+                        entities={response || []}
                         {...restOfProps}
                     />
                 )}
-            </HttpRequestWrapper>
+            </ApiRequestWrapper>
         </>
     );
 };

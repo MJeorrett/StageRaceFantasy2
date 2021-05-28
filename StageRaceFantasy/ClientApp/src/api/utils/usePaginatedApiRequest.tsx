@@ -4,7 +4,7 @@ import { ApiClientPaginatedListResponse } from '../common/apiClientResponseModel
 import { useApiRequest, UseApiRequestState } from './useApiRequest';
 
 export type UsePaginatedApiRequestState<T> = UseApiRequestState<ApiPaginationListResponseContent<T>> & {
-    setPageNumber: (pageSize: number) => void,
+    setPageNumber: (pageNumber: number) => void,
     setPageSize: (pageSize: number) => void,
 };
 
