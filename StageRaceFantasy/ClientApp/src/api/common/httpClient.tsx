@@ -63,7 +63,7 @@ const buildDefaultHeaders = async () => {
     return headers;
 };
 
-export async function getRequest<TResponse>(url: string): Promise<HttpClientResponse<TResponse>> {
+export async function httpGet<TResponse>(url: string): Promise<HttpClientResponse<TResponse>> {
     try {
         const response = await Axios.get(url,
             {
@@ -82,7 +82,7 @@ export async function getRequest<TResponse>(url: string): Promise<HttpClientResp
         return handleError<TResponse>(url, error);
     }
 }
-export async function postRequest<TResponse>(url: string, payload?: unknown): Promise<HttpClientResponse<TResponse>> {
+export async function httpPost<TResponse>(url: string, payload?: unknown): Promise<HttpClientResponse<TResponse>> {
     try {
 
         const response = await Axios.post(url, payload,
@@ -103,7 +103,7 @@ export async function postRequest<TResponse>(url: string, payload?: unknown): Pr
     }
 }
 
-export async function putRequest<TResponse>(url: string, payload?: unknown): Promise<HttpClientResponse<TResponse>> {
+export async function httpPut<TResponse>(url: string, payload?: unknown): Promise<HttpClientResponse<TResponse>> {
     try {
 
         const response = await Axios.put(url, payload,
@@ -124,7 +124,7 @@ export async function putRequest<TResponse>(url: string, payload?: unknown): Pro
     }
 }
 
-export async function patchRequest<TResponse>(url: string, payload?: unknown): Promise<HttpClientResponse<TResponse>> {
+export async function httpPatch<TResponse>(url: string, payload?: unknown): Promise<HttpClientResponse<TResponse>> {
     try {
 
         const response = await Axios.patch(url, payload,
@@ -145,7 +145,7 @@ export async function patchRequest<TResponse>(url: string, payload?: unknown): P
     }
 }
 
-export async function deleteRequest<TResponse>(url: string): Promise<HttpClientResponse<TResponse>> {
+export async function httpDelete<TResponse>(url: string): Promise<HttpClientResponse<TResponse>> {
     try {
 
         const response = await Axios.delete(url,

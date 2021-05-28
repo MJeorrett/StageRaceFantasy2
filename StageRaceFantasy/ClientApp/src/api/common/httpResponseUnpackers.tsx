@@ -1,6 +1,6 @@
-import { HttpClientResponse } from '../httpClient';
-import { ApiListResponseModel, ApiPaginatedListResponseModel, ApiResponseModel } from './models';
-import { ApiClientListResponse, ApiClientPaginatedListResponse, ApiClientResponse } from './responses';
+import { HttpClientResponse } from './httpClient';
+import { ApiListResponseModel, ApiPaginatedListResponseModel, ApiResponseModel } from './apiResponseModels';
+import { ApiClientListResponse, ApiClientPaginatedListResponse, ApiClientResponse } from './apiClientResponseModels';
 
 export function unpackApiResponseModel<TResponse, TMapped>(
     response: HttpClientResponse<ApiResponseModel<TResponse>>,

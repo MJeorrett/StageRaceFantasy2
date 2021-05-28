@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ApiClientResponse } from '../common';
+import { ApiClientResponse } from '../common/apiClientResponseModels';
 import { HttpClientFailureResponse } from '../common/httpClient';
 
 export interface UseApiRequestLoadingState {

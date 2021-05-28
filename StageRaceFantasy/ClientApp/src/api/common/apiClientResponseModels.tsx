@@ -1,4 +1,4 @@
-import { ApiPaginationListResponseContent } from './models';
+import { ApiPaginationListResponseContent } from './apiResponseModels';
 
 export interface ApiClientSuccessResponse<T> {
     isError: false,

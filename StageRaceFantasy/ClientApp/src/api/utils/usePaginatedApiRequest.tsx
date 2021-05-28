@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
-import { ApiClientPaginatedListResponse, ApiPaginationListResponseContent, ApiPaginationQueryParams } from '../common';
+import { ApiPaginationListResponseContent, ApiPaginationQueryParams } from '../common/apiResponseModels';
+import { ApiClientPaginatedListResponse } from '../common/apiClientResponseModels';
 import { useApiRequest, UseApiRequestState } from './useApiRequest';
 
 export type UsePaginatedApiRequestState<T> = UseApiRequestState<ApiPaginationListResponseContent<T>> & {
