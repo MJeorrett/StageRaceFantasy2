@@ -5,7 +5,7 @@ import { createRider, getRiderById, updateRider, useApiRequest } from '../api';
 import AppForm, { AppFormikSubmitButton } from '../components/AppForm';
 import HttpRequestWrapper from '../components/HttpRequestWrapper';
 import AppPageTitle from '../components/PageTitle';
-import RiderForm from '../riders/form';
+import RiderForm from '../riders/Form';
 import { appPaths, useRiderId } from '../Routes';
 
 const EditRiderPage: React.FC = () => {
@@ -21,7 +21,7 @@ const EditRiderPage: React.FC = () => {
                 <>
                     <AppPageTitle>Create New Rider</AppPageTitle>
                     
-                    <RiderForm.Container
+                    <RiderForm
                         initialValues={rider}
                         onSubmit={async values => {
                             const response = await updateRider(riderId, values);
@@ -30,12 +30,8 @@ const EditRiderPage: React.FC = () => {
                                 history.push(appPaths.riders);
                             }
                         }}
-                    >
-                        <AppForm>
-                            <RiderForm.Fields autoFocus />
-                            <AppFormikSubmitButton>Save Changes</AppFormikSubmitButton>
-                        </AppForm>
-                    </RiderForm.Container>
+                        submitButtonText="Save Changes"
+                    />
                 </>
             )}
         </HttpRequestWrapper>

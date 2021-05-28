@@ -21,6 +21,7 @@ const CreateRiderPage: React.FC = () => {
                         history.push(appPaths.viewRider(response.content));
                     }
                 }}
+                submitButtonText="Create New Rider"
             />
         </>
     );

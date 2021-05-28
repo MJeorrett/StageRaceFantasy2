@@ -7,17 +7,20 @@ import AppFormikForm from '../components/AppForm/AppFormikForm';
 export type FantasyRaceFormProps = {
     initialValues?: ApiFantasyRace.CreateUpdateDto,
     onSubmit: (values: ApiFantasyRace.CreateUpdateDto) => Promise<void>
+    submitButtonText?: string,
 }
 
 const FantasyRaceForm: React.FC<FantasyRaceFormProps> = ({
     initialValues = defaultValues,
     onSubmit,
+    submitButtonText
 }) => {
     return (
         <AppFormikForm
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            submitButtonText={submitButtonText}
             config={{
                 name: {
                     type: 'string',

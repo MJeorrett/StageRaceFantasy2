@@ -22,6 +22,7 @@ const CreateFantasyRaceTeamPage: React.FC = () => {
                         history.push(appPaths.viewFantasyRace(fantasyRaceId));
                     }
                 }}
+                submitButtonText="Create New Team"
             />
         </>
     );

@@ -20,6 +20,7 @@ const CreateFantasyRacePage: React.FC = () => {
                         history.push(appPaths.fantasyRaces);
                     }
                 }}
+                submitButtonText="Create New Race"
             />
         </>
     );

@@ -27,6 +27,7 @@ const EditFantasyRacePage: React.FC = () => {
                                 history.push(appPaths.fantasyRaces);
                             }
                         }}
+                        submitButtonText="Save Changes"
                     />
                 )}
             </HttpRequestWrapper>
