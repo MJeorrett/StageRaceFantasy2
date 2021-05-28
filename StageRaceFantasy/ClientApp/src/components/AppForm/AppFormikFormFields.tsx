@@ -40,6 +40,7 @@ const AppFormikFormFields = <T,>({
                 const fieldConfig = config[fieldName as keyof T] as AppFormikFormFieldConfig;
 
                 if (fieldConfig.type === 'endDate') {
+                    // this field will be rendered byt the startDate config.
                     return null;
                 }
 
