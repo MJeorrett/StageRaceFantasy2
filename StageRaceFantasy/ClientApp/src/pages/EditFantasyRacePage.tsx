@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';
 import { getFantasyRaceById, updateFantasyRace, useApiRequest } from '../api';
-import AppForm, { AppFormikSubmitButton } from '../components/AppForm';
 import HttpRequestWrapper from '../components/HttpRequestWrapper';
 import AppPageTitle from '../components/PageTitle';
-import FantasyRaceForm from '../fantasyRaces/form';
+import FantasyRaceForm from '../fantasyRaces/Form';
 import { appPaths, useFantasyRaceId } from '../Routes';
 
 const EditFantasyRacePage: React.FC = () => {
@@ -19,7 +18,7 @@ const EditFantasyRacePage: React.FC = () => {
             <AppPageTitle>Edit Race</AppPageTitle>
             <HttpRequestWrapper apiRequestState={fetchRaceState}>
                 {fetchRaceResponse => (
-                    <FantasyRaceForm.Container
+                    <FantasyRaceForm
                         initialValues={fetchRaceResponse}
                         onSubmit={async values => {
                             const response = await updateFantasyRace(raceId, values);
@@ -28,12 +27,7 @@ const EditFantasyRacePage: React.FC = () => {
                                 history.push(appPaths.fantasyRaces);
                             }
                         }}
-                    >
-                        <AppForm>
-                            <FantasyRaceForm.Fields />
-                            <AppFormikSubmitButton>Save Changes</AppFormikSubmitButton>
-                        </AppForm>
-                    </FantasyRaceForm.Container>
+                    />
                 )}
             </HttpRequestWrapper>
         </>
