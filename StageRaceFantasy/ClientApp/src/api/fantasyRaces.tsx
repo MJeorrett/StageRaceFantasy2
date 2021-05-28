@@ -1,39 +1,32 @@
 import { ApiFantasyRace } from './models';
 import { FantasyRace } from '../models';
-import { buildApiUrl } from './common/buildApiUrl';
-import { ApiResponseModel } from './common/apiResponseModels';
-import { httpPost } from './common/httpClient';
-import { ApiClientListResponse, ApiClientResponse } from './common/apiClientResponseModels';
-import { doErrorToastIfRequired } from './common/doErrorToastIfRequired';
-import { unpackApiResponseModel } from './common/httpResponseUnpackers';
-import { apiGet, apiGetList, apiPut, makeApiGetPaginated } from './common/apiClient';
+import { apiGet, apiGetList, apiGetPaginated, apiPost, apiPut } from './common/apiClient';
 import { mapFromApiFantasyRaceDetails, mapFromApiFantasyRaceSummary } from '../modelMappers/fantasyRace';
+import { ApiPaginationQueryParams } from './common/apiResponseModels';
 
-export const createFantasyRace = async (createDto: ApiFantasyRace.CreateUpdateDto): Promise<ApiClientResponse<number>> => {
-    const url = buildApiUrl('api/fantasy-races');
-    const response = await httpPost<ApiResponseModel<number>>(url, createDto);
+export const createFantasyRace = (createDto: ApiFantasyRace.CreateUpdateDto) => (
+    apiPost('api/fantasy-races', createDto)
+);
 
-    doErrorToastIfRequired(response);
-
-    return unpackApiResponseModel(response, m => m);
-};
-
-export const updateFantasyRace = async (id: number, updateDto: ApiFantasyRace.CreateUpdateDto): Promise<ApiClientResponse<void>> => (
+export const updateFantasyRace = async (id: number, updateDto: ApiFantasyRace.CreateUpdateDto) => (
     apiPut(
         `api/fantasy-races/${id}`,
         updateDto)
 );
 
-export const getPaginatedFantasyRaces = makeApiGetPaginated<ApiFantasyRace.Summary, FantasyRace.Summary>(
-    'api/fantasy-races',
-    mapFromApiFantasyRaceSummary);
+export const getPaginatedFantasyRaces = (paginationQueryParams: ApiPaginationQueryParams) => (
+    apiGetPaginated<ApiFantasyRace.Summary, FantasyRace.Summary>(
+        'api/fantasy-races',
+        paginationQueryParams,
+        mapFromApiFantasyRaceSummary)
+);
 
-export const getAllFantasyRaceNames = async (): Promise<ApiClientListResponse<FantasyRace.Name>> => {
-    return apiGetList<ApiFantasyRace.Name, FantasyRace.Name>('api/fantasy-race-names', m => m);
-};
+export const getAllFantasyRaceNames = () => (
+    apiGetList<ApiFantasyRace.Name, FantasyRace.Name>('api/fantasy-race-names', m => m)
+);
 
-export const getFantasyRaceById = async (id: number): Promise<ApiClientResponse<FantasyRace.Details>> => {
-    return apiGet<ApiFantasyRace.Details, FantasyRace.Details>(
+export const getFantasyRaceById = (id: number) => (
+    apiGet<ApiFantasyRace.Details, FantasyRace.Details>(
         `api/fantasy-races/${id}`,
-        mapFromApiFantasyRaceDetails);
-};
+        mapFromApiFantasyRaceDetails)
+);

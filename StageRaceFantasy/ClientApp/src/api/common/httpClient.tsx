@@ -54,7 +54,6 @@ function handleError<T>(url: string, error: any): HttpClientResponse<T> {
 }
 
 const buildDefaultHeaders = async () => {
-    // placeholder this is where we would add e.g. auth token.
     const token = await authService.getAccessToken();
     const headers = {
         'Authorization': token ? `Bearer ${token}` : undefined,

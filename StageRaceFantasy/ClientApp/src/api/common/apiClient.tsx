@@ -3,7 +3,7 @@ import { buildApiUrl, buildApiUrlWithQueryParams } from './buildApiUrl';
 import { unpackApiListResponseModel, unpackApiPaginatedListResponseModel, unpackApiResponseModel } from './httpResponseUnpackers';
 import { ApiListResponseModel, ApiPaginatedListResponseModel, ApiPaginationQueryParams, ApiResponseModel } from './apiResponseModels';
 import { ApiClientListResponse, ApiClientPaginatedListResponse, ApiClientResponse } from './apiClientResponseModels';
-import { httpGet, httpPut } from './httpClient';
+import { httpGet, httpPost, httpPut } from './httpClient';
 
 export const apiGet = async <TApiResponse, TResponse>(path: string, mapper: (apiModel: TApiResponse) => TResponse): Promise<ApiClientResponse<TResponse>> => {
     const url = buildApiUrl(path);
@@ -23,22 +23,22 @@ export const apiGetList = async <TApiResponse, TResponse>(path: string, mapper: 
     return unpackApiListResponseModel(response, mapper);
 };
 
-export const makeApiGetList = <TApiResponse, TResponse>(path: string, mapper: (apiModel: TApiResponse) => TResponse) => async (): Promise<ApiClientListResponse<TResponse>> => {
-    const url = buildApiUrl(path);
-    const response = await httpGet<ApiListResponseModel<TApiResponse>>(url);
-
-    doErrorToastIfRequired(response);
-
-    return unpackApiListResponseModel(response, mapper);
-};
-
-export const makeApiGetPaginated = <TApiResponse, TResponse>(path: string, mapper: (apiModel: TApiResponse) => TResponse) => async (paginationQueryParams: ApiPaginationQueryParams): Promise<ApiClientPaginatedListResponse<TResponse>> => {
+export const apiGetPaginated = async <TApiResponse, TResponse>(path: string, paginationQueryParams: ApiPaginationQueryParams, mapper: (apiModel: TApiResponse) => TResponse): Promise<ApiClientPaginatedListResponse<TResponse>> => {
     const url = buildApiUrlWithQueryParams(path, paginationQueryParams);
     const response = await httpGet<ApiPaginatedListResponseModel<TApiResponse>>(url);
 
     doErrorToastIfRequired(response);
 
     return unpackApiPaginatedListResponseModel(response, mapper);
+};
+
+export const apiPost = async <TDto,>(path: string, dto: TDto): Promise<ApiClientResponse<number>> => {
+    const url = buildApiUrl(path);
+    const response = await httpPost<ApiResponseModel<number>>(url, dto);
+
+    doErrorToastIfRequired(response);
+
+    return unpackApiResponseModel(response, m => m);
 };
 
 export const apiPut = async <TDto,>(path: string, dto: TDto): Promise<ApiClientResponse<void>> => {
