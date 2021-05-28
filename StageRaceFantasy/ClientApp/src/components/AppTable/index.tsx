@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography, Paper, makeStyles, IconButton } from '@material-ui/core';
 import React from 'react';
 import { ChangeEvent } from 'react';
-import { ApiPagination } from '../../api/models/common';
+import { ApiPagination } from '../../api';
 
 const useStyles = makeStyles((theme) => ({
     pagination: {

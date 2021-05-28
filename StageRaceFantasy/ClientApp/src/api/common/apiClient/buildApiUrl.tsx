@@ -1,5 +1,5 @@
-import config from '../../config';
-import { ApiPaginationQueryParams } from '../models/common';
+import config from '../../../config';
+import { ApiPaginationQueryParams } from './models';
 
 export const buildApiUrl = (path: string): string => `${config.apiBaseUrl}/${path}`;
 

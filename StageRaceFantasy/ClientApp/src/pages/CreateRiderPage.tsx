@@ -19,7 +19,7 @@ const CreateRiderPage: React.FC = () => {
                     const response = await createRider(values);
 
                     if (!response.isError) {
-                        history.push(appPaths.viewRider(response.body));
+                        history.push(appPaths.viewRider(response.content));
                     }
                 }}
             >

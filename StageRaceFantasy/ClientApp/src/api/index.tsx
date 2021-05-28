@@ -6,9 +6,11 @@ export type {
 
 export type {
     ApiPagination,
-} from './models/common/apiPaginatedResponse';
+    ApiPaginationQueryParams,
+} from './common';
 
-export * from './utils/useHttpRequest';
+export * from './utils/useApiRequest';
+export * from './utils/usePaginatedApiRequest';
 export * from './riders';
 export * from './fantasyRaces';
 export * from './fantasyRaceTeams';

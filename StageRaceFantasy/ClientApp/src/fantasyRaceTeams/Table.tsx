@@ -2,9 +2,8 @@ import React, { useCallback } from 'react';
 import { TableCell } from '@material-ui/core';
 import AppTable, { TableActionButtonDefinition } from '../components/AppTable';
 import HttpRequestWrapper from '../components/HttpRequestWrapper';
-import { usePaginatedHttpRequest } from '../api/utils/usePaginatedHttpRequest';
-import { getPaginatedFantasyRaceTeams } from '../api';
-import { ApiPaginationQueryParams } from '../api/models/common';
+import { usePaginatedApiRequest } from '../api/utils/usePaginatedApiRequest';
+import { ApiPaginationQueryParams, getPaginatedFantasyRaceTeams } from '../api';
 
 export interface FantasyRacesTeamsTableProps {
     fantasyRaceId: number,
@@ -20,7 +19,7 @@ const FantasyRaceTeamsTable: React.FC<FantasyRacesTeamsTableProps> = ({
         setPageNumber,
         setPageSize,
         ...fetchTeamsState
-    } = usePaginatedHttpRequest(getTeamsForRace);
+    } = usePaginatedApiRequest(getTeamsForRace);
 
     const columnHeaders = ['ID', 'Name'];
 
@@ -30,9 +29,9 @@ const FantasyRaceTeamsTable: React.FC<FantasyRacesTeamsTableProps> = ({
                 {fetchRacesResponse => (
                     <AppTable
                         headers={columnHeaders}
-                        entities={fetchRacesResponse.content.items}
+                        entities={fetchRacesResponse.items}
                         pagination={{
-                            ...fetchRacesResponse.content,
+                            ...fetchRacesResponse,
                             setPageNumber,
                             setPageSize,
                         }}

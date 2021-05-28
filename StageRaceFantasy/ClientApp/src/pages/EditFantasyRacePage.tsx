@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';
-import { getFantasyRaceById, updateFantasyRace, useHttpRequest } from '../api';
+import { getFantasyRaceById, updateFantasyRace, useApiRequest } from '../api';
 import AppForm, { AppFormikSubmitButton } from '../components/AppForm';
 import HttpRequestWrapper from '../components/HttpRequestWrapper';
 import AppPageTitle from '../components/PageTitle';
@@ -12,7 +12,7 @@ const EditFantasyRacePage: React.FC = () => {
     const raceId = useFantasyRaceId();
 
     const fetchRace = useCallback(() => getFantasyRaceById(raceId), [raceId]);
-    const fetchRaceState = useHttpRequest(fetchRace);
+    const fetchRaceState = useApiRequest(fetchRace);
 
     return (
         <>

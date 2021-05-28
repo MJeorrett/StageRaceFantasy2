@@ -1,31 +1,32 @@
 import { useEffect, useState } from 'react';
-import { HttpClientFailureResponse, HttpClientResponse } from '../common/httpClient';
+import { ApiClientResponse } from '../common';
+import { HttpClientFailureResponse } from '../common/httpClient';
 
-export interface UseHttpRequestLoadingState {
+export interface UseApiRequestLoadingState {
     isLoading: true,
     forceRefresh: () => void,
 }
 
-export interface UseHttpRequestFailureState {
+export interface UseApiRequestFailureState {
     isLoading: false,
     httpError: HttpClientFailureResponse,
     isError: true,
     forceRefresh: () => void,
 }
 
-export interface UseHttpRequestSuccessState<T> {
+export interface UseApiRequestSuccessState<T> {
     isLoading: false,
     isError: false,
     result: T,
     forceRefresh: () => void,
 }
 
-export type UseHttpRequestState<T> =
-    UseHttpRequestLoadingState |
-    UseHttpRequestFailureState |
-    UseHttpRequestSuccessState<T>;
+export type UseApiRequestState<T> =
+    UseApiRequestLoadingState |
+    UseApiRequestFailureState |
+    UseApiRequestSuccessState<T>;
 
-export const useHttpRequest = <T,>(makeRequest: () => Promise<HttpClientResponse<T>>, defaultValue?: T): UseHttpRequestState<T> => {
+export const useApiRequest = <T,>(makeRequest: () => Promise<ApiClientResponse<T>>, defaultValue?: T): UseApiRequestState<T> => {
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState<HttpClientFailureResponse | undefined>(undefined);
     const [result, setResult] = useState<T | undefined>(defaultValue);
@@ -40,7 +41,7 @@ export const useHttpRequest = <T,>(makeRequest: () => Promise<HttpClientResponse
                 setHttpError(apiResponse);
             }
             else {
-                setResult(apiResponse.body);
+                setResult(apiResponse.content);
             }
             setIsLoading(false);
         };

@@ -63,12 +63,11 @@ const buildDefaultHeaders = async () => {
     return headers;
 };
 
-export async function getRequest<TResponse>(url: string, allowedNon200Statuses: number[] = []): Promise<HttpClientResponse<TResponse>> {
+export async function getRequest<TResponse>(url: string): Promise<HttpClientResponse<TResponse>> {
     try {
         const response = await Axios.get(url,
             {
                 headers: await buildDefaultHeaders(),
-                validateStatus: status => (status >= 200 && status <= 299) || allowedNon200Statuses.includes(status),
             });
 
         const responseData = response.data as TResponse;
@@ -83,34 +82,12 @@ export async function getRequest<TResponse>(url: string, allowedNon200Statuses: 
         return handleError<TResponse>(url, error);
     }
 }
-
-export async function thirdPartyGetRequest<TResponse>(url: string, allowedNon200Statuses: number[] = []): Promise<HttpClientResponse<TResponse>> {
-    try {
-        const response = await Axios.get(url,
-            {
-                validateStatus: status => (status >= 200 && status <= 299) || allowedNon200Statuses.includes(status),
-            });
-
-        const responseData = response.data as TResponse;
-
-        return {
-            isError: false,
-            statusCode: response.status,
-            body: responseData,
-        };
-    }
-    catch (error) {
-        return handleError<TResponse>(url, error);
-    }
-}
-
 export async function postRequest<TResponse>(url: string, payload?: unknown): Promise<HttpClientResponse<TResponse>> {
     try {
 
         const response = await Axios.post(url, payload,
             {
                 headers: await buildDefaultHeaders(),
-                validateStatus: status => status >= 200 && status <= 299,
             });
 
         const responseData = response.data as TResponse;
@@ -132,7 +109,6 @@ export async function putRequest<TResponse>(url: string, payload?: unknown): Pro
         const response = await Axios.put(url, payload,
             {
                 headers: await buildDefaultHeaders(),
-                validateStatus: status => status >= 200 && status <= 299,
             });
 
         const responseData = response.data as TResponse;
@@ -154,7 +130,6 @@ export async function patchRequest<TResponse>(url: string, payload?: unknown): P
         const response = await Axios.patch(url, payload,
             {
                 headers: await buildDefaultHeaders(),
-                validateStatus: status => status >= 200 && status <= 299,
             });
 
         const responseData = response.data as TResponse;
@@ -176,7 +151,6 @@ export async function deleteRequest<TResponse>(url: string): Promise<HttpClientR
         const response = await Axios.delete(url,
             {
                 headers: await buildDefaultHeaders(),
-                validateStatus: status => status >= 200 && status <= 299,
             });
 
         const responseData = response.data as TResponse;

@@ -3,7 +3,7 @@ import { TableCell } from '@material-ui/core';
 import { getPaginatedFantasyRaces } from '../api';
 import AppTable, { TableActionButtonDefinition } from '../components/AppTable';
 import HttpRequestWrapper from '../components/HttpRequestWrapper';
-import { usePaginatedHttpRequest } from '../api/utils/usePaginatedHttpRequest';
+import { usePaginatedApiRequest } from '../api/utils/usePaginatedApiRequest';
 
 export interface FantasyRacesTableProps {
     actionButtons?: TableActionButtonDefinition[],
@@ -16,7 +16,7 @@ const FantasyRacesTable: React.FC<FantasyRacesTableProps> = ({
         setPageNumber,
         setPageSize,
         ...fetchRacesState
-    } = usePaginatedHttpRequest(getPaginatedFantasyRaces);
+    } = usePaginatedApiRequest(getPaginatedFantasyRaces);
 
     const columnHeaders = ['ID', 'Name', 'Start', 'End'];
 
@@ -26,9 +26,9 @@ const FantasyRacesTable: React.FC<FantasyRacesTableProps> = ({
                 {fetchRacesResponse => (
                     <AppTable
                         headers={columnHeaders}
-                        entities={fetchRacesResponse.content.items || []}
+                        entities={fetchRacesResponse.items || []}
                         pagination={{
-                            ...fetchRacesResponse.content,
+                            ...fetchRacesResponse,
                             setPageNumber,
                             setPageSize,
                         }}

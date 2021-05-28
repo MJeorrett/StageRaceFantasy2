@@ -1,30 +1,28 @@
 import { HttpClientResponse } from '.';
 import { Rider } from '../models';
-import { buildApiUrl, httpClient, doErrorToastIfRequired, apiClient } from './common';
+import { buildApiUrl, httpClient, doErrorToastIfRequired, ApiResponseModel, unpackApiResponseModel, ApiClientResponse, put, makeGetPaginated, basicGet } from './common';
 import { ApiRider } from './models';
-import { ApiSingleObjectResponse, unpackApiSingleObjectResponse } from './models/common';
 
-export const createRider = async (createDto: ApiRider.CreateUpdateDto): Promise<HttpClientResponse<number>> => {
+export const createRider = async (createDto: ApiRider.CreateUpdateDto): Promise<ApiClientResponse<number>> => {
     const url = buildApiUrl('api/riders');
-    const response = await httpClient.postRequest<ApiSingleObjectResponse<number>>(url, createDto);
+    const response = await httpClient.postRequest<ApiResponseModel<number>>(url, createDto);
 
     doErrorToastIfRequired(response);
 
-    return unpackApiSingleObjectResponse(response, m => m);
+    return unpackApiResponseModel(response, m => m);
 };
 
 export const updateRider = async (id: number, updateDto: ApiRider.CreateUpdateDto) => (
-    apiClient.put(`api/riders/${id}`, updateDto)
+    put(`api/riders/${id}`, updateDto)
 );
 
-export const getPaginatedRiders = apiClient
-    .makeGetPaginated<ApiRider.Summary, Rider.Summary>(
-        'api/riders',
-        m => m
-    );
+export const getPaginatedRiders = makeGetPaginated<ApiRider.Summary, Rider.Summary>(
+    'api/riders',
+    m => m
+);
 
 export const getRiderById = (id: number) => (
-    apiClient.getSingleObject<ApiRider.Summary, Rider.Summary>(
+    basicGet<ApiRider.Summary, Rider.Summary>(
         `api/riders/${id}`,
         m => m)
 );

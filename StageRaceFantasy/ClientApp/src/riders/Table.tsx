@@ -1,9 +1,8 @@
 import React, {  } from 'react';
 import { TableCell } from '@material-ui/core';
-import { getPaginatedRiders } from '../api';
+import { getPaginatedRiders, usePaginatedApiRequest } from '../api';
 import AppTable, { TableActionButtonDefinition } from '../components/AppTable';
 import HttpRequestWrapper from '../components/HttpRequestWrapper';
-import { usePaginatedHttpRequest } from '../api/utils/usePaginatedHttpRequest';
 
 export interface RidersTableProps {
     actionButtons?: TableActionButtonDefinition[],
@@ -16,7 +15,7 @@ const RidersTable: React.FC<RidersTableProps> = ({
         setPageNumber,
         setPageSize,
         ...fetchRacesState
-    } = usePaginatedHttpRequest(getPaginatedRiders);
+    } = usePaginatedApiRequest(getPaginatedRiders);
 
     const columnHeaders = ['ID', 'First Name', 'Last Name'];
 
@@ -26,9 +25,9 @@ const RidersTable: React.FC<RidersTableProps> = ({
                 {ridersResponse => (
                     <AppTable
                         headers={columnHeaders}
-                        entities={ridersResponse.content.items || []}
+                        entities={ridersResponse.items || []}
                         pagination={{
-                            ...ridersResponse.content,
+                            ...ridersResponse,
                             setPageNumber,
                             setPageSize,
                         }}

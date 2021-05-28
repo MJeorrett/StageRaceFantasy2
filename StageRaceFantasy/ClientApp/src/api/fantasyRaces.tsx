@@ -1,41 +1,38 @@
-import { apiClient, buildApiUrl, buildApiUrlWithQueryParams, doErrorToastIfRequired, httpClient } from './common';
-import { ApiListResponse, ApiPaginatedListResponse, ApiPaginationQueryParams, ApiSingleObjectResponse, unpackApiListResponse, unpackApiPaginatedListResponse, unpackApiSingleObjectResponse } from './models/common';
+import { ApiClientListResponse, ApiClientResponse, ApiListResponseModel, ApiResponseModel, basicGet, buildApiUrl, doErrorToastIfRequired, httpClient, makeGetPaginated, put, unpackApiListResponseModel, unpackApiResponseModel } from './common';
 import { ApiFantasyRace } from './models';
 import { FantasyRace } from '../models';
-import { HttpClientResponse } from './common/httpClient';
 import { mapFromApiFantasyRaceDetails, mapFromApiFantasyRaceSummary } from '../modelMappers/fantasyRace';
 
-export const createFantasyRace = async (createDto: ApiFantasyRace.CreateUpdateDto): Promise<HttpClientResponse<number>> => {
+export const createFantasyRace = async (createDto: ApiFantasyRace.CreateUpdateDto): Promise<ApiClientResponse<number>> => {
     const url = buildApiUrl('api/fantasy-races');
-    const response = await httpClient.postRequest<ApiSingleObjectResponse<number>>(url, createDto);
+    const response = await httpClient.postRequest<ApiResponseModel<number>>(url, createDto);
 
     doErrorToastIfRequired(response);
 
-    return unpackApiSingleObjectResponse(response, m => m);
+    return unpackApiResponseModel(response, m => m);
 };
 
-export const updateFantasyRace = async (id: number, updateDto: ApiFantasyRace.CreateUpdateDto): Promise<HttpClientResponse<void>> => (
-    apiClient.put(
+export const updateFantasyRace = async (id: number, updateDto: ApiFantasyRace.CreateUpdateDto): Promise<ApiClientResponse<void>> => (
+    put(
         `api/fantasy-races/${id}`,
         updateDto)
 );
 
-export const getPaginatedFantasyRaces = apiClient
-    .makeGetPaginated<ApiFantasyRace.Summary, FantasyRace.Summary>(
-        'api/fantasy-races',
-        mapFromApiFantasyRaceSummary);
+export const getPaginatedFantasyRaces = makeGetPaginated<ApiFantasyRace.Summary, FantasyRace.Summary>(
+    'api/fantasy-races',
+    mapFromApiFantasyRaceSummary);
 
-export const getAllFantasyRaceNames = async (): Promise<HttpClientResponse<ApiListResponse<FantasyRace.Name>>> => {
+export const getAllFantasyRaceNames = async (): Promise<ApiClientListResponse<FantasyRace.Name>> => {
     const url = buildApiUrl('api/fantasy-race-names');
-    const response = await httpClient.getRequest<ApiListResponse<ApiFantasyRace.Name>>(url);
+    const response = await httpClient.getRequest<ApiListResponseModel<ApiFantasyRace.Name>>(url);
 
     doErrorToastIfRequired(response);
 
-    return unpackApiListResponse(response, m => m);
+    return unpackApiListResponseModel(response, m => m);
 };
 
-export const getFantasyRaceById = async (id: number): Promise<HttpClientResponse<FantasyRace.Details>> => (
-    apiClient.getSingleObject<ApiFantasyRace.Details, FantasyRace.Details>(
+export const getFantasyRaceById = async (id: number): Promise<ApiClientResponse<FantasyRace.Details>> => (
+    basicGet<ApiFantasyRace.Details, FantasyRace.Details>(
         `api/fantasy-races/${id}`,
         mapFromApiFantasyRaceDetails)
 );

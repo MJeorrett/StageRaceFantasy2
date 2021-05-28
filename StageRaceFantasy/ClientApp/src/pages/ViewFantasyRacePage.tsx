@@ -1,6 +1,6 @@
 import { Typography } from '@material-ui/core';
 import React, { useCallback } from 'react';
-import { getFantasyRaceById, useHttpRequest } from '../api';
+import { getFantasyRaceById, useApiRequest } from '../api';
 import AppButton from '../components/AppButton';
 import AppDataPoint from '../components/AppDataPoints/AppDataPoint';
 import AppDataPointGroup from '../components/AppDataPoints/AppDataPointGroup';
@@ -15,7 +15,7 @@ import { appPaths, useFantasyRaceId } from '../Routes';
 const ViewFantasyRacePage = () => {
     const fantasyRaceId = useFantasyRaceId();
     const getFantasyRaceCallback = useCallback(() => getFantasyRaceById(fantasyRaceId), [fantasyRaceId]);
-    const getFantasyRaceRequest = useHttpRequest(getFantasyRaceCallback);
+    const getFantasyRaceRequest = useApiRequest(getFantasyRaceCallback);
 
     return (
         <HttpRequestWrapper

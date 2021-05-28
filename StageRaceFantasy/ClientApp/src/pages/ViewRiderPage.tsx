@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { getRiderById, useHttpRequest } from '../api';
+import { getRiderById, useApiRequest } from '../api';
 import HttpRequestWrapper from '../components/HttpRequestWrapper';
 import AppPageTitle from '../components/PageTitle';
 import { useRiderId } from '../Routes';
@@ -8,7 +8,7 @@ import { useRiderId } from '../Routes';
 const ViewRiderPage = () => {
     const riderId = useRiderId();
     const getRiderCallback = useCallback(() => getRiderById(riderId), [riderId]);
-    const getRiderRequest = useHttpRequest(getRiderCallback);
+    const getRiderRequest = useApiRequest(getRiderCallback);
 
     return (
         <HttpRequestWrapper

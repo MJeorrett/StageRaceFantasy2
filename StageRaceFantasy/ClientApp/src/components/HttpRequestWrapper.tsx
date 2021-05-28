@@ -2,10 +2,10 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 
 import AppLoader from './AppLoader';
-import { UseHttpRequestState } from '../api';
+import { UseApiRequestState } from '../api';
 
 interface HttpRequestWrapperProps<T> {
-    httpState: UseHttpRequestState<T>,
+    httpState: UseApiRequestState<T>,
     children: (result: T) => JSX.Element,
 }
 

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';
 
-import { createRider, getRiderById, updateRider, useHttpRequest } from '../api';
+import { createRider, getRiderById, updateRider, useApiRequest } from '../api';
 import AppForm, { AppFormikSubmitButton } from '../components/AppForm';
 import HttpRequestWrapper from '../components/HttpRequestWrapper';
 import AppPageTitle from '../components/PageTitle';
@@ -13,7 +13,7 @@ const EditRiderPage: React.FC = () => {
     const riderId = useRiderId();
 
     const fetchRider = useCallback(() => getRiderById(riderId), [riderId]);
-    const fetchRiderState = useHttpRequest(fetchRider);
+    const fetchRiderState = useApiRequest(fetchRider);
 
     return (
         <HttpRequestWrapper httpState={fetchRiderState}>
