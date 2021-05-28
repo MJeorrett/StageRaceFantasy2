@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { createFantasyRaceTeam } from '../api';
-import AppForm, { AppFormikSubmitButton } from '../components/AppForm';
 import AppPageTitle from '../components/PageTitle';
 import FantasyRaceTeamForm from '../fantasyRaceTeams/Form';
 import { appPaths, useFantasyRaceId } from '../Routes';
@@ -23,6 +22,7 @@ const CreateFantasyRaceTeamPage: React.FC = () => {
                     }
                 }}
                 submitButtonText="Create New Team"
+                autofocus
             />
         </>
     );

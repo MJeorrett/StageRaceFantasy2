@@ -21,6 +21,7 @@ const CreateFantasyRacePage: React.FC = () => {
                     }
                 }}
                 submitButtonText="Create New Race"
+                autofocus
             />
         </>
     );

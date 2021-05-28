@@ -8,12 +8,14 @@ export type RiderFormContainer = {
     initialValues?: ApiRider.CreateUpdateDto,
     onSubmit: (values: ApiRider.CreateUpdateDto) => Promise<void>,
     submitButtonText?: string,
+    autofocus?: boolean,
 }
 
 const RiderForm: React.FC<RiderFormContainer> = ({
     initialValues = defaultValues,
     onSubmit,
     submitButtonText,
+    autofocus,
 }) => {
     return (
         <AppFormikForm
@@ -21,6 +23,7 @@ const RiderForm: React.FC<RiderFormContainer> = ({
             validationSchema={validationSchema}
             onSubmit={onSubmit}
             submitButtonText={submitButtonText}
+            autofocus={autofocus}
             config={{
                 firstName: {
                     type: 'string',

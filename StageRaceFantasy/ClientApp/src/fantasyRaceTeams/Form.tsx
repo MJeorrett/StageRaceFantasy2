@@ -7,12 +7,14 @@ export interface FantasyRacesFormProps {
     initialValues?: ApiFantasyRaceTeam.CreateUpdateDto,
     onSubmit: (values: ApiFantasyRaceTeam.CreateUpdateDto) => Promise<void>,
     submitButtonText?: string,
+    autofocus?: boolean,
 }
  
 const FantasyRacesForm: React.FC<FantasyRacesFormProps> = ({
     initialValues = defaultValues,
     onSubmit,
     submitButtonText,
+    autofocus,
 }) => {
     return (
         <AppFormikForm
@@ -20,6 +22,7 @@ const FantasyRacesForm: React.FC<FantasyRacesFormProps> = ({
             validationSchema={validationSchema}
             onSubmit={onSubmit}
             submitButtonText={submitButtonText}
+            autofocus={autofocus}
             config={{
                 name: {
                     type: 'string',

@@ -4,33 +4,13 @@ import AppForm from './AppForm';
 import AppFormikSubmitButton from './AppFormikSubmitButton';
 import AppFormikFormFields, { AppFormikFormFieldsConfig } from './AppFormikFormFields';
 
-export type AppFormikFormTextFieldConfig = {
-    type: 'string' | 'number',
-    label: string,
-}
-
-export type AppFormikFormStartDateFieldConfig = {
-    type: 'startDate',
-    label?: string,
-    endFieldName: string,
-    endFieldLabel?: string,
-}
-
-export type AppFormikFormEndDateFieldConfig = {
-    type: 'endDate',
-}
-
-export type AppFormikFormFieldConfig =
-    AppFormikFormTextFieldConfig |
-    AppFormikFormStartDateFieldConfig |
-    AppFormikFormEndDateFieldConfig;
-
 export type AppFormikFormProps<T> = {
     initialValues: T,
     validationSchema: any,
     config: AppFormikFormFieldsConfig<T>,
     onSubmit: (values: T) => Promise<void>,
     submitButtonText?: string,
+    autofocus?: boolean,
 }
 
 const AppFormikForm = <T, >({
@@ -38,7 +18,8 @@ const AppFormikForm = <T, >({
     validationSchema,
     config,
     onSubmit,
-    submitButtonText = 'Submit'
+    submitButtonText = 'Submit',
+    autofocus,
 }: AppFormikFormProps<T>): JSX.Element => {
     return (
         <Formik
@@ -48,7 +29,7 @@ const AppFormikForm = <T, >({
         >
             <Form>
                 <AppForm>
-                    <AppFormikFormFields config={config} />
+                    <AppFormikFormFields config={config} autofocus={autofocus} />
                     <AppFormikSubmitButton>{submitButtonText}</AppFormikSubmitButton>
                 </AppForm>
             </Form>

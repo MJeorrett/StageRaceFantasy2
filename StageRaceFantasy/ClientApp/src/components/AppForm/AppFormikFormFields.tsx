@@ -29,14 +29,16 @@ export type AppFormikFormFieldsConfig<T> = {
 
 export type AppFormikFormFieldsProps<T> = {
     config: AppFormikFormFieldsConfig<T>,
+    autofocus?: boolean,
 }
 
 const AppFormikFormFields = <T,>({
     config,
+    autofocus,
 }: AppFormikFormFieldsProps<T>): JSX.Element => {
     return (
         <>
-            {Object.keys(config).map(fieldName => {
+            {Object.keys(config).map((fieldName, index) => {
                 const fieldConfig = config[fieldName as keyof T] as AppFormikFormFieldConfig;
 
                 if (fieldConfig.type === 'endDate') {
@@ -57,6 +59,7 @@ const AppFormikFormFields = <T,>({
 
                 return (
                     <AppFormikTextField
+                        autoFocus={autofocus && index === 0}
                         key={fieldName}
                         name={fieldName}
                         label={fieldConfig.label}

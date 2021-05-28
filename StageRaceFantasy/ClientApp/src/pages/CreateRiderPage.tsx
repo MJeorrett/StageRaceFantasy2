@@ -22,6 +22,7 @@ const CreateRiderPage: React.FC = () => {
                     }
                 }}
                 submitButtonText="Create New Rider"
+                autofocus
             />
         </>
     );
