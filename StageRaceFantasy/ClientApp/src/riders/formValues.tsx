@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import { ApiRider } from '../../api/models';
+import { ApiRider } from '../api/models';
 
 export const defaultValues: ApiRider.CreateUpdateDto = {
     firstName: '',

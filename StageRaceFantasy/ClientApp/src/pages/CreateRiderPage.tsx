@@ -2,9 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router';
 
 import { createRider } from '../api';
-import AppForm, { AppFormikSubmitButton } from '../components/AppForm';
 import AppPageTitle from '../components/PageTitle';
-import RiderForm from '../riders/form';
+import RiderForm from '../riders/Form';
 import { appPaths } from '../Routes';
 
 const CreateRiderPage: React.FC = () => {
@@ -14,7 +13,7 @@ const CreateRiderPage: React.FC = () => {
         <>
             <AppPageTitle>Create New Rider</AppPageTitle>
             
-            <RiderForm.Container
+            <RiderForm
                 onSubmit={async values => {
                     const response = await createRider(values);
 
@@ -22,12 +21,7 @@ const CreateRiderPage: React.FC = () => {
                         history.push(appPaths.viewRider(response.content));
                     }
                 }}
-            >
-                <AppForm>
-                    <RiderForm.Fields autoFocus />
-                    <AppFormikSubmitButton>Create</AppFormikSubmitButton>
-                </AppForm>
-            </RiderForm.Container>
+            />
         </>
     );
 };

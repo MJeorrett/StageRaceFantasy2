@@ -10,12 +10,12 @@ export type FantasyRaceFormProps = {
 }
 
 const FantasyRaceForm: React.FC<FantasyRaceFormProps> = ({
-    initialValues,
+    initialValues = defaultValues,
     onSubmit,
 }) => {
     return (
         <AppFormikForm
-            initialValues={initialValues || defaultValues}
+            initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
             config={{
