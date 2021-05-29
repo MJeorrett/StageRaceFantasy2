@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using StageRaceFantasy.Application.Common.Mapping;
 using StageRaceFantasy.Application.Common.Requests;
 using StageRaceFantasy.Domain.Entities;
@@ -32,17 +31,8 @@ namespace StageRaceFantasy.Application.FantasyTeam.Commands
 
         public override async Task<AppResponse<int>> Handle(CreateFantasyTeamCommand command, CancellationToken cancellationToken)
         {
-            var fantasyRaceEntity = await DbContext.FantasyRaces
-                .FirstOrDefaultAsync(_ => _.Id == command.FantasyRaceId, cancellationToken);
-
-            if (fantasyRaceEntity is null)
-            {
-                return BadRequest($"No fantasy race exists with id {command.FantasyRaceId}.");
-            }
-
             var fantasyRaceTeamEntity = Mapper.Map<FantasyRaceTeamEntity>(command);
-
-            fantasyRaceEntity.FantasyTeams.Add(fantasyRaceTeamEntity);
+            fantasyRaceTeamEntity.FantasyRaceId = command.FantasyRaceId;
             await DbContext.SaveChangesAsync(cancellationToken);
 
             return Created(fantasyRaceTeamEntity.Id);

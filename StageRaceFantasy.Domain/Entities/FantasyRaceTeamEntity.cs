@@ -10,7 +10,7 @@ namespace StageRaceFantasy.Domain.Entities
 
         public string Name { get; init; } = "";
 
-        public int FantasyRaceId { get; init; }
+        public int FantasyRaceId { get; set; }
         public FantasyRaceEntity FantasyRace { get; init; } = null!;
     }
 }
