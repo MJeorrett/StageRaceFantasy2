@@ -1,9 +1,9 @@
 ﻿using StageRaceFantasy.Application.Common.Mapping;
 using StageRaceFantasy.Domain.Entities;
 
-namespace StageRaceFantasy.Application.FantasyRaceTeam.Dtos
+namespace StageRaceFantasy.Application.FantasyTeam.Dtos
 {
-    public record FantasyRaceTeamSummaryDto : IMapFrom<FantasyRaceTeamEntity>
+    public record FantasyTeamSummaryDto : IMapFrom<FantasyRaceTeamEntity>
     {
         public int Id { get; init; }
 

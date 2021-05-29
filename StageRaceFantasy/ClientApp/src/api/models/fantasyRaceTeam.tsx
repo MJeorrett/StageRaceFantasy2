@@ -3,6 +3,7 @@ interface Core {
 }
 
 export interface CreateUpdateDto extends Core {
+    fantasyRaceId: number,
 }
 
 export interface Summary extends Core {

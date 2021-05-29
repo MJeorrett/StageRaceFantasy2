@@ -5,6 +5,8 @@ using StageRaceFantasy.Application.Common.Requests;
 using StageRaceFantasy.Application.FantasyRaces.Commands;
 using StageRaceFantasy.Application.FantasyRaces.Dtos;
 using StageRaceFantasy.Application.FantasyRaces.Queries;
+using StageRaceFantasy.Application.FantasyTeam.Dtos;
+using StageRaceFantasy.Application.FantasyTeam.Queries;
 using StageRaceFantasy.Controllers.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -31,12 +33,12 @@ namespace StageRaceFantasy.Controllers
             return ActionResultBuilder.Build(response);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{fantasyRaceId}")]
         public async Task<ActionResult<AppResponse>> Update(
-            [FromRoute] int id,
+            [FromRoute] int fantasyRaceId,
             [FromBody] UpdateFantasyRaceCommand command)
         {
-            var response = await _mediator.Send(command with { Id = id });
+            var response = await _mediator.Send(command with { Id = fantasyRaceId });
 
             return ActionResultBuilder.Build(response);
         }
@@ -59,11 +61,23 @@ namespace StageRaceFantasy.Controllers
             return ActionResultBuilder.Build(response);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{fantasyRaceId}")]
         public async Task<ActionResult<AppResponse<FantasyRaceDetailsDto>>> GetById(
-            [FromRoute] int id)
+            [FromRoute] int fantasyRaceId)
         {
-            var query = new GetFantasyRaceByIdQuery(id);
+            var query = new GetFantasyRaceByIdQuery(fantasyRaceId);
+            var response = await _mediator.Send(query);
+
+            return ActionResultBuilder.Build(response);
+        }
+
+        [HttpGet("{fantasyRaceId}/fantasy-teams")]
+        public async Task<ActionResult<AppResponse<PaginatedList<FantasyTeamSummaryDto>>>> GetPaginatedRaceTeams(
+            [FromRoute] int fantasyRaceId,
+            [FromQuery] GetPaginatedFantasyTeamsQuery query)
+        {
+            query.FantasyRaceId = fantasyRaceId;
+
             var response = await _mediator.Send(query);
 
             return ActionResultBuilder.Build(response);

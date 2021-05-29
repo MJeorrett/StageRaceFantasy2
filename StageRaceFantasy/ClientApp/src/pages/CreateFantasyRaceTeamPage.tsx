@@ -15,7 +15,10 @@ const CreateFantasyRaceTeamPage: React.FC = () => {
             
             <FantasyRaceTeamForm
                 onSubmit={async values => {
-                    const response = await createFantasyRaceTeam(fantasyRaceId, values);
+                    const response = await createFantasyRaceTeam({
+                        ...values,
+                        fantasyRaceId,
+                    });
 
                     if (!response.isError) {
                         history.push(appPaths.viewFantasyRace(fantasyRaceId));

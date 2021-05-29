@@ -4,6 +4,7 @@ import { ApiFantasyRaceTeam } from '../api/models';
 
 export const defaultValues: ApiFantasyRaceTeam.CreateUpdateDto = {
     name: '',
+    fantasyRaceId: -1,
 };
 
 export const validationSchema = Yup.object().shape({

@@ -7,7 +7,6 @@ import { appPaths } from '../Routes';
 import AppPageTitle from '../components/PageTitle';
 import AppButton from '../components/AppButton';
 import FantasyRacesTable from '../fantasyRaces/Table';
-import { makeStyles } from '@material-ui/core';
 import AppTableActionButtons from '../components/AppTableActionButtons';
 
 const ViewFantasyRacesPage: React.FC = () => {

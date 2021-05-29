@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace StageRaceFantasy.Application.FantasyRaceTeam
+namespace StageRaceFantasy.Application.FantasyTeam
 {
     public static class FantasyRaceTeamValidationRules
     {

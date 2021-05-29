@@ -4,35 +4,33 @@ using Microsoft.EntityFrameworkCore;
 using StageRaceFantasy.Application.Common.Mapping;
 using StageRaceFantasy.Application.Common.Requests;
 using StageRaceFantasy.Domain.Entities;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace StageRaceFantasy.Application.FantasyRaceTeam.Commands
+namespace StageRaceFantasy.Application.FantasyTeam.Commands
 {
-    public record CreateFantasyRaceTeamCommand :
+    public record CreateFantasyTeamCommand :
         IAppRequest<int>,
         IMapTo<FantasyRaceTeamEntity>
     {
         public string Name { get; init; } = "";
 
-        [JsonIgnore]
         public int FantasyRaceId { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<CreateFantasyRaceTeamCommand, FantasyRaceTeamEntity>()
+            profile.CreateMap<CreateFantasyTeamCommand, FantasyRaceTeamEntity>()
                 .ValidateMemberList(MemberList.Source);
         }
     }
 
-    public class CreateFantasyRaceTeamCommandHandler : AppRequestHandler<CreateFantasyRaceTeamCommand, int>
+    public class CreateFantasyTeamCommandHandler : AppRequestHandler<CreateFantasyTeamCommand, int>
     {
-        public CreateFantasyRaceTeamCommandHandler(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+        public CreateFantasyTeamCommandHandler(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
         }
 
-        public override async Task<AppResponse<int>> Handle(CreateFantasyRaceTeamCommand command, CancellationToken cancellationToken)
+        public override async Task<AppResponse<int>> Handle(CreateFantasyTeamCommand command, CancellationToken cancellationToken)
         {
             var fantasyRaceEntity = await DbContext.FantasyRaces
                 .FirstOrDefaultAsync(_ => _.Id == command.FantasyRaceId, cancellationToken);

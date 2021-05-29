@@ -3,8 +3,8 @@ import { apiGetPaginated, apiPost } from './common/apiClient';
 import { ApiPaginationQueryParams } from './common/apiResponseModels';
 import { ApiFantasyRaceTeam } from './models';
 
-export const createFantasyRaceTeam = async (fantasyRaceId: number, createDto: ApiFantasyRaceTeam.CreateUpdateDto) => (
-    apiPost(`api/fantasy-races/${fantasyRaceId}/fantasy-teams`, createDto)
+export const createFantasyRaceTeam = async (createDto: ApiFantasyRaceTeam.CreateUpdateDto) => (
+    apiPost('api/fantasy-teams', createDto)
 );
 
 export const getPaginatedFantasyRaceTeams = async (fantasyRaceId: number, paginationQueryParams: ApiPaginationQueryParams) => (

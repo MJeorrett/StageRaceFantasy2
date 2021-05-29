@@ -18,10 +18,15 @@ export type AppFormikFormEndDateFieldConfig = {
     type: 'endDate',
 }
 
+export type AppFormikHiddenFieldConfig = {
+    type: 'hidden',
+}
+
 export type AppFormikFormFieldConfig =
     AppFormikFormTextFieldConfig |
     AppFormikFormStartDateFieldConfig |
-    AppFormikFormEndDateFieldConfig;
+    AppFormikFormEndDateFieldConfig |
+    AppFormikHiddenFieldConfig;
 
 export type AppFormikFormFieldsConfig<T> = {
     [Property in keyof T]: AppFormikFormFieldConfig;
@@ -41,8 +46,8 @@ const AppFormikFormFields = <T,>({
             {Object.keys(config).map((fieldName, index) => {
                 const fieldConfig = config[fieldName as keyof T] as AppFormikFormFieldConfig;
 
-                if (fieldConfig.type === 'endDate') {
-                    // this field will be rendered byt the startDate config.
+                if (fieldConfig.type === 'endDate' ||
+                    fieldConfig.type === 'hidden') {
                     return null;
                 }
 
