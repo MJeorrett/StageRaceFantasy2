@@ -1,5 +1,8 @@
-import { Typography } from '@material-ui/core';
 import React, { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Typography } from '@material-ui/core';
+import ViewIcon from '@material-ui/icons/Visibility';
+
 import { getFantasyRaceById } from '../api';
 import AppButton from '../components/AppButton';
 import AppDataPoint from '../components/AppDataPoints/AppDataPoint';
@@ -9,12 +12,18 @@ import AppTableActionButtons from '../components/AppTableActionButtons';
 import ApiRequestWrapper from '../components/ApiRequestWrapper';
 import AppPageTitle from '../components/PageTitle';
 import { formatDateString } from '../dateUtils';
-import FantasyRaceTeamsTable from '../fantasyRaceTeams/Table';
+import FantasyTeamsTable from '../fantasyTeams/Table';
 import { appPaths, useFantasyRaceId } from '../Routes';
 
 const ViewFantasyRacePage = () => {
+    const history = useHistory();
+
     const fantasyRaceId = useFantasyRaceId();
     const getFantasyRace = useCallback(() => getFantasyRaceById(fantasyRaceId), [fantasyRaceId]);
+
+    const handleViewFantasyTeamClick = (id: number) => {
+        history.push(appPaths.viewFantasyTeam(id));
+    };
 
     return (
         <ApiRequestWrapper makeRequest={getFantasyRace}>
@@ -31,10 +40,15 @@ const ViewFantasyRacePage = () => {
                         <AppTableActionButtons>
                             <Typography variant="h5" component="h2">Fantasy Teams</Typography>
                             <AppFlexSpacer />
-                            <AppButton variant="text" linkPath={appPaths.createFantasyRaceTeam(fantasyRaceId)}>Create New Team</AppButton>
+                            <AppButton variant="text" linkPath={appPaths.createFantasyTeam(fantasyRaceId)}>Create New Team</AppButton>
                         </AppTableActionButtons>
 
-                        <FantasyRaceTeamsTable fantasyRaceId={fantasyRaceId} />
+                        <FantasyTeamsTable
+                            fantasyRaceId={fantasyRaceId}
+                            actionButtons={[
+                                { icon: <ViewIcon />, onClick: handleViewFantasyTeamClick }
+                            ]}
+                        />
                     </>
                 )
             }

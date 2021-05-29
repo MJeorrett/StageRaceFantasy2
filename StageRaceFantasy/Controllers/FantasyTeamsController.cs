@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using StageRaceFantasy.Application.Common.Requests;
 using StageRaceFantasy.Application.FantasyTeam.Commands;
+using StageRaceFantasy.Application.FantasyTeam.Dtos;
+using StageRaceFantasy.Application.FantasyTeam.Queries;
 using StageRaceFantasy.Controllers.Common;
 using System.Threading.Tasks;
 
@@ -25,6 +27,17 @@ namespace StageRaceFantasy.Controllers
             var response = await _mediator.Send(command);
 
             return ActionResultBuilder.Build(response);
+        }
+
+        [HttpGet("{fantasyTeamId}")]
+        public async Task<ActionResult<AppResponse<FantasyTeamDetailsDto>>> GetById(
+            [FromRoute] int fantasyTeamId)
+        {
+            var query = new GetFantasyTeamByIdQuery(fantasyTeamId);
+
+            var result = await _mediator.Send(query);
+
+            return ActionResultBuilder.Build(result);
         }
     }
 }

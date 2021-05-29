@@ -1,11 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import { createFantasyRaceTeam } from '../api';
+import { createFantasyTeam } from '../api';
 import AppPageTitle from '../components/PageTitle';
-import FantasyRaceTeamForm from '../fantasyRaceTeams/Form';
+import FantasyTeamForm from '../fantasyTeams/Form';
 import { appPaths, useFantasyRaceId } from '../Routes';
 
-const CreateFantasyRaceTeamPage: React.FC = () => {
+const CreateFantasyTeamPage: React.FC = () => {
     const history = useHistory();
     const fantasyRaceId = useFantasyRaceId();
 
@@ -13,9 +13,9 @@ const CreateFantasyRaceTeamPage: React.FC = () => {
         <>
             <AppPageTitle>Create New Team</AppPageTitle>
             
-            <FantasyRaceTeamForm
+            <FantasyTeamForm
                 onSubmit={async values => {
-                    const response = await createFantasyRaceTeam({
+                    const response = await createFantasyTeam({
                         ...values,
                         fantasyRaceId,
                     });
@@ -31,4 +31,4 @@ const CreateFantasyRaceTeamPage: React.FC = () => {
     );
 };
 
-export default CreateFantasyRaceTeamPage;
+export default CreateFantasyTeamPage;

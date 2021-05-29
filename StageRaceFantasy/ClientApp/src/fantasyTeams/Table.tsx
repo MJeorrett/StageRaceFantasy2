@@ -1,18 +1,18 @@
 import React, { useCallback } from 'react';
 import { TableCell } from '@material-ui/core';
 import { PaginatedApiTable, TableActionButtonDefinition } from '../components/AppTable';
-import { ApiPaginationQueryParams, getPaginatedFantasyRaceTeams } from '../api';
+import { ApiPaginationQueryParams, getPaginatedFantasyTeams } from '../api';
 
 export interface FantasyRacesTeamsTableProps {
     fantasyRaceId: number,
     actionButtons?: TableActionButtonDefinition[],
 }
 
-const FantasyRaceTeamsTable: React.FC<FantasyRacesTeamsTableProps> = ({
+const FantasyTeamsTable: React.FC<FantasyRacesTeamsTableProps> = ({
     fantasyRaceId,
     actionButtons = [],
 }) => {
-    const getTeamsForRace = useCallback((paginationParams: ApiPaginationQueryParams) => getPaginatedFantasyRaceTeams(fantasyRaceId, paginationParams), [fantasyRaceId]);
+    const getTeamsForRace = useCallback((paginationParams: ApiPaginationQueryParams) => getPaginatedFantasyTeams(fantasyRaceId, paginationParams), [fantasyRaceId]);
 
     const columnHeaders = ['ID', 'Name'];
 
@@ -33,4 +33,4 @@ const FantasyRaceTeamsTable: React.FC<FantasyRacesTeamsTableProps> = ({
     );
 };
 
-export default FantasyRaceTeamsTable;
+export default FantasyTeamsTable;

@@ -1,16 +1,16 @@
 import React from 'react';
-import { ApiFantasyRaceTeam } from '../api/models';
+import { ApiFantasyTeam as ApiFantasyTeam } from '../api/models';
 import AppFormikForm from '../components/AppForm/AppFormikForm';
 import { defaultValues, validationSchema } from './formValues';
 
-export interface FantasyRacesFormProps {
-    initialValues?: ApiFantasyRaceTeam.CreateUpdateDto,
-    onSubmit: (values: ApiFantasyRaceTeam.CreateUpdateDto) => Promise<void>,
+export interface FantasyTeamFormProps {
+    initialValues?: ApiFantasyTeam.CreateUpdateDto,
+    onSubmit: (values: ApiFantasyTeam.CreateUpdateDto) => Promise<void>,
     submitButtonText?: string,
     autofocus?: boolean,
 }
  
-const FantasyRacesForm: React.FC<FantasyRacesFormProps> = ({
+const FantasyTeamForm: React.FC<FantasyTeamFormProps> = ({
     initialValues = defaultValues,
     onSubmit,
     submitButtonText,
@@ -36,4 +36,4 @@ const FantasyRacesForm: React.FC<FantasyRacesFormProps> = ({
     );
 };
  
-export default FantasyRacesForm;
+export default FantasyTeamForm;

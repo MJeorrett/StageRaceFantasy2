@@ -14,4 +14,4 @@ export * from './utils/usePaginatedApiRequest';
 
 export * from './riders';
 export * from './fantasyRaces';
-export * from './fantasyRaceTeams';
+export * from './fantasyTeams';

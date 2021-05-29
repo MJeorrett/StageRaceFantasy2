@@ -7,12 +7,13 @@ import ViewFantasyRacesPage from './pages/ViewFantasyRacesPage';
 import CreateFantasyRacePage from './pages/CreateFantasyRacePage';
 import EditFantasyRacePage from './pages/EditFantasyRacePage';
 import HomePage from './pages/HomePage';
-import CreateFantasyRaceTeamPage from './pages/CreateFantasyRaceTeamPage';
+import CreateFantasyTeamPage from './pages/CreateFantasyTeamPage';
 import ViewFantasyRacePage from './pages/ViewFantasyRacePage';
 import ViewRidersPage from './pages/ViewRidersPage';
 import CreateRiderPage from './pages/CreateRiderPage';
 import ViewRiderPage from './pages/ViewRiderPage';
 import EditRiderPage from './pages/EditRiderPage';
+import ViewFantasyTeamPage from './pages/ViewFantasyTeamPage';
 
 export const appPaths = {
     home: '/',
@@ -24,7 +25,8 @@ export const appPaths = {
     createFantasyRace: '/fantasy-races/create',
     viewFantasyRace: (id: number|string) => `/fantasy-races/${id}`,
     editFantasyRace: (id: number|string) => `/fantasy-races/${id}/edit`,
-    createFantasyRaceTeam: (id: number|string) => `/fantasy-races/${id}/fantasy-teams/create`,
+    createFantasyTeam: (id: number|string) => `/fantasy-races/${id}/fantasy-teams/create`,
+    viewFantasyTeam: (id: number|string) => `/fantasy-teams/${id}`,
 };
 
 const Routes: React.FC = () => {
@@ -39,7 +41,8 @@ const Routes: React.FC = () => {
             <AuthorizeRoute path={appPaths.createFantasyRace} component={CreateFantasyRacePage} />
             <AuthorizeRoute exact path={appPaths.viewFantasyRace(':fantasyRaceId')} component={ViewFantasyRacePage} />
             <AuthorizeRoute path={appPaths.editFantasyRace(':fantasyRaceId')} component={EditFantasyRacePage} />
-            <AuthorizeRoute path={appPaths.createFantasyRaceTeam(':fantasyRaceId')} component={CreateFantasyRaceTeamPage} />
+            <AuthorizeRoute path={appPaths.createFantasyTeam(':fantasyRaceId')} component={CreateFantasyTeamPage} />
+            <AuthorizeRoute path={appPaths.viewFantasyTeam(':fantasyTeamId')} component={ViewFantasyTeamPage} />
             <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
             <Redirect to={appPaths.home} />
         </Switch>
@@ -54,6 +57,11 @@ export const useRiderId = () => {
 export const useFantasyRaceId = () => {
     const { fantasyRaceId } = useParams<{ fantasyRaceId: string }>();
     return parseInt(fantasyRaceId);
+};
+
+export const useFantasyTeamId = () => {
+    const { fantasyTeamId } = useParams<{ fantasyTeamId: string }>();
+    return parseInt(fantasyTeamId);
 };
 
 export default Routes;
