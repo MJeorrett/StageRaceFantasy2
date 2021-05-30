@@ -7,6 +7,7 @@ import AppTableActionButtons from '../components/AppTableActionButtons';
 import AppFlexSpacer from '../components/AppFlexSpacer';
 import AppButton from '../components/AppButton';
 import { useGetPaginatedRiders } from './useGetPaginatedRiders';
+import { getPaginatedRiders } from '../api';
 
 export type ExtraColumnDefinition = {
     header: string,
@@ -17,12 +18,16 @@ export interface RidersTableProps {
     actionButtons?: TableActionButtonDefinition[],
     extraColumns?: ExtraColumnDefinition[],
     actionHeaderButtons?: JSX.Element[],
+    getPaginatedRidersRequest?: typeof getPaginatedRiders,
+    pageSizeOptions?: number[],
 }
 
 const RidersTable: React.FC<RidersTableProps> = ({
     actionButtons = [],
     extraColumns = [],
     actionHeaderButtons = [],
+    getPaginatedRidersRequest,
+    pageSizeOptions,
 }) => {
     const extraColumnHeaders = extraColumns.map(_ => _.header);
     const columnHeaders = ['ID', 'First Name', 'Last Name'].concat(extraColumnHeaders);
@@ -32,7 +37,7 @@ const RidersTable: React.FC<RidersTableProps> = ({
         nameFilterValue,
         setNameFilter,
         clearNameFilter,
-    } = useGetPaginatedRiders();
+    } = useGetPaginatedRiders(getPaginatedRidersRequest);
 
     return (
         <div>
@@ -71,6 +76,7 @@ const RidersTable: React.FC<RidersTableProps> = ({
                     `No riders match the filter '${nameFilterValue}'.` :
                     'You don\'t have any riders yet.'
                 }
+                pageSizeOptions={pageSizeOptions}
             />
         </div>
     );

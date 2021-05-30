@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles, Typography } from '@material-ui/core';
 import ViewIcon from '@material-ui/icons/Visibility';
 
-import { getRaceById } from '../api';
+import { ApiPaginationQueryParams, getPaginatedRidersEnteredInRace, useGetRaceById } from '../api';
 import AppButton from '../components/AppButton';
 import AppDataPoint from '../components/AppDataPoints/AppDataPoint';
 import AppDataPointGroup from '../components/AppDataPoints/AppDataPointGroup';
@@ -13,8 +13,8 @@ import AppPageTitle from '../components/PageTitle';
 import { formatDateString } from '../dateUtils';
 import FantasyTeamsTable from '../fantasyTeams/Table';
 import { appPaths, useRaceId } from '../Routes';
-import EditRiderRaceEntriesTable from '../riders/EditRiderEntriesTable';
 import ApiRequestWrapper from '../components/ApiRequestWrapper';
+import RidersTable from '../riders/Table';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -29,7 +29,7 @@ const ViewRacePage = () => {
     const classNames = useStyles();
     const raceId = useRaceId();
 
-    const getRace = useCallback(() => getRaceById(raceId), [raceId]);
+    const getRace = useGetRaceById(raceId);
 
     const handleViewFantasyTeamClick = (id: number) => {
         history.push(appPaths.viewFantasyTeam(id));
@@ -64,8 +64,17 @@ const ViewRacePage = () => {
 
                             <div>
                                 <Typography align="center" variant="h5" component="h2">Riders</Typography>
-                                <EditRiderRaceEntriesTable
-                                    raceId={raceId}
+                                <RidersTable
+                                    actionHeaderButtons={[
+                                        <AppButton
+                                            key="manage"
+                                            onClick={() => history.push(appPaths.manageRaceRiderEntries(raceId))}
+                                        >
+                                            Manage
+                                        </AppButton>
+                                    ]}
+                                    getPaginatedRidersRequest={(paginationParams: ApiPaginationQueryParams) => getPaginatedRidersEnteredInRace(raceId, { ...paginationParams, nameFilter: '' })}
+                                    pageSizeOptions={[10]}
                                 />
                             </div>
                         </div>

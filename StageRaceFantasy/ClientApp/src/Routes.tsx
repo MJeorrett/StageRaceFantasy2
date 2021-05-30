@@ -14,6 +14,7 @@ import CreateRiderPage from './pages/CreateRiderPage';
 import ViewRiderPage from './pages/ViewRiderPage';
 import EditRiderPage from './pages/EditRiderPage';
 import ViewFantasyTeamPage from './pages/ViewFantasyTeamPage';
+import ManageRaceRiderEntriesPage from './pages/ManageRaceRiderEntriesPage';
 
 export const appPaths = {
     home: '/',
@@ -24,6 +25,7 @@ export const appPaths = {
     races: '/races',
     createRace: '/races/create',
     viewRace: (id: number|string) => `/races/${id}`,
+    manageRaceRiderEntries: (id: number|string) => `/races/${id}/rider-entries`,
     editRace: (id: number|string) => `/races/${id}/edit`,
     createFantasyTeam: (id: number|string) => `/races/${id}/fantasy-teams/create`,
     viewFantasyTeam: (id: number|string) => `/fantasy-teams/${id}`,
@@ -40,6 +42,7 @@ const Routes: React.FC = () => {
             <AuthorizeRoute exact path={appPaths.races} component={ViewFantasyPage} />
             <AuthorizeRoute path={appPaths.createRace} component={CreateRacePage} />
             <AuthorizeRoute exact path={appPaths.viewRace(':raceId')} component={ViewRacePage} />
+            <AuthorizeRoute exact path={appPaths.manageRaceRiderEntries(':raceId')} component={ManageRaceRiderEntriesPage} />
             <AuthorizeRoute path={appPaths.editRace(':raceId')} component={EditRacePage} />
             <AuthorizeRoute path={appPaths.createFantasyTeam(':raceId')} component={CreateFantasyTeamPage} />
             <AuthorizeRoute path={appPaths.viewFantasyTeam(':fantasyTeamId')} component={ViewFantasyTeamPage} />

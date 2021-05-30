@@ -3,6 +3,7 @@ import { Race } from '../models';
 import { apiGet, apiGetList, apiGetPaginated, apiPost, apiPut } from './common/apiClient';
 import { mapFromApiRaceDetails, mapFromApiRaceSummary } from '../modelMappers/race';
 import { ApiPaginationQueryParams } from './common/apiResponseModels';
+import { useCallback } from 'react';
 
 export const createRace = (createDto: ApiRace.CreateUpdateDto) => (
     apiPost('api/races', createDto)
@@ -30,3 +31,5 @@ export const getRaceById = (id: number) => (
         `api/races/${id}`,
         mapFromApiRaceDetails)
 );
+
+export const useGetRaceById = (raceId: number) => useCallback(() => getRaceById(raceId), [raceId]);

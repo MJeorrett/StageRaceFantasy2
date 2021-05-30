@@ -47,7 +47,7 @@ namespace StageRaceFantasy.Application.UnitTests.Common.Mapping
         [TestCase(typeof(RaceEntity), typeof(RaceDetailsDto))]
 
         // Rider Race Entry
-        [TestCase(typeof(RiderRaceEntryEntity), typeof(RiderRaceEntryDto))]
+        [TestCase(typeof(RiderRaceEntryEntity), typeof(RiderSummaryDto))]
 
         // Fantasy Team
         [TestCase(typeof(CreateFantasyTeamCommand), typeof(FantasyTeamEntity))]

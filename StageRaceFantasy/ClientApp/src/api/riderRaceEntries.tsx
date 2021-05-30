@@ -1,12 +1,16 @@
-import { RiderRaceEntry } from '../models';
+import { Rider } from '../models';
 import { apiDelete, apiGetList, apiGetPaginated, apiPost } from './common/apiClient';
 import { ApiPaginationQueryParams } from './common/apiResponseModels';
-import { ApiRiderRaceEntry } from './models';
+import { ApiRider } from './models';
+
+export type GetPaginatedRidersEnteredInRaceParams = ApiPaginationQueryParams & {
+    nameFilter: string,
+}
 
 export const getPaginatedRidersEnteredInRace = (
     raceId: number,
-    paginationQueryParams: ApiPaginationQueryParams) => (
-    apiGetPaginated<ApiRiderRaceEntry.Summary, RiderRaceEntry.Summary>(
+    paginationQueryParams: GetPaginatedRidersEnteredInRaceParams) => (
+    apiGetPaginated<ApiRider.Summary, Rider.Summary>(
         `api/races/${raceId}/riders`,
         {
             ...paginationQueryParams,

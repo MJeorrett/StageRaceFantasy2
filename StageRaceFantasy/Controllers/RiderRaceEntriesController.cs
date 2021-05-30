@@ -5,6 +5,7 @@ using StageRaceFantasy.Application.Common.Requests;
 using StageRaceFantasy.Application.Races.Commands;
 using StageRaceFantasy.Application.Races.Dtos;
 using StageRaceFantasy.Application.Races.Queries;
+using StageRaceFantasy.Application.Riders.Dtos;
 using StageRaceFantasy.Controllers.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace StageRaceFantasy.Controllers
         }
 
         [HttpGet("riders")]
-        public async Task<ActionResult<AppResponse<PaginatedList<RiderRaceEntryDto>>>> GetPaginatedEnteredRiders(
+        public async Task<ActionResult<AppResponse<PaginatedList<RiderSummaryDto>>>> GetPaginatedEnteredRiders(
             [FromQuery] GetPaginatedRidersEnteredInRaceQuery query,
             [FromRoute] int raceId)
         {

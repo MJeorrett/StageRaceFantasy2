@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
-import { getRaceById, updateRace } from '../api';
+import { updateRace, useGetRaceById } from '../api';
 import ApiRequestWrapper from '../components/ApiRequestWrapper';
 import AppPageTitle from '../components/PageTitle';
 import RaceForm from '../races/Form';
@@ -10,7 +10,7 @@ const EditRacePage: React.FC = () => {
     const history = useHistory();
     const raceId = useRaceId();
 
-    const getRace = useCallback(() => getRaceById(raceId), [raceId]);
+    const getRace = useGetRaceById(raceId);
 
     return (
         <>
