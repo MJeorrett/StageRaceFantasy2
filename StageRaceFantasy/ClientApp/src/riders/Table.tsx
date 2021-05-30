@@ -16,13 +16,13 @@ export type ExtraColumnDefinition = {
 export interface RidersTableProps {
     actionButtons?: TableActionButtonDefinition[],
     extraColumns?: ExtraColumnDefinition[],
-    actionHeaderContent?: JSX.Element[],
+    actionHeaderButtons?: JSX.Element[],
 }
 
 const RidersTable: React.FC<RidersTableProps> = ({
     actionButtons = [],
     extraColumns = [],
-    actionHeaderContent = [],
+    actionHeaderButtons = [],
 }) => {
     const [nameFilter, setNameFilter] = useState('');
     const [nameFilterValue, setNameFilterValue] = useState('');
@@ -59,7 +59,7 @@ const RidersTable: React.FC<RidersTableProps> = ({
                     Clear
                 </AppButton>
                 <AppFlexSpacer />
-                {actionHeaderContent}
+                {actionHeaderButtons}
             </AppTableActionButtons>
             <PaginatedApiTable
                 makeRequest={doGetPaginatedRiders}

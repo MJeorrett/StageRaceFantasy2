@@ -24,7 +24,7 @@ const ViewRidersPage: React.FC = () => {
         <>
             <AppPageTitle>Riders</AppPageTitle>
             <RidersTable
-                actionHeaderContent={[
+                actionHeaderButtons={[
                     <AppButton key="create new" linkPath={appPaths.createRider}>Create New</AppButton>
                 ]}
                 actionButtons={[

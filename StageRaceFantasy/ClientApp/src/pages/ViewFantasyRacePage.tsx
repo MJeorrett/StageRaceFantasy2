@@ -49,8 +49,8 @@ const ViewFantasyRacePage = () => {
                             </AppDataPointGroup>
 
                             <div>
+                                <Typography align="center" variant="h5" component="h2">Fantasy Teams</Typography>
                                 <AppTableActionButtons>
-                                    <Typography variant="h5" component="h2">Fantasy Teams</Typography>
                                     <AppFlexSpacer />
                                     <AppButton variant="text" linkPath={appPaths.createFantasyTeam(fantasyRaceId)}>Create New Team</AppButton>
                                 </AppTableActionButtons>
@@ -62,9 +62,12 @@ const ViewFantasyRacePage = () => {
                                 />
                             </div>
 
-                            <RiderRaceEntriesTable
-                                fantasyRaceId={fantasyRaceId}
-                            />
+                            <div>
+                                <Typography align="center" variant="h5" component="h2">Riders</Typography>
+                                <RiderRaceEntriesTable
+                                    fantasyRaceId={fantasyRaceId}
+                                />
+                            </div>
                         </div>
                     </>
                 )
