@@ -10,10 +10,10 @@ namespace StageRaceFantasy.Application.Common.Mapping
     {
         public static Task<PaginatedList<T>> ToPaginatedListAsync<T>(
             this IQueryable<T> queryable,
-            GetPaginatedListQuery request,
+            GetPaginatedListQuery query,
             CancellationToken cancellationToken)
         {
-            return PaginatedList<T>.CreateAsync(queryable, request.PageNumber, request.PageSize, cancellationToken);
+            return PaginatedList<T>.CreateAsync(queryable, query.PageNumber, query.PageSize, cancellationToken);
         }
     }
 }

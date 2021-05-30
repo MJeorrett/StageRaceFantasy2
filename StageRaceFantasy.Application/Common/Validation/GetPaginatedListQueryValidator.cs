@@ -3,16 +3,27 @@ using StageRaceFantasy.Application.Common.Requests;
 
 namespace StageRaceFantasy.Application.Common.Validation
 {
-    public class GetPaginatedListQueryValidator<T> : AbstractValidator<T> where T : GetPaginatedListQuery
+    public abstract class GetPaginatedListQueryValidator<T> : AbstractValidator<T> where T : GetPaginatedListQuery
     {
+        protected virtual bool AllAllowed { get; } = false;
+
         public GetPaginatedListQueryValidator()
         {
             RuleFor(_ => _.PageNumber)
                 .GreaterThanOrEqualTo(1);
 
-            RuleFor(_ => _.PageSize)
-                .GreaterThanOrEqualTo(1)
-                .LessThanOrEqualTo(100);
+            if (AllAllowed)
+            {
+                RuleFor(_ => _.PageSize)
+                    .Must(pageNumber => pageNumber == -1 || pageNumber >= 1)
+                        .WithMessage("Must be -1 (indicating return all items on one page) or greater than 0.")
+                    .LessThanOrEqualTo(100);
+            }
+            else
+            {
+                RuleFor(_ => _.PageSize)
+                    .InclusiveBetween(1, 100);
+            }
         }
     }
 }

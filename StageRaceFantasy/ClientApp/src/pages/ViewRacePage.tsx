@@ -13,7 +13,7 @@ import AppPageTitle from '../components/PageTitle';
 import { formatDateString } from '../dateUtils';
 import FantasyTeamsTable from '../fantasyTeams/Table';
 import { appPaths, useRaceId } from '../Routes';
-import RiderRaceEntriesTable from '../riders/RiderEntriesTable';
+import EditRiderRaceEntriesTable from '../riders/EditRiderEntriesTable';
 import ApiRequestWrapper from '../components/ApiRequestWrapper';
 
 const useStyles = makeStyles(theme => ({
@@ -64,7 +64,7 @@ const ViewRacePage = () => {
 
                             <div>
                                 <Typography align="center" variant="h5" component="h2">Riders</Typography>
-                                <RiderRaceEntriesTable
+                                <EditRiderRaceEntriesTable
                                     raceId={raceId}
                                 />
                             </div>

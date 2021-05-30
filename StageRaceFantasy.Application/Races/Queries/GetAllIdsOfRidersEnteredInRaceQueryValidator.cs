@@ -4,9 +4,9 @@ using StageRaceFantasy.Application.Common.Validation.Rules;
 
 namespace StageRaceFantasy.Application.Races.Queries
 {
-    public class GetAllEnteredRiderIdsForRaceQueryValidator : AbstractValidator<GetAllEnteredRiderIdsForRaceQuery>
+    public class GetAllIdsOfRidersEnteredInRaceQueryValidator : AbstractValidator<GetAllIdsOfRidersEnteredInRaceQuery>
     {
-        public GetAllEnteredRiderIdsForRaceQueryValidator(IRacesRepository racesRepository)
+        public GetAllIdsOfRidersEnteredInRaceQueryValidator(IRacesRepository racesRepository)
         {
             RuleFor(_ => _.RaceId)
                 .EntityWithIdExists(racesRepository)

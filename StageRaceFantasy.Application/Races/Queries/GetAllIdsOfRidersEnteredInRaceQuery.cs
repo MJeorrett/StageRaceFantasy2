@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace StageRaceFantasy.Application.Races.Queries
 {
-    public record GetAllEnteredRiderIdsForRaceQuery(
+    public record GetAllIdsOfRidersEnteredInRaceQuery(
         int RaceId) : IAppRequest<List<int>>
     {
     }
 
-    public class GetAllEnteredRiderIdsForRaceQueryHandler : AppRequestHandler<GetAllEnteredRiderIdsForRaceQuery, List<int>>
+    public class GetAllIdsOfRidersEnteredInRaceQueryHandler : AppRequestHandler<GetAllIdsOfRidersEnteredInRaceQuery, List<int>>
     {
-        public GetAllEnteredRiderIdsForRaceQueryHandler(IHttpContextAccessor httpContextAccessor) :
+        public GetAllIdsOfRidersEnteredInRaceQueryHandler(IHttpContextAccessor httpContextAccessor) :
             base(httpContextAccessor)
         {
         }
 
         public override async Task<AppResponse<List<int>>> Handle(
-            GetAllEnteredRiderIdsForRaceQuery query,
+            GetAllIdsOfRidersEnteredInRaceQuery query,
             CancellationToken cancellationToken)
         {
             var riderIds = await DbContext.RiderRaceEntries

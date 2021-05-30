@@ -1,20 +1,20 @@
 import { TableCell } from '@material-ui/core';
 import React, { useCallback, useState } from 'react';
 import { useApiRequest } from '../api';
-import { enterRiderIntoRace, getAllEnteredRiderIdsForRace, withdrawRiderFromRace } from '../api/riderRaceEntries';
+import { enterRiderIntoRace, getIdOfAllRidersEnteredInRace, withdrawRiderFromRace } from '../api';
 import AppCheckbox from '../components/AppForm/AppCheckbox';
 import RidersTable from './Table';
 
-export type RiderRaceEntriesTableProps = {
+export type EditRiderRaceEntriesTableProps = {
     raceId: number,
 }
 
-const RiderRaceEntriesTable: React.FC<RiderRaceEntriesTableProps> = ({
+const EditRiderRaceEntriesTable: React.FC<EditRiderRaceEntriesTableProps> = ({
     raceId,
 }) => {
     const [isSubmittingEntry, setIsSubmittingEntry] = useState(false);
-    const getAllEnteredRiders = useCallback(() => getAllEnteredRiderIdsForRace(raceId), [raceId]);    
-    const getAllEnteredRidersRequest = useApiRequest(getAllEnteredRiders);
+    const getAllEnteredRiderIds = useCallback(() => getIdOfAllRidersEnteredInRace(raceId), [raceId]);    
+    const getAllEnteredRidersRequest = useApiRequest(getAllEnteredRiderIds);
     const enteredRiderIds = getAllEnteredRidersRequest.result || [];
     const checkboxesAreLoading = getAllEnteredRidersRequest.isLoading || isSubmittingEntry;
 
@@ -55,4 +55,4 @@ const RiderRaceEntriesTable: React.FC<RiderRaceEntriesTableProps> = ({
     );
 };
 
-export default RiderRaceEntriesTable;
+export default EditRiderRaceEntriesTable;
