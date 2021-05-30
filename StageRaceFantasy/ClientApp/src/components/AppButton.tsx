@@ -28,12 +28,13 @@ const AppButton: React.FC<AppButtonProps> = ({
     variant = 'contained',
     linkPath,
     color = 'secondary',
+    style,
     ...restOfProps
 }) => {
     const classes = useStyles();
 
     return (
-        <span className={classes.root}>
+        <span className={classes.root} style={style}>
             <Button
                 {...restOfProps as never}
                 component={linkPath ? Link : undefined}

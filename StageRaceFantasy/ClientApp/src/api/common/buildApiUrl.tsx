@@ -1,16 +1,22 @@
 import config from '../../config';
-import { ApiPaginationQueryParams } from './apiResponseModels';
 
-export const buildApiUrl = (path: string): string => `${config.apiBaseUrl}/${path}`;
+export type BuildApiUrlQueryParams = {
+    [key: string]: string,
+}
 
-export const buildApiUrlWithQueryParams = (
+export const buildApiUrl = (
     path: string,
-    { pageNumber, pageSize }: ApiPaginationQueryParams,
-) => {
-    const queryParameters = [
-        `pageNumber=${pageNumber}`,
-        `pageSize=${pageSize}`
-    ];
+    queryParams?: BuildApiUrlQueryParams,
+): string => {
+    let _path = path;
 
-    return buildApiUrl(`${path}?${queryParameters.join('&')}`);
+    if (queryParams) {
+        const queryParamUrl = Object.keys(queryParams)
+            .map(paramName => `${paramName}=${queryParams[paramName]}`)
+            .join('&');
+
+        _path += `?${queryParamUrl}`;
+    }
+
+    return `${config.apiBaseUrl}/${_path}`;
 };

@@ -7,8 +7,8 @@ export interface ApiResponseModel<T> {
 export type ApiListResponseModel<T> = ApiResponseModel<T[]>;
 
 export interface ApiPaginationQueryParams {
-    pageNumber: number,
-    pageSize: number,
+    'pageNumber': number,
+    'pageSize': number,
 }
 
 export interface ApiPagination {

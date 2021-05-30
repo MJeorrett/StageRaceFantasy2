@@ -23,12 +23,10 @@ const ViewRidersPage: React.FC = () => {
     return (
         <>
             <AppPageTitle>Riders</AppPageTitle>
-
-            <AppTableActionButtons>
-                <AppButton linkPath={appPaths.createRider}>Create New</AppButton>
-            </AppTableActionButtons>
-            
             <RidersTable
+                actionHeaderContent={[
+                    <AppButton key="create new" linkPath={appPaths.createRider}>Create New</AppButton>
+                ]}
                 actionButtons={[
                     { icon: <ViewIcon />, onClick: handleViewClick },
                     { icon: <EditIcon />, onClick: handleEditClick },

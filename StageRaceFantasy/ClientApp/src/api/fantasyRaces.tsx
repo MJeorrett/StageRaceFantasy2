@@ -17,7 +17,7 @@ export const updateFantasyRace = async (id: number, updateDto: ApiFantasyRace.Cr
 export const getPaginatedFantasyRaces = (paginationQueryParams: ApiPaginationQueryParams) => (
     apiGetPaginated<ApiFantasyRace.Summary, FantasyRace.Summary>(
         'api/fantasy-races',
-        paginationQueryParams,
+        paginationQueryParams as any,
         mapFromApiFantasyRaceSummary)
 );
 

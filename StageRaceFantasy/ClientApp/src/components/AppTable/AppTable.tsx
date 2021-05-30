@@ -8,8 +8,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center'
     },
-    table: {
-
+    noItemsMessage: {
+        marginTop: theme.spacing(4),
     },
     tableContainer: {
         boxShadow: 'none'
@@ -43,7 +43,7 @@ const AppTable = <TRow extends { id: number },>({
     noEntitiesMessage,
     actionButtons = [],
 }: AppTableProps<TRow>): JSX.Element => {
-    const classes = useStyles();
+    const classNames = useStyles();
 
     const handleChangePageNumber = (_: unknown, pageNumber: number) => {
         pagination?.setPageNumber(pageNumber + 1);
@@ -56,7 +56,12 @@ const AppTable = <TRow extends { id: number },>({
 
     if (entities.length === 0) {
         return (
-            <Typography align="center">{noEntitiesMessage}</Typography>
+            <Typography
+                className={classNames.noItemsMessage}
+                align="center"
+            >
+                {noEntitiesMessage}
+            </Typography>
         );
     }
 
@@ -64,8 +69,8 @@ const AppTable = <TRow extends { id: number },>({
 
     return (
         <>
-            <TableContainer className={classes.tableContainer} component={Paper}>
-                <Table className={classes.table}>
+            <TableContainer className={classNames.tableContainer} component={Paper}>
+                <Table>
                     <TableHead>
                         <TableRow>
                             {_headers.map((header, index) => (
@@ -97,7 +102,7 @@ const AppTable = <TRow extends { id: number },>({
             </TableContainer>
             {pagination && (
                 <TablePagination
-                    className={classes.pagination}
+                    className={classNames.pagination}
                     component="div"
                     rowsPerPageOptions={pageSizeOptions}
                     count={pagination.totalCount}

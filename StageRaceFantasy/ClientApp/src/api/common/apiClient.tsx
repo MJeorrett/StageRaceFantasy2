@@ -1,5 +1,5 @@
 import { doErrorToastIfRequired } from './doErrorToastIfRequired';
-import { buildApiUrl, buildApiUrlWithQueryParams } from './buildApiUrl';
+import { buildApiUrl, BuildApiUrlQueryParams } from './buildApiUrl';
 import { unpackApiListResponseModel, unpackApiPaginatedListResponseModel, unpackApiResponseModel } from './httpResponseUnpackers';
 import { ApiListResponseModel, ApiPaginatedListResponseModel, ApiPaginationQueryParams, ApiResponseModel } from './apiResponseModels';
 import { ApiClientListResponse, ApiClientPaginatedListResponse, ApiClientResponse } from './apiClientResponseModels';
@@ -23,8 +23,11 @@ export const apiGetList = async <TApiResponse, TResponse>(path: string, mapper: 
     return unpackApiListResponseModel(response, mapper);
 };
 
-export const apiGetPaginated = async <TApiResponse, TResponse>(path: string, paginationQueryParams: ApiPaginationQueryParams, mapper: (apiModel: TApiResponse) => TResponse): Promise<ApiClientPaginatedListResponse<TResponse>> => {
-    const url = buildApiUrlWithQueryParams(path, paginationQueryParams);
+export const apiGetPaginated = async <TApiResponse, TResponse>(
+    path: string,
+    queryParams: ApiPaginationQueryParams & BuildApiUrlQueryParams,
+    mapper: (apiModel: TApiResponse) => TResponse): Promise<ApiClientPaginatedListResponse<TResponse>> => {
+    const url = buildApiUrl(path, queryParams);
     const response = await httpGet<ApiPaginatedListResponseModel<TApiResponse>>(url);
 
     doErrorToastIfRequired(response);

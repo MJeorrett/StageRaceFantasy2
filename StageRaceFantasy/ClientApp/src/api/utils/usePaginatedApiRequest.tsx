@@ -14,7 +14,7 @@ export const usePaginatedApiRequest = <T,>(makeRequest: (params: ApiPaginationQu
 
     const doGetPaginatedRaces = useCallback(
         () => makeRequest({ pageNumber, pageSize }),
-        [pageNumber, pageSize]);
+        [pageNumber, pageSize, makeRequest]);
 
     const httpState = useApiRequest(doGetPaginatedRaces);
 

@@ -1,6 +1,7 @@
 import { Rider } from '../models';
 import { apiGet, apiGetPaginated, apiPost, apiPut } from './common/apiClient';
 import { ApiPaginationQueryParams } from './common/apiResponseModels';
+import { BuildApiUrlQueryParams } from './common/buildApiUrl';
 import { ApiRider } from './models';
 
 export const createRider = async (createDto: ApiRider.CreateUpdateDto) => (
@@ -11,10 +12,14 @@ export const updateRider = async (id: number, updateDto: ApiRider.CreateUpdateDt
     apiPut(`api/riders/${id}`, updateDto)
 );
 
-export const getPaginatedRiders = (paginationQueryParams: ApiPaginationQueryParams) => (
+export type GetPaginatedRidersParams = ApiPaginationQueryParams & {
+    nameFilter: string,
+}
+
+export const getPaginatedRiders = (paginationQueryParams: GetPaginatedRidersParams) => (
     apiGetPaginated<ApiRider.Summary, Rider.Summary>(
         'api/riders',
-        paginationQueryParams,
+        paginationQueryParams as any,
         m => m)
 );
 
