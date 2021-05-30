@@ -34,7 +34,7 @@ const ApiPaginatedRequestWrapper = <T, >({
         return (
             <div>
                 <Typography align="center" color="error" gutterBottom>error, please try again</Typography>
-                <Typography variant="body2" align="center" color="textSecondary">{apiRequestState.httpError.message}</Typography>
+                <Typography variant="body2" align="center" color="textSecondary">{apiRequestState.apiError.message}</Typography>
             </div>
         );
     }

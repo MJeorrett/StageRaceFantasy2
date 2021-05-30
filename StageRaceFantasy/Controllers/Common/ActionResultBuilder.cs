@@ -11,6 +11,7 @@ namespace StageRaceFantasy.Controllers.Common
             {
                 200 => new OkObjectResult(responseModel),
                 201 => new ObjectResult(responseModel) { StatusCode = 201 },
+                204 => new NoContentResult(),
                 400 => new BadRequestObjectResult(responseModel),
                 401 => new UnauthorizedResult(),
                 403 => new ForbidResult(),
@@ -27,6 +28,7 @@ namespace StageRaceFantasy.Controllers.Common
             {
                 200 => new OkObjectResult(responseModel),
                 201 => new ObjectResult(responseModel) { StatusCode = 201 },
+                204 => new NoContentResult(),
                 400 => new BadRequestObjectResult(responseModel),
                 401 => new UnauthorizedResult(),
                 403 => new ForbidResult(),

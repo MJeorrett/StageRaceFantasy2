@@ -2,15 +2,24 @@ import React, { } from 'react';
 import { TableCell } from '@material-ui/core';
 import { getPaginatedRiders } from '../api';
 import { PaginatedApiTable, TableActionButtonDefinition } from '../components/AppTable';
+import { Rider } from '../models';
+
+export type ExtraColumn = {
+    header: string,
+    renderRow: (value: Rider.Summary) => JSX.Element,
+}
 
 export interface RidersTableProps {
     actionButtons?: TableActionButtonDefinition[],
+    extraColumns?: ExtraColumn[],
 }
 
 const RidersTable: React.FC<RidersTableProps> = ({
     actionButtons = [],
+    extraColumns = [],
 }) => {
-    const columnHeaders = ['ID', 'First Name', 'Last Name'];
+    const extraColumnHeaders = extraColumns.map(_ => _.header);
+    const columnHeaders = ['ID', 'First Name', 'Last Name'].concat(extraColumnHeaders);
 
     return (
         <PaginatedApiTable
@@ -21,6 +30,9 @@ const RidersTable: React.FC<RidersTableProps> = ({
                     <TableCell width={48}>{rider.id}</TableCell>
                     <TableCell>{rider.firstName}</TableCell>
                     <TableCell>{rider.lastName}</TableCell>
+                    {extraColumns.map(extraColumn => (
+                        extraColumn.renderRow(rider)
+                    ))}
                 </>
             )}
             actionButtons={actionButtons}

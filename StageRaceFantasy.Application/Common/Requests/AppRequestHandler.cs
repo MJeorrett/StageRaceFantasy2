@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using StageRaceFantasy.Application.Common.ExternalInterfaces;
 using System.Threading;
@@ -32,6 +33,12 @@ namespace StageRaceFantasy.Application.Common.Requests
         {
             return AppResponse.Ok();
         }
+
+        protected AppResponse NoContent()
+        {
+            return AppResponse.NoContent();
+        }
+
         protected AppResponse Created()
         {
             return AppResponse.Created();
@@ -72,6 +79,12 @@ namespace StageRaceFantasy.Application.Common.Requests
         {
             return AppResponse.Ok(response);
         }
+
+        protected AppResponse<TResponse> NoContent()
+        {
+            return AppResponse.NoContent<TResponse>();
+        }
+
         protected AppResponse<TResponse> Created(TResponse response)
         {
             return AppResponse.Created(response);

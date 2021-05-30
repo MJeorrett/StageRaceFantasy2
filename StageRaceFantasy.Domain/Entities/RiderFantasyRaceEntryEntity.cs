@@ -3,14 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StageRaceFantasy.Domain.Entities
 {
-    [Table("FantasyRaceTeam")]
-    public class FantasyRaceTeamEntity : IEntity
+    [Table("RiderFantasyRaceEntry")]
+    public class RiderFantasyRaceEntryEntity : IEntity
     {
-        [Column("FantasyRaceTeamId")]
+        [Column("RiderFantasyRaceEntryId")]
         public int Id { get; set; }
 
-        public string Name { get; set; } = "";
-
+        public int RiderId { get; set; }
+        public RiderEntity Rider { get; set; } = null!;
+        
         public int FantasyRaceId { get; set; }
         public FantasyRaceEntity FantasyRace { get; set; } = null!;
     }

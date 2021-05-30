@@ -13,6 +13,7 @@ namespace StageRaceFantasy.Infrastructure.Persistence
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
     {
         public DbSet<RiderEntity> Riders { get; init; } = null!;
+        public DbSet<RiderFantasyRaceEntryEntity> RiderFantasyRaceEntries { get; init; } = null!;
         public DbSet<FantasyRaceEntity> FantasyRaces { get; init; } = null!;
         public DbSet<FantasyRaceTeamEntity> FantasyRaceTeams { get; init; } = null!;
 

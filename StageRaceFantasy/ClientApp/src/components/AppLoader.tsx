@@ -1,4 +1,4 @@
-import { CircularProgress, styled } from '@material-ui/core';
+import { CircularProgress, CircularProgressProps, styled } from '@material-ui/core';
 
 const AppLoader = styled(CircularProgress)(({ theme }) => ({
     display: 'block',

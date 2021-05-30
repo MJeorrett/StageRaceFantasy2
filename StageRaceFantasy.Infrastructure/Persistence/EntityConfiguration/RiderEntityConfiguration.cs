@@ -13,6 +13,21 @@ namespace StageRaceFantasy.Infrastructure.Persistence.EntityConfiguration
 
             builder.Property(_ => _.LastName)
                 .HasColumnType("varchar(256)");
+
+            builder
+                .HasMany(_ => _.RaceEntries)
+                .WithMany(_ => _.Riders)
+                .UsingEntity<RiderFantasyRaceEntryEntity>(
+                    j => j
+                        .HasOne(_ => _.FantasyRace)
+                        .WithMany(_ => _.RiderFantasyRaceEntries)
+                        .OnDelete(DeleteBehavior.Cascade),
+                    j => j
+                        .HasOne(_ => _.Rider)
+                        .WithMany(_ => _.RiderFantasyRaceEntries)
+                        .OnDelete(DeleteBehavior.Cascade),
+                    j => 
+                        j.HasIndex(_ => new { _.RiderId, _.FantasyRaceId }));
         }
     }
 }

@@ -24,6 +24,9 @@ namespace StageRaceFantasy.Application.Common.Requests
         public static AppResponse Created(string message = "") =>
             new(201, message);
 
+        public static AppResponse NoContent(string message = "") =>
+            new(204, message);
+
         public static AppResponse BadRequest(string message) =>
             new(400, message);
 
@@ -35,6 +38,9 @@ namespace StageRaceFantasy.Application.Common.Requests
 
         public static AppResponse<T> Created<T>(T content, string message = "") =>
             new(201, content, message);
+
+        public static AppResponse<T> NoContent<T>(string message = "") =>
+            new(204, default, message);
 
         public static AppResponse<T> BadRequest<T>(string message) =>
             new(400, default, message);

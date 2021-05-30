@@ -1,6 +1,8 @@
 ﻿using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using StageRaceFantasy.Application.Common.Repositories;
+using StageRaceFantasy.Application.Common.Repositories.Intefaces;
 using StageRaceFantasy.Application.Common.Behaviours;
 using StageRaceFantasy.Application.FantasyRaces.Commands;
 using System.Reflection;
@@ -15,6 +17,9 @@ namespace StageRaceFantasy.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AppRequestValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(GenericAppRequestValidationBehaviour<,>));
+
+            services.AddScoped<IFantasyRacesRepository, FantasyRacesRepository>();
+            services.AddScoped<IRidersRepository, RidersRepository>();
 
             return services;
         }

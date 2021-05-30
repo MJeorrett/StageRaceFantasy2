@@ -25,14 +25,18 @@ namespace StageRaceFantasy.Application.FantasyTeam.Commands
 
     public class CreateFantasyTeamCommandHandler : AppRequestHandler<CreateFantasyTeamCommand, int>
     {
-        public CreateFantasyTeamCommandHandler(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+        public CreateFantasyTeamCommandHandler(IHttpContextAccessor httpContextAccessor) :
+            base(httpContextAccessor)
         {
         }
 
-        public override async Task<AppResponse<int>> Handle(CreateFantasyTeamCommand command, CancellationToken cancellationToken)
+        public override async Task<AppResponse<int>> Handle(
+            CreateFantasyTeamCommand command,
+            CancellationToken cancellationToken)
         {
             var fantasyRaceTeamEntity = Mapper.Map<FantasyRaceTeamEntity>(command);
             fantasyRaceTeamEntity.FantasyRaceId = command.FantasyRaceId;
+
             await DbContext.SaveChangesAsync(cancellationToken);
 
             return Created(fantasyRaceTeamEntity.Id);

@@ -1,23 +1,27 @@
-﻿using System;
+﻿using StageRaceFantasy.Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StageRaceFantasy.Domain.Entities
 {
     [Table("FantasyRace")]
-    public record FantasyRaceEntity
+    public class FantasyRaceEntity : IEntity
     {
         [Column("FantasyRaceId")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
-        public string Name { get; init; } = "";
+        public string Name { get; set; } = "";
 
-        public DateTime StartDate { get; init; }
+        public DateTime StartDate { get; set; }
 
-        public DateTime EndDate { get; init; }
+        public DateTime EndDate { get; set; }
 
-        public int FantasyTeamSize { get; init; }
+        public int FantasyTeamSize { get; set; }
 
         public List<FantasyRaceTeamEntity> FantasyTeams { get; set; } = new();
+
+        public List<RiderFantasyRaceEntryEntity> RiderFantasyRaceEntries { get; set; } = new();
+        public List<RiderEntity> Riders { get; set; } = new();
     }
 }

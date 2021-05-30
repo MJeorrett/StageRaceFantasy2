@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import ViewIcon from '@material-ui/icons/Visibility';
 
 import { getFantasyRaceById } from '../api';
@@ -9,16 +9,26 @@ import AppDataPoint from '../components/AppDataPoints/AppDataPoint';
 import AppDataPointGroup from '../components/AppDataPoints/AppDataPointGroup';
 import AppFlexSpacer from '../components/AppFlexSpacer';
 import AppTableActionButtons from '../components/AppTableActionButtons';
-import ApiRequestWrapper from '../components/ApiRequestWrapper';
 import AppPageTitle from '../components/PageTitle';
 import { formatDateString } from '../dateUtils';
 import FantasyTeamsTable from '../fantasyTeams/Table';
 import { appPaths, useFantasyRaceId } from '../Routes';
+import RiderRaceEntriesTable from '../riders/RiderEntriesTable';
+import ApiRequestWrapper from '../components/ApiRequestWrapper';
+
+const useStyles = makeStyles(theme => ({
+    container: {
+        '& > *:not(:last-child)': {
+            marginBottom: theme.spacing(8),
+        },
+    },
+}));
 
 const ViewFantasyRacePage = () => {
     const history = useHistory();
-
+    const classNames = useStyles();
     const fantasyRaceId = useFantasyRaceId();
+
     const getFantasyRace = useCallback(() => getFantasyRaceById(fantasyRaceId), [fantasyRaceId]);
 
     const handleViewFantasyTeamClick = (id: number) => {
@@ -32,23 +42,30 @@ const ViewFantasyRacePage = () => {
                     <>
                         <AppPageTitle>{fantasyRace.name}</AppPageTitle>
 
-                        <AppDataPointGroup>
-                            <AppDataPoint label="Start">{formatDateString(fantasyRace.startDate)}</AppDataPoint>
-                            <AppDataPoint label="End">{formatDateString(fantasyRace.endDate)}</AppDataPoint>
-                        </AppDataPointGroup>
+                        <div className={classNames.container}>
+                            <AppDataPointGroup>
+                                <AppDataPoint label="Start">{formatDateString(fantasyRace.startDate)}</AppDataPoint>
+                                <AppDataPoint label="End">{formatDateString(fantasyRace.endDate)}</AppDataPoint>
+                            </AppDataPointGroup>
 
-                        <AppTableActionButtons>
-                            <Typography variant="h5" component="h2">Fantasy Teams</Typography>
-                            <AppFlexSpacer />
-                            <AppButton variant="text" linkPath={appPaths.createFantasyTeam(fantasyRaceId)}>Create New Team</AppButton>
-                        </AppTableActionButtons>
+                            <div>
+                                <AppTableActionButtons>
+                                    <Typography variant="h5" component="h2">Fantasy Teams</Typography>
+                                    <AppFlexSpacer />
+                                    <AppButton variant="text" linkPath={appPaths.createFantasyTeam(fantasyRaceId)}>Create New Team</AppButton>
+                                </AppTableActionButtons>
+                                <FantasyTeamsTable
+                                    fantasyRaceId={fantasyRaceId}
+                                    actionButtons={[
+                                        { icon: <ViewIcon />, onClick: handleViewFantasyTeamClick }
+                                    ]}
+                                />
+                            </div>
 
-                        <FantasyTeamsTable
-                            fantasyRaceId={fantasyRaceId}
-                            actionButtons={[
-                                { icon: <ViewIcon />, onClick: handleViewFantasyTeamClick }
-                            ]}
-                        />
+                            <RiderRaceEntriesTable
+                                fantasyRaceId={fantasyRaceId}
+                            />
+                        </div>
                     </>
                 )
             }
