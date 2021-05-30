@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { debounce, TableCell } from '@material-ui/core';
 import { ApiPaginationQueryParams, getPaginatedRiders } from '../api';
 import { PaginatedApiTable, TableActionButtonDefinition } from '../components/AppTable';
@@ -7,6 +7,7 @@ import AppTextField from '../components/AppForm/AppTextField';
 import AppTableActionButtons from '../components/AppTableActionButtons';
 import AppFlexSpacer from '../components/AppFlexSpacer';
 import AppButton from '../components/AppButton';
+import { useDebouncedState } from '../utils/useDebouncedStateHook';
 
 export type ExtraColumnDefinition = {
     header: string,
@@ -24,23 +25,21 @@ const RidersTable: React.FC<RidersTableProps> = ({
     extraColumns = [],
     actionHeaderButtons = [],
 }) => {
-    const [nameFilter, setNameFilter] = useState('');
-    const [nameFilterValue, setNameFilterValue] = useState('');
-    const doGetPaginatedRiders = useCallback((queryParams: ApiPaginationQueryParams) => getPaginatedRiders({ ...queryParams, nameFilter }), [nameFilter]);
+    const {
+        instantState: nameFilterValue,
+        debouncedState: nameFilterDebounced,
+        setState: handleNameFilterChange,
+        instantReset: handleClearNameFilter,
+    } = useDebouncedState('');
+    
+    const doGetPaginatedRiders = useCallback((queryParams: ApiPaginationQueryParams) =>
+        getPaginatedRiders({
+            ...queryParams,
+            nameFilter: nameFilterDebounced
+        }), [nameFilterDebounced]);
+    
     const extraColumnHeaders = extraColumns.map(_ => _.header);
     const columnHeaders = ['ID', 'First Name', 'Last Name'].concat(extraColumnHeaders);
-
-    const setNameFilterDebounced = useCallback(debounce(setNameFilter, 500), []);
-
-    const handleNameFilterChange = (nameFilter: string) => {
-        setNameFilterValue(nameFilter);
-        setNameFilterDebounced(nameFilter);
-    };
-
-    const handleClearNameFilter = () => {
-        setNameFilterValue('');
-        setNameFilter('');
-    };
 
     return (
         <div>
@@ -75,8 +74,8 @@ const RidersTable: React.FC<RidersTableProps> = ({
                     </>
                 )}
                 actionButtons={actionButtons}
-                noEntitiesMessage={nameFilter ?
-                    `No riders match the filter '${nameFilter}'.` :
+                noEntitiesMessage={nameFilterValue ?
+                    `No riders match the filter '${nameFilterValue}'.` :
                     'You don\'t have any riders yet.'
                 }
             />
