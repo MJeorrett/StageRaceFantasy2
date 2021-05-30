@@ -6,11 +6,11 @@ namespace StageRaceFantasy.Application.FantasyTeam.Commands
 {
     public class CreateFantasyTeamCommandValidator : AbstractValidator<CreateFantasyTeamCommand>
     {
-        public CreateFantasyTeamCommandValidator(IFantasyRacesRepository fantasyRacesRepository)
+        public CreateFantasyTeamCommandValidator(IRacesRepository rcesRepository)
         {
-            RuleFor(_ => _.FantasyRaceId)
-                .EntityWithIdExists(fantasyRacesRepository)
-                    .WithMessage(command => $"No fantasy race exists with id {command.FantasyRaceId}.");
+            RuleFor(_ => _.RaceId)
+                .EntityWithIdExists(rcesRepository)
+                    .WithMessage(command => $"No race exists with id {command.RaceId}.");
         }
     }
 }

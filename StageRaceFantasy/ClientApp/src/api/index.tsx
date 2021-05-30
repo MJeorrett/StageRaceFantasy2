@@ -15,5 +15,5 @@ export * from './common/apiClientResponseModels';
 export * from './common/apiResponseModels';
 
 export * from './riders';
-export * from './fantasyRaces';
+export * from './races';
 export * from './fantasyTeams';

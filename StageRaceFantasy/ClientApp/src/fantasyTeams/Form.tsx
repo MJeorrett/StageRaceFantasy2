@@ -28,7 +28,7 @@ const FantasyTeamForm: React.FC<FantasyTeamFormProps> = ({
                     type: 'string',
                     label: 'Name',
                 },
-                fantasyRaceId: {
+                raceId: {
                     type: 'hidden',
                 }
             }}

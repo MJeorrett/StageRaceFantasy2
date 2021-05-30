@@ -13,9 +13,9 @@ namespace StageRaceFantasy.Application.FantasyTeam.Queries
     {
     }
 
-    public class GetFantasyRaceTeamByIdQueryHandler : AppRequestHandler<GetFantasyTeamByIdQuery, FantasyTeamDetailsDto>
+    public class GetFantasyTeamByIdQueryHandler : AppRequestHandler<GetFantasyTeamByIdQuery, FantasyTeamDetailsDto>
     {
-        public GetFantasyRaceTeamByIdQueryHandler(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+        public GetFantasyTeamByIdQueryHandler(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
         }
 
@@ -23,17 +23,17 @@ namespace StageRaceFantasy.Application.FantasyTeam.Queries
             GetFantasyTeamByIdQuery query,
             CancellationToken cancellationToken)
         {
-            var fantasyRaceTeamEntity = await DbContext.FantasyRaceTeams
+            var fantasyTeamEntity = await DbContext.FantasyTeams
                 .FirstOrDefaultAsync(_ => _.Id == query.Id, cancellationToken);
 
-            if (fantasyRaceTeamEntity is null)
+            if (fantasyTeamEntity is null)
             {
                 return NotFound();
             }
 
-            var fantasyRaceTeamDto = Mapper.Map<FantasyTeamDetailsDto>(fantasyRaceTeamEntity);
+            var fantasyTeamDto = Mapper.Map<FantasyTeamDetailsDto>(fantasyTeamEntity);
 
-            return Ok(fantasyRaceTeamDto);
+            return Ok(fantasyTeamDto);
         }
     }
 }

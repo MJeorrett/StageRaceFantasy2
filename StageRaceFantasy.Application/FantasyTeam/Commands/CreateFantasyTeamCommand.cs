@@ -10,15 +10,15 @@ namespace StageRaceFantasy.Application.FantasyTeam.Commands
 {
     public record CreateFantasyTeamCommand :
         IAppRequest<int>,
-        IMapTo<FantasyRaceTeamEntity>
+        IMapTo<FantasyTeamEntity>
     {
         public string Name { get; init; } = "";
 
-        public int FantasyRaceId { get; set; }
+        public int RaceId { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<CreateFantasyTeamCommand, FantasyRaceTeamEntity>()
+            profile.CreateMap<CreateFantasyTeamCommand, FantasyTeamEntity>()
                 .ValidateMemberList(MemberList.Source);
         }
     }
@@ -34,12 +34,13 @@ namespace StageRaceFantasy.Application.FantasyTeam.Commands
             CreateFantasyTeamCommand command,
             CancellationToken cancellationToken)
         {
-            var fantasyRaceTeamEntity = Mapper.Map<FantasyRaceTeamEntity>(command);
-            fantasyRaceTeamEntity.FantasyRaceId = command.FantasyRaceId;
+            var fantasyTeamEntity = Mapper.Map<FantasyTeamEntity>(command);
+            fantasyTeamEntity.RaceId = command.RaceId;
 
+            DbContext.FantasyTeams.Add(fantasyTeamEntity);
             await DbContext.SaveChangesAsync(cancellationToken);
 
-            return Created(fantasyRaceTeamEntity.Id);
+            return Created(fantasyTeamEntity.Id);
         }
     }
 }

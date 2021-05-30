@@ -321,12 +321,34 @@ namespace StageRaceFantasy.Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.FantasyRaceEntity", b =>
+            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.FantasyTeamEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("FantasyRaceId")
+                        .HasColumnName("FantasyTeamId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<int>("RaceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RaceId");
+
+                    b.ToTable("FantasyTeam");
+                });
+
+            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.RaceEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("RaceId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("EndDate")
@@ -344,29 +366,7 @@ namespace StageRaceFantasy.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FantasyRace");
-                });
-
-            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.FantasyRaceTeamEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("FantasyRaceTeamId")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("FantasyRaceId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FantasyRaceId");
-
-                    b.ToTable("FantasyRaceTeam");
+                    b.ToTable("Race");
                 });
 
             modelBuilder.Entity("StageRaceFantasy.Domain.Entities.RiderEntity", b =>
@@ -390,15 +390,15 @@ namespace StageRaceFantasy.Infrastructure.Persistence.Migrations
                     b.ToTable("Rider");
                 });
 
-            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.RiderFantasyRaceEntryEntity", b =>
+            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.RiderRaceEntryEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("RiderFantasyRaceEntryId")
+                        .HasColumnName("RiderRaceEntryId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FantasyRaceId")
+                    b.Property<int>("RaceId")
                         .HasColumnType("int");
 
                     b.Property<int>("RiderId")
@@ -406,11 +406,11 @@ namespace StageRaceFantasy.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FantasyRaceId");
+                    b.HasIndex("RaceId");
 
-                    b.HasIndex("RiderId", "FantasyRaceId");
+                    b.HasIndex("RiderId", "RaceId");
 
-                    b.ToTable("RiderFantasyRaceEntry");
+                    b.ToTable("RiderRaceEntry");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -464,46 +464,46 @@ namespace StageRaceFantasy.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.FantasyRaceTeamEntity", b =>
+            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.FantasyTeamEntity", b =>
                 {
-                    b.HasOne("StageRaceFantasy.Domain.Entities.FantasyRaceEntity", "FantasyRace")
+                    b.HasOne("StageRaceFantasy.Domain.Entities.RaceEntity", "Race")
                         .WithMany("FantasyTeams")
-                        .HasForeignKey("FantasyRaceId")
+                        .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("FantasyRace");
+                    b.Navigation("Race");
                 });
 
-            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.RiderFantasyRaceEntryEntity", b =>
+            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.RiderRaceEntryEntity", b =>
                 {
-                    b.HasOne("StageRaceFantasy.Domain.Entities.FantasyRaceEntity", "FantasyRace")
-                        .WithMany("RiderFantasyRaceEntries")
-                        .HasForeignKey("FantasyRaceId")
+                    b.HasOne("StageRaceFantasy.Domain.Entities.RaceEntity", "Race")
+                        .WithMany("RiderRaceEntries")
+                        .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("StageRaceFantasy.Domain.Entities.RiderEntity", "Rider")
-                        .WithMany("RiderFantasyRaceEntries")
+                        .WithMany("RiderRaceEntries")
                         .HasForeignKey("RiderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("FantasyRace");
+                    b.Navigation("Race");
 
                     b.Navigation("Rider");
                 });
 
-            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.FantasyRaceEntity", b =>
+            modelBuilder.Entity("StageRaceFantasy.Domain.Entities.RaceEntity", b =>
                 {
                     b.Navigation("FantasyTeams");
 
-                    b.Navigation("RiderFantasyRaceEntries");
+                    b.Navigation("RiderRaceEntries");
                 });
 
             modelBuilder.Entity("StageRaceFantasy.Domain.Entities.RiderEntity", b =>
                 {
-                    b.Navigation("RiderFantasyRaceEntries");
+                    b.Navigation("RiderRaceEntries");
                 });
 #pragma warning restore 612, 618
         }

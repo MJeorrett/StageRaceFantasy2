@@ -64,7 +64,7 @@ const RidersTable: React.FC<RidersTableProps> = ({
             <PaginatedApiTable
                 makeRequest={doGetPaginatedRiders}
                 headers={columnHeaders}
-                renderRowCells={rider => (
+                renderRowCell={rider => (
                     <>
                         <TableCell width={48}>{rider.id}</TableCell>
                         <TableCell>{rider.firstName}</TableCell>

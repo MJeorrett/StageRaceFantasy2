@@ -6,14 +6,14 @@ import AppCheckbox from '../components/AppForm/AppCheckbox';
 import RidersTable from './Table';
 
 export type RiderRaceEntriesTableProps = {
-    fantasyRaceId: number,
+    raceId: number,
 }
 
 const RiderRaceEntriesTable: React.FC<RiderRaceEntriesTableProps> = ({
-    fantasyRaceId,
+    raceId,
 }) => {
     const [isSubmittingEntry, setIsSubmittingEntry] = useState(false);
-    const getAllEnteredRiders = useCallback(() => getAllEnteredRiderIdsForRace(fantasyRaceId), [fantasyRaceId]);    
+    const getAllEnteredRiders = useCallback(() => getAllEnteredRiderIdsForRace(raceId), [raceId]);    
     const getAllEnteredRidersRequest = useApiRequest(getAllEnteredRiders);
     const enteredRiderIds = getAllEnteredRidersRequest.result || [];
     const checkboxesAreLoading = getAllEnteredRidersRequest.isLoading || isSubmittingEntry;
@@ -22,10 +22,10 @@ const RiderRaceEntriesTable: React.FC<RiderRaceEntriesTableProps> = ({
         setIsSubmittingEntry(true);
 
         if (enteredRiderIds.includes(riderId)) {
-            await withdrawRiderFromRace(fantasyRaceId, riderId);
+            await withdrawRiderFromRace(raceId, riderId);
         }
         else {
-            await enterRiderIntoRace(fantasyRaceId, riderId);
+            await enterRiderIntoRace(raceId, riderId);
         }
 
         getAllEnteredRidersRequest.forceRefresh();

@@ -11,9 +11,9 @@ export const getFantasyTeamById = async (fantasyTeamId: number) => (
     apiGet<ApiFantasyTeam.Details, FantasyTeam.Details>(`api/fantasy-teams/${fantasyTeamId}`, m => m)
 );
 
-export const getPaginatedFantasyTeams = async (fantasyRaceId: number, paginationQueryParams: ApiPaginationQueryParams) => (
+export const getPaginatedFantasyTeams = async (raceId: number, paginationQueryParams: ApiPaginationQueryParams) => (
     apiGetPaginated<ApiFantasyTeam.Summary, FantasyTeam.Summary>(
-        `api/fantasy-races/${fantasyRaceId}/fantasy-teams`,
+        `api/races/${raceId}/fantasy-teams`,
         paginationQueryParams as any,
         m => m,
     )

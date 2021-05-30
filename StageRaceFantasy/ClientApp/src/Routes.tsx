@@ -3,12 +3,12 @@ import { Redirect, Route, Switch, useParams } from 'react-router-dom';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
-import ViewFantasyRacesPage from './pages/ViewFantasyRacesPage';
-import CreateFantasyRacePage from './pages/CreateFantasyRacePage';
-import EditFantasyRacePage from './pages/EditFantasyRacePage';
+import ViewFantasyPage from './pages/ViewRacesPage';
+import CreateRacePage from './pages/CreateRacePage';
+import EditRacePage from './pages/EditRacePage';
 import HomePage from './pages/HomePage';
 import CreateFantasyTeamPage from './pages/CreateFantasyTeamPage';
-import ViewFantasyRacePage from './pages/ViewFantasyRacePage';
+import ViewRacePage from './pages/ViewRacePage';
 import ViewRidersPage from './pages/ViewRidersPage';
 import CreateRiderPage from './pages/CreateRiderPage';
 import ViewRiderPage from './pages/ViewRiderPage';
@@ -21,11 +21,11 @@ export const appPaths = {
     createRider: '/riders/create',
     editRider: (id: number|string) => `/riders/${id}/edit`,
     viewRider: (id: number|string) => `/riders/${id}`,
-    fantasyRaces: '/fantasy-races',
-    createFantasyRace: '/fantasy-races/create',
-    viewFantasyRace: (id: number|string) => `/fantasy-races/${id}`,
-    editFantasyRace: (id: number|string) => `/fantasy-races/${id}/edit`,
-    createFantasyTeam: (id: number|string) => `/fantasy-races/${id}/fantasy-teams/create`,
+    races: '/races',
+    createRace: '/races/create',
+    viewRace: (id: number|string) => `/races/${id}`,
+    editRace: (id: number|string) => `/races/${id}/edit`,
+    createFantasyTeam: (id: number|string) => `/races/${id}/fantasy-teams/create`,
     viewFantasyTeam: (id: number|string) => `/fantasy-teams/${id}`,
 };
 
@@ -37,11 +37,11 @@ const Routes: React.FC = () => {
             <AuthorizeRoute exact path={appPaths.editRider(':riderId')} component={EditRiderPage} />
             <AuthorizeRoute exact path={appPaths.riders} component={ViewRidersPage} />
             <AuthorizeRoute exact path={appPaths.viewRider(':riderId')} component={ViewRiderPage} />
-            <AuthorizeRoute exact path={appPaths.fantasyRaces} component={ViewFantasyRacesPage} />
-            <AuthorizeRoute path={appPaths.createFantasyRace} component={CreateFantasyRacePage} />
-            <AuthorizeRoute exact path={appPaths.viewFantasyRace(':fantasyRaceId')} component={ViewFantasyRacePage} />
-            <AuthorizeRoute path={appPaths.editFantasyRace(':fantasyRaceId')} component={EditFantasyRacePage} />
-            <AuthorizeRoute path={appPaths.createFantasyTeam(':fantasyRaceId')} component={CreateFantasyTeamPage} />
+            <AuthorizeRoute exact path={appPaths.races} component={ViewFantasyPage} />
+            <AuthorizeRoute path={appPaths.createRace} component={CreateRacePage} />
+            <AuthorizeRoute exact path={appPaths.viewRace(':raceId')} component={ViewRacePage} />
+            <AuthorizeRoute path={appPaths.editRace(':raceId')} component={EditRacePage} />
+            <AuthorizeRoute path={appPaths.createFantasyTeam(':raceId')} component={CreateFantasyTeamPage} />
             <AuthorizeRoute path={appPaths.viewFantasyTeam(':fantasyTeamId')} component={ViewFantasyTeamPage} />
             <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
             <Redirect to={appPaths.home} />
@@ -54,9 +54,9 @@ export const useRiderId = () => {
     return parseInt(riderId);
 };
 
-export const useFantasyRaceId = () => {
-    const { fantasyRaceId } = useParams<{ fantasyRaceId: string }>();
-    return parseInt(fantasyRaceId);
+export const useRaceId = () => {
+    const { raceId } = useParams<{ raceId: string }>();
+    return parseInt(raceId);
 };
 
 export const useFantasyTeamId = () => {

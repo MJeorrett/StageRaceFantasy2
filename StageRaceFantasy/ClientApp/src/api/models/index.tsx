@@ -1,3 +1,3 @@
 export * as ApiRider from './rider';
-export * as ApiFantasyRace from './fantasyRace';
+export * as ApiRace from './race';
 export * as ApiFantasyTeam from './fantasyTeam';

@@ -8,9 +8,9 @@ namespace StageRaceFantasy.Application.Common.ExternalInterfaces
     public interface IApplicationDbContext
     {
         DbSet<RiderEntity> Riders { get; }
-        DbSet<RiderFantasyRaceEntryEntity> RiderFantasyRaceEntries { get; }
-        DbSet<FantasyRaceEntity> FantasyRaces { get; }
-        DbSet<FantasyRaceTeamEntity> FantasyRaceTeams { get; }
+        DbSet<RiderRaceEntryEntity> RiderRaceEntries { get; }
+        DbSet<RaceEntity> Races { get; }
+        DbSet<FantasyTeamEntity> FantasyTeams { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

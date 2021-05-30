@@ -3,11 +3,11 @@ import { useHistory } from 'react-router';
 import { createFantasyTeam } from '../api';
 import AppPageTitle from '../components/PageTitle';
 import FantasyTeamForm from '../fantasyTeams/Form';
-import { appPaths, useFantasyRaceId } from '../Routes';
+import { appPaths, useRaceId } from '../Routes';
 
 const CreateFantasyTeamPage: React.FC = () => {
     const history = useHistory();
-    const fantasyRaceId = useFantasyRaceId();
+    const raceId = useRaceId();
 
     return (
         <>
@@ -17,11 +17,11 @@ const CreateFantasyTeamPage: React.FC = () => {
                 onSubmit={async values => {
                     const response = await createFantasyTeam({
                         ...values,
-                        fantasyRaceId,
+                        raceId: raceId,
                     });
 
                     if (!response.isError) {
-                        history.push(appPaths.viewFantasyRace(fantasyRaceId));
+                        history.push(appPaths.viewRace(raceId));
                     }
                 }}
                 submitButtonText="Create New Team"

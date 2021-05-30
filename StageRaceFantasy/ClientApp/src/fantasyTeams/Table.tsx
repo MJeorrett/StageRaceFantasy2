@@ -3,16 +3,16 @@ import { TableCell } from '@material-ui/core';
 import { PaginatedApiTable, TableActionButtonDefinition } from '../components/AppTable';
 import { ApiPaginationQueryParams, getPaginatedFantasyTeams } from '../api';
 
-export interface FantasyRacesTeamsTableProps {
-    fantasyRaceId: number,
+export interface FantasyTeamsTableProps {
+    raceId: number,
     actionButtons?: TableActionButtonDefinition[],
 }
 
-const FantasyTeamsTable: React.FC<FantasyRacesTeamsTableProps> = ({
-    fantasyRaceId,
+const FantasyTeamsTable: React.FC<FantasyTeamsTableProps> = ({
+    raceId,
     actionButtons = [],
 }) => {
-    const getTeamsForRace = useCallback((paginationParams: ApiPaginationQueryParams) => getPaginatedFantasyTeams(fantasyRaceId, paginationParams), [fantasyRaceId]);
+    const getTeamsForRace = useCallback((paginationParams: ApiPaginationQueryParams) => getPaginatedFantasyTeams(raceId, paginationParams), [raceId]);
 
     const columnHeaders = ['ID', 'Name'];
 
@@ -21,7 +21,7 @@ const FantasyTeamsTable: React.FC<FantasyRacesTeamsTableProps> = ({
             makeRequest={getTeamsForRace}
             headers={columnHeaders}
             pageSizeOptions={[10]}
-            renderRowCells={fantasyTeam => (
+            renderRowCell={fantasyTeam => (
                 <>
                     <TableCell width={48}>{fantasyTeam.id}</TableCell>
                     <TableCell>{fantasyTeam.name}</TableCell>

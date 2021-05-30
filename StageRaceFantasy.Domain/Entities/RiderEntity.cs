@@ -14,7 +14,7 @@ namespace StageRaceFantasy.Domain.Entities
 
         public string LastName { get; set; } = "";
 
-        public List<RiderFantasyRaceEntryEntity> RiderFantasyRaceEntries { get; set; } = new();
-        public List<FantasyRaceEntity> RaceEntries { get; set; } = new();
+        public List<RiderRaceEntryEntity> RiderRaceEntries { get; set; } = new();
+        public List<RaceEntity> RaceEntries { get; set; } = new();
     }
 }

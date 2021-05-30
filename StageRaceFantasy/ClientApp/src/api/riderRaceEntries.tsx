@@ -1,20 +1,20 @@
 import { apiDelete, apiGetList, apiPost } from './common/apiClient';
 
-export const getAllEnteredRiderIdsForRace = (fantasyRaceId: number) => (
+export const getAllEnteredRiderIdsForRace = (raceId: number) => (
     apiGetList<number, number>(
-        `api/fantasy-races/${fantasyRaceId}/rider-entries`,
+        `api/races/${raceId}/rider-entries`,
         m => m,
     )
 );
 
-export const enterRiderIntoRace = (fantasyRaceId: number, riderId: number) => (
+export const enterRiderIntoRace = (raceId: number, riderId: number) => (
     apiPost(
-        `api/fantasy-races/${fantasyRaceId}/rider-entries/${riderId}`,
+        `api/races/${raceId}/rider-entries/${riderId}`,
     )
 );
 
-export const withdrawRiderFromRace = (fantasyRaceId: number, riderId: number) => (
+export const withdrawRiderFromRace = (raceId: number, riderId: number) => (
     apiDelete(
-        `api/fantasy-races/${fantasyRaceId}/rider-entries/${riderId}`,
+        `api/races/${raceId}/rider-entries/${riderId}`,
     )
 );

@@ -17,17 +17,17 @@ namespace StageRaceFantasy.Infrastructure.Persistence.EntityConfiguration
             builder
                 .HasMany(_ => _.RaceEntries)
                 .WithMany(_ => _.Riders)
-                .UsingEntity<RiderFantasyRaceEntryEntity>(
+                .UsingEntity<RiderRaceEntryEntity>(
                     j => j
-                        .HasOne(_ => _.FantasyRace)
-                        .WithMany(_ => _.RiderFantasyRaceEntries)
+                        .HasOne(_ => _.Race)
+                        .WithMany(_ => _.RiderRaceEntries)
                         .OnDelete(DeleteBehavior.Cascade),
                     j => j
                         .HasOne(_ => _.Rider)
-                        .WithMany(_ => _.RiderFantasyRaceEntries)
+                        .WithMany(_ => _.RiderRaceEntries)
                         .OnDelete(DeleteBehavior.Cascade),
                     j => 
-                        j.HasIndex(_ => new { _.RiderId, _.FantasyRaceId }));
+                        j.HasIndex(_ => new { _.RiderId, _.RaceId }));
         }
     }
 }

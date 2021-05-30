@@ -15,7 +15,7 @@ namespace StageRaceFantasy.Application.FantasyTeam.Queries
     public record GetPaginatedFantasyTeamsQuery : GetPaginatedListQuery, IAppRequest<PaginatedList<FantasyTeamSummaryDto>>
     {
         [JsonIgnore]
-        public int FantasyRaceId { get; set; }
+        public int RaceId { get; set; }
     }
 
     public class GetPaginatedFantasyTeamsQueryHandler : AppRequestHandler<GetPaginatedFantasyTeamsQuery, PaginatedList<FantasyTeamSummaryDto>>
@@ -28,16 +28,16 @@ namespace StageRaceFantasy.Application.FantasyTeam.Queries
             GetPaginatedFantasyTeamsQuery query,
             CancellationToken cancellationToken)
         {
-            var fantasyRace = await DbContext.FantasyRaces
-                .FirstOrDefaultAsync(_ => _.Id == query.FantasyRaceId, cancellationToken);
+            var race = await DbContext.Races
+                .FirstOrDefaultAsync(_ => _.Id == query.RaceId, cancellationToken);
 
-            if (fantasyRace is null)
+            if (race is null)
             {
-                return BadRequest($"No fantasy race exists with id {query.FantasyRaceId}.");
+                return BadRequest($"No fantasy race exists with id {query.RaceId}.");
             }
 
-            var result = await DbContext.FantasyRaceTeams
-                .Where(_ => _.FantasyRaceId == query.FantasyRaceId)
+            var result = await DbContext.FantasyTeams
+                .Where(_ => _.RaceId == query.RaceId)
                 .OrderBy(_ => _.Name)
                 .ProjectTo<FantasyTeamSummaryDto>(Mapper.ConfigurationProvider)
                 .ToPaginatedListAsync(query, cancellationToken);

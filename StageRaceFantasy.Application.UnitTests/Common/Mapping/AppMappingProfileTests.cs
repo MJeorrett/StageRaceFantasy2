@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using NUnit.Framework;
 using StageRaceFantasy.Application.Common.Mapping;
-using StageRaceFantasy.Application.FantasyRaces.Commands;
-using StageRaceFantasy.Application.FantasyRaces.Dtos;
+using StageRaceFantasy.Application.Races.Commands;
+using StageRaceFantasy.Application.Races.Dtos;
 using StageRaceFantasy.Application.FantasyTeam.Commands;
 using StageRaceFantasy.Application.FantasyTeam.Dtos;
 using StageRaceFantasy.Application.Riders.Commands;
@@ -41,15 +41,15 @@ namespace StageRaceFantasy.Application.UnitTests.Common.Mapping
         [TestCase(typeof(RiderEntity), typeof(RiderDetailsDto))]
 
         // Fantasy Race
-        [TestCase(typeof(CreateFantasyRaceCommand), typeof(FantasyRaceEntity))]
-        [TestCase(typeof(FantasyRaceEntity), typeof(FantasyRaceNameDto))]
-        [TestCase(typeof(FantasyRaceEntity), typeof(FantasyRaceSummaryDto))]
-        [TestCase(typeof(FantasyRaceEntity), typeof(FantasyRaceDetailsDto))]
+        [TestCase(typeof(CreateRaceCommand), typeof(RaceEntity))]
+        [TestCase(typeof(RaceEntity), typeof(RaceNameDto))]
+        [TestCase(typeof(RaceEntity), typeof(RaceSummaryDto))]
+        [TestCase(typeof(RaceEntity), typeof(RaceDetailsDto))]
 
         // Fantasy Race Team
-        [TestCase(typeof(CreateFantasyTeamCommand), typeof(FantasyRaceTeamEntity))]
-        [TestCase(typeof(FantasyRaceTeamEntity), typeof(FantasyTeamSummaryDto))]
-        [TestCase(typeof(FantasyRaceTeamEntity), typeof(FantasyTeamDetailsDto))]
+        [TestCase(typeof(CreateFantasyTeamCommand), typeof(FantasyTeamEntity))]
+        [TestCase(typeof(FantasyTeamEntity), typeof(FantasyTeamSummaryDto))]
+        [TestCase(typeof(FantasyTeamEntity), typeof(FantasyTeamDetailsDto))]
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
         {
             var instance = GetInstanceOf(source);

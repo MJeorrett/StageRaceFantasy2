@@ -24,7 +24,7 @@ export interface TableActionButtonDefinition {
 export type AppTableProps<TRow> = {
     headers: string[],
     entities: TRow[],
-    renderRowCells: (entity: TRow) => JSX.Element,
+    renderRowCell: (entity: TRow) => JSX.Element,
     pagination?: ApiPagination & {
         setPageNumber: (pageNumber: number) => void
         setPageSize: (pageSize: number) => void
@@ -37,7 +37,7 @@ export type AppTableProps<TRow> = {
 const AppTable = <TRow extends { id: number },>({
     headers,
     entities,
-    renderRowCells,
+    renderRowCell,
     pagination,
     pageSizeOptions = [10, 25, 100],
     noEntitiesMessage,
@@ -81,7 +81,7 @@ const AppTable = <TRow extends { id: number },>({
                     <TableBody>
                         {entities.map(entity => (
                             <TableRow key={entity.id}>
-                                {renderRowCells(entity)}
+                                {renderRowCell(entity)}
                                 {actionButtons.length > 0 && (
                                     <TableCell>
                                         <div>

@@ -1,3 +1,3 @@
 export * as Rider from './rider';
-export * as FantasyRace from './fantasyRace';
+export * as Race from './race';
 export * as FantasyTeam from './fantasyTeam';

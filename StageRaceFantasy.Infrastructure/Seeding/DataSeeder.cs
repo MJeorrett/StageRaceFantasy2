@@ -16,9 +16,9 @@ namespace StageRaceFantasy.Infrastructure.Seeding
             var dbContext = services.GetRequiredService<ApplicationDbContext>();
             var logger = services.GetRequiredService<ILogger<DataSeeder>>();
 
-            var anyFantasyRacesExist = dbContext.FantasyRaces.Any();
+            var anyRacesExist = dbContext.Races.Any();
 
-            if (anyFantasyRacesExist)
+            if (anyRacesExist)
             {
                 logger.LogInformation("Fantasy Races already exist so not seeding data.");
                 return;
@@ -33,9 +33,9 @@ namespace StageRaceFantasy.Infrastructure.Seeding
             logger.LogInformation("...finished creating seed data.");
         }
 
-        private static List<FantasyRaceEntity> SeedRaces(ApplicationDbContext dbContext)
+        private static List<RaceEntity> SeedRaces(ApplicationDbContext dbContext)
         {
-            FantasyRaceEntity tourDeFrance = new()
+            RaceEntity tourDeFrance = new()
             {
                 Name = "Tour de France 2021",
                 StartDate = new DateTime(2021, 06, 26),
@@ -43,7 +43,7 @@ namespace StageRaceFantasy.Infrastructure.Seeding
                 FantasyTeamSize = 8,
             };
 
-            FantasyRaceEntity giroDItalia = new()
+            RaceEntity giroDItalia = new()
             {
                 Name = "Giro d'Italia 2021",
                 StartDate = new DateTime(2021, 05, 8),
@@ -51,8 +51,8 @@ namespace StageRaceFantasy.Infrastructure.Seeding
                 FantasyTeamSize = 6,
             };
 
-            dbContext.FantasyRaces.Add(tourDeFrance);
-            dbContext.FantasyRaces.Add(giroDItalia);
+            dbContext.Races.Add(tourDeFrance);
+            dbContext.Races.Add(giroDItalia);
 
             dbContext.SaveChanges();
 
@@ -63,22 +63,22 @@ namespace StageRaceFantasy.Infrastructure.Seeding
             };
         }
 
-        private static void SeedFantasyTeams(ApplicationDbContext dbContext, FantasyRaceEntity race)
+        private static void SeedFantasyTeams(ApplicationDbContext dbContext, RaceEntity race)
         {
-            var teamOuteos = new FantasyRaceTeamEntity()
+            var teamOuteos = new FantasyTeamEntity()
             {
                 Name = "Team Outeos",
-                FantasyRaceId = race.Id,
+                RaceId = race.Id,
             };
 
-            var catrionasWheelers = new FantasyRaceTeamEntity()
+            var catrionasWheelers = new FantasyTeamEntity()
             {
                 Name = "Catriona's Wheelers",
-                FantasyRaceId = race.Id,
+                RaceId = race.Id,
             };
 
-            dbContext.FantasyRaceTeams.Add(teamOuteos);
-            dbContext.FantasyRaceTeams.Add(catrionasWheelers);
+            dbContext.FantasyTeams.Add(teamOuteos);
+            dbContext.FantasyTeams.Add(catrionasWheelers);
             dbContext.SaveChanges();
         }
 

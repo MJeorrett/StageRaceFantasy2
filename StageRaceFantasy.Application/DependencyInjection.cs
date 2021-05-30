@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using StageRaceFantasy.Application.Common.Repositories;
 using StageRaceFantasy.Application.Common.Repositories.Intefaces;
 using StageRaceFantasy.Application.Common.Behaviours;
-using StageRaceFantasy.Application.FantasyRaces.Commands;
+using StageRaceFantasy.Application.Races.Commands;
 using System.Reflection;
 
 namespace StageRaceFantasy.Application
@@ -18,7 +18,7 @@ namespace StageRaceFantasy.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AppRequestValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(GenericAppRequestValidationBehaviour<,>));
 
-            services.AddScoped<IFantasyRacesRepository, FantasyRacesRepository>();
+            services.AddScoped<IRacesRepository, RacesRepository>();
             services.AddScoped<IRidersRepository, RidersRepository>();
 
             return services;
@@ -28,7 +28,7 @@ namespace StageRaceFantasy.Application
         {
             mvcBuilder.AddFluentValidation(fv =>
             {
-                fv.RegisterValidatorsFromAssemblyContaining<CreateFantasyRaceCommandValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<CreateRaceCommandValidator>();
                 fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                 fv.ImplicitlyValidateChildProperties = true;
             });
