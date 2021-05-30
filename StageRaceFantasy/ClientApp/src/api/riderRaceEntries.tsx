@@ -31,6 +31,6 @@ export const enterRiderIntoRace = (raceId: number, riderId: number) => (
 
 export const withdrawRiderFromRace = (raceId: number, riderId: number) => (
     apiDelete(
-        `api/races/${raceId}/rider-entries/${riderId}`,
+        `api/races/${raceId}/riders/${riderId}`,
     )
 );

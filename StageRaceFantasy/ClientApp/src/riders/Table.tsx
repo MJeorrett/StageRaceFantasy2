@@ -1,13 +1,12 @@
-import React, { useCallback } from 'react';
-import { debounce, TableCell } from '@material-ui/core';
-import { ApiPaginationQueryParams, getPaginatedRiders } from '../api';
+import React from 'react';
+import { TableCell } from '@material-ui/core';
 import { PaginatedApiTable, TableActionButtonDefinition } from '../components/AppTable';
 import { Rider } from '../models';
 import AppTextField from '../components/AppForm/AppTextField';
 import AppTableActionButtons from '../components/AppTableActionButtons';
 import AppFlexSpacer from '../components/AppFlexSpacer';
 import AppButton from '../components/AppButton';
-import { useDebouncedState } from '../utils/useDebouncedStateHook';
+import { useGetPaginatedRiders } from './useGetPaginatedRiders';
 
 export type ExtraColumnDefinition = {
     header: string,
@@ -25,21 +24,15 @@ const RidersTable: React.FC<RidersTableProps> = ({
     extraColumns = [],
     actionHeaderButtons = [],
 }) => {
-    const {
-        instantState: nameFilterValue,
-        debouncedState: nameFilterDebounced,
-        setState: handleNameFilterChange,
-        instantReset: handleClearNameFilter,
-    } = useDebouncedState('');
-    
-    const doGetPaginatedRiders = useCallback((queryParams: ApiPaginationQueryParams) =>
-        getPaginatedRiders({
-            ...queryParams,
-            nameFilter: nameFilterDebounced
-        }), [nameFilterDebounced]);
-    
     const extraColumnHeaders = extraColumns.map(_ => _.header);
     const columnHeaders = ['ID', 'First Name', 'Last Name'].concat(extraColumnHeaders);
+
+    const {
+        getRidersRequest,
+        nameFilterValue,
+        setNameFilter,
+        clearNameFilter,
+    } = useGetPaginatedRiders();
 
     return (
         <div>
@@ -47,13 +40,13 @@ const RidersTable: React.FC<RidersTableProps> = ({
                 <AppTextField
                     label="Filter by name"
                     value={nameFilterValue}
-                    onChange={event => handleNameFilterChange(event.target.value)}
+                    onChange={event => setNameFilter(event.target.value)}
                     fullWidth={false}
                 />
                 <AppButton
                     variant="text"
                     disabled={!nameFilterValue}
-                    onClick={handleClearNameFilter}
+                    onClick={clearNameFilter}
                 >
                     Clear
                 </AppButton>
@@ -61,7 +54,7 @@ const RidersTable: React.FC<RidersTableProps> = ({
                 {actionHeaderButtons}
             </AppTableActionButtons>
             <PaginatedApiTable
-                makeRequest={doGetPaginatedRiders}
+                makeRequest={getRidersRequest}
                 headers={columnHeaders}
                 renderRowCell={rider => (
                     <>
